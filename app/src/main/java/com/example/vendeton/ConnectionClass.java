@@ -10,13 +10,13 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.0.5";
+    protected static String ip = "192.168.1.10";
 
     protected static String port = "3306";
 
-    protected static String username = "usuario_publico";
+    protected static String username = "farid";
 
-    protected static String password = "";
+    protected static String password = "contrasena";
 
     public Connection CONN(){
 

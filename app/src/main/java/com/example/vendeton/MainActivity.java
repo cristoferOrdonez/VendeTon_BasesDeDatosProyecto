@@ -31,18 +31,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         connectionClass = new ConnectionClass();
         connect();
-        Toast.makeText(this, "MENSAJE",Toast.LENGTH_LONG).show();
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
 
                 try {
                     con = connectionClass.CONN();
-
-                    String query = "SELECT COUNT(*) AS cantidad FROM vw_catalogo_productos";
+                    String query = "SELECT COUNT(*) AS cantidad FROM contraparte;";
                     PreparedStatement stmt = con.prepareStatement(query);
                     ResultSet rs = stmt.executeQuery();
-                    Toast.makeText(this, rs.getInt("canitdad"), Toast.LENGTH_SHORT).show();
+                    if(rs.next()){
+                        int result;
+                        result= rs.getInt("cantidad");
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, ""+ result, Toast.LENGTH_SHORT).show();
+                        });
+                    }
+
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);
