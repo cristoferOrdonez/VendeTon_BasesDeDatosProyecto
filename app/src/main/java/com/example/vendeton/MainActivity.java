@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         connectionClass = new ConnectionClass();
         connect();
-        Toast.makeText(this, "MENSAJE",Toast.LENGTH_LONG).show();
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
@@ -39,10 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     con = connectionClass.CONN();
 
-                    String query = "SELECT COUNT(*) AS cantidad FROM vw_catalogo_productos";
+                    String query = "SELECT COUNT(*) AS cantidad FROM vw_catalogo_productos;";
                     PreparedStatement stmt = con.prepareStatement(query);
                     ResultSet rs = stmt.executeQuery();
-                    Toast.makeText(this, rs.getInt("canitdad"), Toast.LENGTH_SHORT).show();
+                    rs.next();
+                    String mensaje = "" + rs.getInt("cantidad");
+
+                runOnUiThread(() -> {
+
+
+                    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+
+                });
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);

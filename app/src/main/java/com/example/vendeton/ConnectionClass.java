@@ -14,9 +14,9 @@ public class ConnectionClass {
 
     protected static String port = "3306";
 
-    protected static String username = "usuario_publico";
+    protected static String username = "CelularRoot";
 
-    protected static String password = "";
+    protected static String password = "CelularRoot";
 
     public Connection CONN(){
 
