@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         connectionClass = new ConnectionClass();
         connect();
+        Toast.makeText(this, "MENSAJE",Toast.LENGTH_LONG).show();
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
