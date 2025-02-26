@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VendeTon</string>
+    <string name="tipo">Tipo</string>
+    <string name="monto">monto</string>
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CardView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewContenidoBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="8dp"
+        CardView:cardBackgroundColor="@color/fondo_secundario"
+        CardView:cardCornerRadius="23dp"
+        CardView:cardElevation="6dp"
+        CardView:contentPadding="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewContenidoTipoBalance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/jost_regular"
+                android:inputType="textCapSentences|textMultiLine"
+                android:scrollHorizontally="false"
+                android:text="@string/tipo"
+                android:textAlignment="textStart"
+                android:textColor="@color/gris_oscuro_box_background_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewContenidoMontoBalance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/jost_regular"
+                android:inputType="textCapSentences|textMultiLine"
+                android:scrollHorizontally="false"
+                android:text="Monto"
+                android:textAlignment="textStart"
+                android:textColor="@color/gris_oscuro_box_background_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
