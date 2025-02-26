@@ -10,6 +10,7 @@ public class VendeTon extends Application {
     public void onCreate() {
         super.onCreate();
 
+
     }
 
     @Override

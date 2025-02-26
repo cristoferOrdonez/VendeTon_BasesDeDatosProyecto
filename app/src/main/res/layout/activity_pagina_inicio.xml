@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:CardView="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Activitys.activity_pagina_inicial">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roslindale_condensed_medium_edu"
+        android:paddingTop="18dp"
+        android:paddingBottom="10dp"
+        android:text="Balance General"
+        android:textAlignment="center"
+        android:textColor="@color/gris_oscuro_box_background_color"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewBalanceHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="8dp"
+        CardView:cardBackgroundColor="@color/fondo_secundario"
+        CardView:cardCornerRadius="23dp"
+        CardView:cardElevation="6dp"
+        CardView:contentPadding="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTipoBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roslindale_condensed_medium_edu"
+                android:text="@string/tipo"
+                android:textAlignment="center"
+                android:textColor="@color/gris_oscuro_box_background_color"
+                android:textSize="24sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewMontoBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roslindale_condensed_medium_edu"
+                android:text="Monto"
+                android:textAlignment="center"
+                android:textColor="@color/gris_oscuro_box_background_color"
+                android:textSize="24sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewBalanceGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
