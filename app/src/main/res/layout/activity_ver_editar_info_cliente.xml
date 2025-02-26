@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:CardView="http://schemas.android.com/apk/res-auto"
     tools:context=".Activitys.activity_info_cliente">
 
     <TextView
@@ -22,10 +23,11 @@
         android:theme="@style/Theme.VendeTon.ActivityTitles"
         android:visibility="visible" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,9 +183,218 @@
                     android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/textViewNumeroTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_regular"
+                android:text="Numero de teléfono"
+                android:textColor="@color/white" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardViewTelefonoHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="8dp"
+                CardView:cardBackgroundColor="@color/fondo_secundario"
+                CardView:cardCornerRadius="23dp"
+                CardView:cardElevation="6dp"
+                CardView:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewPrefijoNumero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roslindale_condensed_medium_edu"
+                        android:text="Prefijo"
+                        android:textAlignment="center"
+                        android:textColor="@color/gris_oscuro_box_background_color"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/textViewNumero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roslindale_condensed_medium_edu"
+                        android:text="Número"
+                        android:textAlignment="center"
+                        android:textColor="@color/gris_oscuro_box_background_color"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewNumeroTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/BotonAgregarNumeroTelefono"
+                style="@style/Theme.VendeTon.Botones"
+                android:layout_width="140dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="16sp"
+                android:paddingLeft="10dp"
+                android:text="Agregar"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/textViewCorreoElectronico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_regular"
+                android:text="Correo Electrónico"
+                android:textColor="@color/white" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardViewCorreoHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="8dp"
+                CardView:cardBackgroundColor="@color/fondo_secundario"
+                CardView:cardCornerRadius="23dp"
+                CardView:cardElevation="6dp"
+                CardView:contentPadding="13dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewUsuarioCorreo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roslindale_condensed_medium_edu"
+                        android:text="Usuario"
+                        android:textAlignment="center"
+                        android:textColor="@color/gris_oscuro_box_background_color"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/textViewDominioCorreo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roslindale_condensed_medium_edu"
+                        android:text="Dominio"
+                        android:textAlignment="center"
+                        android:textColor="@color/gris_oscuro_box_background_color"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/BotonAgregarCorreoElectronico"
+                style="@style/Theme.VendeTon.Botones"
+                android:layout_width="140dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="16sp"
+                android:paddingLeft="10dp"
+                android:text="Agregar"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/textViewAreaTrabajo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_regular"
+                android:text="Área de trabajo"
+                android:textColor="@color/white" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardViewAreaTrabajoHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="8dp"
+                CardView:cardBackgroundColor="@color/fondo_secundario"
+                CardView:cardCornerRadius="23dp"
+                CardView:cardElevation="6dp"
+                CardView:contentPadding="13dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewAreaTrabajoNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roslindale_condensed_medium_edu"
+                        android:text="Nombre"
+                        android:textAlignment="center"
+                        android:textColor="@color/gris_oscuro_box_background_color"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewAreaTrabajo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/BotonAgregarAreaTrabajo"
+                style="@style/Theme.VendeTon.Botones"
+                android:layout_width="140dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="16sp"
+                android:paddingLeft="10dp"
+                android:text="Agregar"
+                android:textSize="8sp" />
+
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/layoutBotonesCuenta"
@@ -239,6 +450,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="18sp"
+            android:onClick="guardarInformacion"
             android:text="Guardar"
             android:textSize="8sp" />
 
