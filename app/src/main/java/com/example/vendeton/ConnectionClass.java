@@ -10,7 +10,7 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.0.5";
+    protected static String ip = "192.168.1.10";
 
     protected static String port = "3306";
 
