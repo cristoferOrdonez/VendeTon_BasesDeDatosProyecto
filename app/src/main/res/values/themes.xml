@@ -23,4 +23,11 @@
         <item name="android:windowBackground">@color/fondo</item>
 
     </style>
+
+    <style name="Theme.VendeTon.ActivityTitles">
+        <item name="android:fontFamily">@font/jost_medium</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@color/fondo</item>
+
+    </style>
 </resources>
