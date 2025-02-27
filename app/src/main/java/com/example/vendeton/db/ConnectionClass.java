@@ -1,4 +1,4 @@
-package com.example.vendeton;
+package com.example.vendeton.db;
 
 import android.util.Log;
 
@@ -10,7 +10,7 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.0.5";
+    protected static String ip = "192.168.0.4";
 
     protected static String port = "3306";
 

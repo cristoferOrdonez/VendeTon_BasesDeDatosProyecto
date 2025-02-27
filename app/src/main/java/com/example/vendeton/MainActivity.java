@@ -3,11 +3,9 @@ package com.example.vendeton;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.vendeton.db.ConnectionClass;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     con = connectionClass.CONN();
 
-                    String query = "SELECT COUNT(*) AS cantidad FROM vw_catalogo_productos;";
+                    String query = "CALL sp_mostrarTodosLosDocumentosVentaMayorista();";
                     PreparedStatement stmt = con.prepareStatement(query);
                     ResultSet rs = stmt.executeQuery();
                     rs.next();
-                    String mensaje = "" + rs.getInt("cantidad");
+                    String mensaje = "" + rs.getString("doc_proposito_de_compra");
 
                 runOnUiThread(() -> {
 

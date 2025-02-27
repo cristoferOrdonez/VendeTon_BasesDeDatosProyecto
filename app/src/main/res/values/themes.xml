@@ -3,6 +3,7 @@
     <style name="Base.Theme.VendeTon" parent="Theme.Design.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/fondo</item>
     </style>
 
     <style name="Theme.VendeTon" parent="Base.Theme.VendeTon" />
@@ -14,6 +15,13 @@
         <item name="android:textColor">@color/gris_oscuro_box_background_color</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:textAllCaps">true</item>
+
+    </style>
+
+    <style name="Theme.VendeTon.ActivityTitles">
+        <item name="android:fontFamily">@font/jost_medium</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@color/fondo</item>
 
     </style>
 </resources>
