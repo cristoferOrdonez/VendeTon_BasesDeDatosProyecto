@@ -1,6 +1,7 @@
 package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.view.LayoutInflater;
@@ -17,11 +18,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Adaptadores.AdaptadorAreasTrabajo;
 import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
+import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
 import com.example.vendeton.ConnectionClass;
+import com.example.vendeton.Entidades.AreaDeTrabajo;
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.Entidades.Contraparte;
 import com.example.vendeton.Entidades.CorreoElectronico;
+import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -45,6 +50,8 @@ public class activity_info_cliente extends AppCompatActivity {
     LinearLayout BotonesCuenta, BotonesEditar;
     RecyclerView RecyclerViewNumeroTelefono, RecyclerViewCorreoElectronico, RecyclerViewAreaTrabajo;
     List<CorreoElectronico> listaCorreos;
+    List<NumeroTelefonico> listaNumeros;
+    List<AreaDeTrabajo> listaAreasTrabajo;
 
     ConnectionClass connectionClass;
     Connection con;
@@ -109,6 +116,10 @@ public class activity_info_cliente extends AppCompatActivity {
         executorService.execute(() -> {
 
             try {
+                listaNumeros = new ArrayList<>();
+                listaCorreos = new ArrayList<>();
+                listaAreasTrabajo = new ArrayList<>();
+
                 con = connectionClass.CONN();
                 String query = "call sp_ConsultarContraparte(1001);";
                 PreparedStatement stmt = con.prepareStatement(query);
@@ -138,7 +149,6 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
 
-                List<CorreoElectronico> tempList = new ArrayList<>();
                 con = connectionClass.CONN();
                 query = "call consultarCorreosElectronicos(1001);";
                 stmt = con.prepareStatement(query);
@@ -147,16 +157,9 @@ public class activity_info_cliente extends AppCompatActivity {
                 while(rs.next()){
                     CorreoElectronico correo = new CorreoElectronico(rs.getString("cor_usuario"),rs.getString("cor_dominio"),
                             rs.getString("cor_correo"),rs.getInt("cor_id"),rs.getInt("con_identificacion"));
-                    tempList.add(correo);
+                    listaCorreos.add(correo);
                 }
 
-                runOnUiThread(() -> {
-                    listaCorreos = new ArrayList<>();
-                    listaCorreos.addAll(tempList);
-
-                });
-
-/*
 
                 try {
                     if (rs != null) rs.close();
@@ -167,26 +170,35 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
 
-                tempList = new ArrayList<>();
                 con = connectionClass.CONN();
-                query = "call consultarCorreosElectronicos(1001);";
+                query = "call  consultarNumerosTelefonicos(1001);";
                 stmt = con.prepareStatement(query);
                 rs = stmt.executeQuery();
-
                 while(rs.next()){
-                    CorreoElectronico correo = new CorreoElectronico(rs.getString("cor_usuario"),rs.getString("cor_dominio"),
-                            rs.getString("cor_correo"),rs.getInt("cor_id"),rs.getInt("con_identificacion"));
-                    tempList.add(correo);
+                    NumeroTelefonico numero = new NumeroTelefonico(rs.getInt("num_id"), rs.getInt("con_identificacion"),
+                            rs.getInt("num_prefijo"), rs.getLong("num_numero"), rs.getLong("num_numero_de_contacto"));
+                    listaNumeros.add(numero);
                 }
 
-                runOnUiThread(() -> {
-                    listaCorreos = new ArrayList<>();
-                    listaCorreos.addAll(tempList);
-
-                });*/
 
 
+                try {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
+
+                con = connectionClass.CONN();
+                query = "call consultarAreasDeTrabajoContraparte(1001);";
+                stmt = con.prepareStatement(query);
+                rs = stmt.executeQuery();
+                while(rs.next()){
+                    AreaDeTrabajo numero = new AreaDeTrabajo(rs.getInt("are_id"), rs.getString("are_nombre"));
+                    listaAreasTrabajo.add(numero);
+                }
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -201,8 +213,13 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
                 AdaptadorCorreoElectronico adaptadorcorreo = new AdaptadorCorreoElectronico(listaCorreos);
-
                 RecyclerViewCorreoElectronico.setAdapter(adaptadorcorreo);
+
+                AdaptadorAreasTrabajo adaptadorareas= new AdaptadorAreasTrabajo(listaAreasTrabajo);
+                RecyclerViewAreaTrabajo.setAdapter(adaptadorareas);
+
+                AdaptadorNumeroTelefonico adaptadornumero= new AdaptadorNumeroTelefonico(listaNumeros);
+                RecyclerViewNumeroTelefono.setAdapter(adaptadornumero);
 
             });
     });
