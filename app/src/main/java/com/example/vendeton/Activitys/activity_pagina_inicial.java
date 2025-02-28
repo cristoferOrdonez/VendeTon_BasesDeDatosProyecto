@@ -58,7 +58,7 @@ public class activity_pagina_inicial extends AppCompatActivity {
         connectionClass = new ConnectionClass();
         connect();
 
-
+/*
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
 
@@ -104,7 +104,7 @@ public class activity_pagina_inicial extends AppCompatActivity {
 
 
                 }
-        );
+        );*/
     }
 
 
