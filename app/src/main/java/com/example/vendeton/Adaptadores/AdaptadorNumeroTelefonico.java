@@ -31,6 +31,12 @@ public class AdaptadorNumeroTelefonico extends RecyclerView.Adapter<AdaptadorNum
         return new AdaptadorNumeroTelefonico.EventoViewHolder(view);
     }
 
+    // Method to add a single item
+    public void addItem(NumeroTelefonico newItem) {
+        listaNumeros.add(newItem); // Add the new item
+        notifyDataSetChanged(); // Notify the adapter that the dataset has changed
+    }
+
     @Override
     public void onBindViewHolder(@NonNull AdaptadorNumeroTelefonico.EventoViewHolder holder, int position) {
 

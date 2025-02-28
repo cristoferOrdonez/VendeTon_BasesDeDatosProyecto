@@ -28,6 +28,10 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".Activitys.activity_detalles_cliente"
+            android:label="Detalles Cliente" >
+        </activity>
     </application>
 
 </manifest>

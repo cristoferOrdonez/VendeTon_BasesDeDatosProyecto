@@ -1,6 +1,8 @@
 package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.telecom.Call;
@@ -46,17 +48,20 @@ public class activity_info_cliente extends AppCompatActivity {
 
     TextInputEditText IdentificacionAcceder, NombreAcceder, ApellidoAcceder, CiudadAcceder, BarrioAcceder, CalleAcceder;
     TextInputLayout layoutIdentificacion, layoutNombre, layoutApellido, layoutCiudad, layoutBarrio, layoutCalle;
-    Button editarBtn, agregarNumeroTelefono, agregarCorreoElectronico, agregarAreaTrabajo;
+    Button editarBtn, agregarNumeroTelefono, agregarCorreoElectronico;
     LinearLayout BotonesCuenta, BotonesEditar;
-    RecyclerView RecyclerViewNumeroTelefono, RecyclerViewCorreoElectronico, RecyclerViewAreaTrabajo;
+    RecyclerView RecyclerViewNumeroTelefono, RecyclerViewCorreoElectronico;
     List<CorreoElectronico> listaCorreos;
     List<NumeroTelefonico> listaNumeros;
-    List<AreaDeTrabajo> listaAreasTrabajo;
+    List<NumeroTelefonico> adicionales;
+    AdaptadorNumeroTelefonico adaptadornumero;
 
     ConnectionClass connectionClass;
     Connection con;
     ResultSet rs;
     String name, str;
+
+    Contraparte cliente;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -85,15 +90,12 @@ public class activity_info_cliente extends AppCompatActivity {
 
         agregarNumeroTelefono = findViewById(R.id.BotonAgregarNumeroTelefono);
         agregarCorreoElectronico = findViewById(R.id.BotonAgregarCorreoElectronico);
-        agregarAreaTrabajo = findViewById(R.id.BotonAgregarAreaTrabajo);
 
         RecyclerViewNumeroTelefono = findViewById(R.id.RecyclerViewNumeroTelefono);
         RecyclerViewCorreoElectronico = findViewById(R.id.RecyclerViewCorreo);
-        RecyclerViewAreaTrabajo = findViewById(R.id.RecyclerViewAreaTrabajo);
 
 
         RecyclerViewCorreoElectronico.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
-        RecyclerViewAreaTrabajo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         RecyclerViewNumeroTelefono.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
 
         IdentificacionAcceder.setEnabled(false);
@@ -104,9 +106,6 @@ public class activity_info_cliente extends AppCompatActivity {
         CalleAcceder.setEnabled(false);
         agregarNumeroTelefono.setVisibility(View.INVISIBLE);
         agregarCorreoElectronico.setVisibility(View.INVISIBLE);
-        agregarAreaTrabajo.setVisibility(View.INVISIBLE);
-
-
 
 
         connectionClass = new ConnectionClass();
@@ -118,13 +117,12 @@ public class activity_info_cliente extends AppCompatActivity {
             try {
                 listaNumeros = new ArrayList<>();
                 listaCorreos = new ArrayList<>();
-                listaAreasTrabajo = new ArrayList<>();
-
+                adicionales = new ArrayList<>();
                 con = connectionClass.CONN();
                 String query = "call sp_ConsultarContraparte(1001);";
                 PreparedStatement stmt = con.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery();
-                Contraparte cliente;
+
                 if(rs.next()){
                     int result;
                     cliente = new Contraparte(rs.getInt("con_identificacion"),rs.getString("con_nombre"),
@@ -181,7 +179,6 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
 
-
                 try {
                     if (rs != null) rs.close();
                     if (stmt != null) stmt.close();
@@ -190,15 +187,6 @@ public class activity_info_cliente extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-                con = connectionClass.CONN();
-                query = "call consultarAreasDeTrabajoContraparte(1001);";
-                stmt = con.prepareStatement(query);
-                rs = stmt.executeQuery();
-                while(rs.next()){
-                    AreaDeTrabajo numero = new AreaDeTrabajo(rs.getInt("are_id"), rs.getString("are_nombre"));
-                    listaAreasTrabajo.add(numero);
-                }
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -215,10 +203,7 @@ public class activity_info_cliente extends AppCompatActivity {
                 AdaptadorCorreoElectronico adaptadorcorreo = new AdaptadorCorreoElectronico(listaCorreos);
                 RecyclerViewCorreoElectronico.setAdapter(adaptadorcorreo);
 
-                AdaptadorAreasTrabajo adaptadorareas= new AdaptadorAreasTrabajo(listaAreasTrabajo);
-                RecyclerViewAreaTrabajo.setAdapter(adaptadorareas);
-
-                AdaptadorNumeroTelefonico adaptadornumero= new AdaptadorNumeroTelefonico(listaNumeros);
+                adaptadornumero= new AdaptadorNumeroTelefonico(listaNumeros);
                 RecyclerViewNumeroTelefono.setAdapter(adaptadornumero);
 
             });
@@ -279,7 +264,6 @@ public class activity_info_cliente extends AppCompatActivity {
 
         agregarNumeroTelefono.setVisibility(View.VISIBLE);
         agregarCorreoElectronico.setVisibility(View.VISIBLE);
-        agregarAreaTrabajo.setVisibility(View.VISIBLE);
 
     }
 
@@ -303,10 +287,34 @@ public class activity_info_cliente extends AppCompatActivity {
 
         agregarNumeroTelefono.setVisibility(View.INVISIBLE);
         agregarCorreoElectronico.setVisibility(View.INVISIBLE);
-        agregarAreaTrabajo.setVisibility(View.INVISIBLE);
-
 
     }
+
+
+    public void AgregarNumeroTelefono(View view){
+        Intent miIntent = new Intent(this, activity_detalles_cliente.class);
+        miIntent.putExtra("con_identificacion", cliente.con_identificacion);
+        miIntent.putExtra("tipo", "numero");
+        startActivityForResult(miIntent,1);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) { // el "1" es el numero que pasaste como parametro
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("datos");
+                // tu codigo para continuar procesando
+                NumeroTelefonico numeroregresado = data.getParcelableExtra("numero");
+                adicionales.add(numeroregresado);
+                adaptadornumero.addItem(numeroregresado);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(this, "no se devolvio",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }//onActivityResult
 
 }
 
