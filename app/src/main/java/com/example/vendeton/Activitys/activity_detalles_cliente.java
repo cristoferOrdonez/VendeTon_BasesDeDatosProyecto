@@ -1,6 +1,8 @@
 package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,98 +44,48 @@ public class activity_detalles_cliente extends AppCompatActivity {
     ResultSet rs;
     String name, str, intencion;
     int con_identificacion;
+    TextInputEditText PrimerCampo, SegundoCampo;
+    TextInputLayout layoutPrimerCampo, layoutSegundoCampo;
+    Button btnGuardar, btnCancelar;
+    NumeroTelefonico numero;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            con_identificacion = extras.getInt("con_identificacion");
-            intencion = extras.getString("intencion");
-        }
+        con_identificacion = getIntent().getIntExtra("con_identificacion",0);
+        intencion = getIntent().getStringExtra("tipo");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_editar_info_cliente);
+        setContentView(R.layout.activity_ver_editar_dos_campos);
 
+        PrimerCampo = findViewById(R.id.editTextPrimerCampo);
+        SegundoCampo = findViewById(R.id.editTextSegundoCampo);
+        layoutPrimerCampo = findViewById(R.id.layoutPrimerCampo);
+        layoutSegundoCampo = findViewById(R.id.layoutSegundoCampo);
 
-        connectionClass = new ConnectionClass();
-        connect();
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-
-            con = connectionClass.CONN();
-
-            try {
-                if (intencion = "correo"){
-
-                    String query = "call sp_ConsultarContraparte(1001);";
-
-                } else if (intencion = 'numero') {
-
-                    String query = "call sp_ConsultarContraparte(1001);";
-
-                }
-                else{
-
-                    String query = "call sp_ConsultarContraparte(1001);";
-
-                }
-
-
-                PreparedStatement stmt = con.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery();
-                Contraparte cliente;
-                if(rs.next()){
-                    int result;
-                    cliente = new Contraparte(rs.getInt("con_identificacion"),rs.getString("con_nombre"),
-                            rs.getString("con_apellido"),rs.getString("con_calle"),rs.getString("con_barrio"),
-                            rs.getString("con_ciudad"), rs.getString("con_direccion"));
-                    runOnUiThread(() -> {
-
-                    });
-                }
-
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-
-               ; con = connectionClass.CONN();
-        query = "call consultarCorreosElectronicos(1001);";
-        stmt = con.prepareStatement(query);
-        rs = stmt.executeQuery();
-
-        while(rs.next()){
-            CorreoElectronico correo = new CorreoElectronico(rs.getString("cor_usuario"),rs.getString("cor_dominio"),
-                    rs.getString("cor_correo"),rs.getInt("cor_id"),rs.getInt("con_identificacion"));
-            listaCorreos.add(correo);
+        if (intencion.equals("numero")){
+            layoutPrimerCampo.setHint("Prefijo");
+            layoutSegundoCampo.setHint("Número");
+        } else{
+            layoutPrimerCampo.setHint("Usuario");
+            layoutSegundoCampo.setHint("Dominio");
         }
-
-
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-    } catch (Exception e) {
-        throw new RuntimeException(e);
-    }
-
-
-});
 
 }
+    public void guardar(View view){
+        if (intencion.equals("numero")){
+            numero = new NumeroTelefonico(0,con_identificacion,Integer.parseInt(PrimerCampo.getText().toString()),
+                    Long.parseLong(SegundoCampo.getText().toString()),
+                    Long.parseLong(PrimerCampo.getText().toString()+SegundoCampo.getText().toString()));
+
+            Intent miIntent = new Intent(this, activity_info_cliente.class);
+            miIntent.putExtra("numero", numero);
+            setResult(Activity.RESULT_OK, miIntent);
+            finish();
+        }
+    }
 
 
     public void connect() {
@@ -166,54 +118,6 @@ public class activity_detalles_cliente extends AppCompatActivity {
                     });
                 }
         );
-
-    }
-
-    public void editarInformacion(View view){
-
-        LinearLayout.LayoutParams nuevoParametroEdicion = (LinearLayout.LayoutParams) BotonesEditar.getLayoutParams();
-        nuevoParametroEdicion.weight = 3.5f;
-        BotonesEditar.setLayoutParams(nuevoParametroEdicion);
-
-        LinearLayout.LayoutParams nuevoParametroCuenta = (LinearLayout.LayoutParams) BotonesCuenta.getLayoutParams();
-        nuevoParametroCuenta.weight = 0;
-        BotonesCuenta.setLayoutParams(nuevoParametroCuenta);
-
-
-        NombreAcceder.setEnabled(true);
-        ApellidoAcceder.setEnabled(true);
-        CiudadAcceder.setEnabled(true);
-        BarrioAcceder.setEnabled(true);
-        CalleAcceder.setEnabled(true);
-
-        agregarNumeroTelefono.setVisibility(View.VISIBLE);
-        agregarCorreoElectronico.setVisibility(View.VISIBLE);
-        agregarAreaTrabajo.setVisibility(View.VISIBLE);
-
-    }
-
-
-    public void guardarInformacion(View view){
-
-        LinearLayout.LayoutParams nuevoParametroEdicion = (LinearLayout.LayoutParams) BotonesEditar.getLayoutParams();
-        nuevoParametroEdicion.weight = 0;
-        BotonesEditar.setLayoutParams(nuevoParametroEdicion);
-
-        LinearLayout.LayoutParams nuevoParametroCuenta = (LinearLayout.LayoutParams) BotonesCuenta.getLayoutParams();
-        nuevoParametroCuenta.weight = 3.5f;
-        BotonesCuenta.setLayoutParams(nuevoParametroCuenta);
-
-
-        NombreAcceder.setEnabled(false);
-        ApellidoAcceder.setEnabled(false);
-        CiudadAcceder.setEnabled(false);
-        BarrioAcceder.setEnabled(false);
-        CalleAcceder.setEnabled(false);
-
-        agregarNumeroTelefono.setVisibility(View.INVISIBLE);
-        agregarCorreoElectronico.setVisibility(View.INVISIBLE);
-        agregarAreaTrabajo.setVisibility(View.INVISIBLE);
-
 
     }
 

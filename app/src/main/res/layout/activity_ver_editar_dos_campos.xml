@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:CardView="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activitys.activity_info_cliente">
+    tools:context=".Activitys.activity_detalles_cliente">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutIdentificacion"
+                android:id="@+id/layoutPrimerCampo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutNombre"
+                android:id="@+id/layoutSegundoCampo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/BotonGeneralGuardar"
+            android:id="@+id/BotonDetalleGuardar"
             style="@style/Theme.VendeTon.Botones"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -108,11 +108,12 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="18sp"
+            android:onClick="guardar"
             android:text="Guardar"
-            android:textSize="8sp"/>
+            android:textSize="8sp" />
 
         <Button
-            android:id="@+id/BotonGeneralCancelar"
+            android:id="@+id/BotonDetalleCancelar"
             style="@style/Theme.VendeTon.Botones"
             android:layout_width="match_parent"
             android:layout_height="0dp"
