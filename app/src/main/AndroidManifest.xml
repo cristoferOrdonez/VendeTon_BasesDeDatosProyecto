@@ -15,7 +15,10 @@
         android:theme="@style/Theme.VendeTon"
         tools:targetApi="31">
         <activity
-            android:name=".Activitys.activity_documentos_VM"
+            android:name=".Activitys.ActivityCrearDocumentoVM"
+            android:exported="false" />
+        <activity
+            android:name=".Activitys.ActivityDocumentosVM"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activitys.activity_seleccion_usuario"
-            android:exported="false">
-
-        </activity>
+            android:name=".Activitys.ActivitySeleccionUsuario"
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

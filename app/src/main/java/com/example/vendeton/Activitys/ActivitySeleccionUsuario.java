@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vendeton.R;
 
-public class activity_seleccion_usuario extends AppCompatActivity {
+public class ActivitySeleccionUsuario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

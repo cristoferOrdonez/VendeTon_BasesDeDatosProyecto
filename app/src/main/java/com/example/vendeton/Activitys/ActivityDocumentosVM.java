@@ -1,6 +1,12 @@
 package com.example.vendeton.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +17,8 @@ import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
 import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 import com.example.vendeton.db.ConnectionClass;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +28,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class activity_documentos_VM extends AppCompatActivity {
+public class ActivityDocumentosVM extends AppCompatActivity {
 
     RecyclerView listaDocumentos;
 
@@ -28,22 +36,31 @@ public class activity_documentos_VM extends AppCompatActivity {
 
     Connection con;
 
-    ResultSet rs;
-
-    String name, str;
+    String str;
 
     ArrayList<DocumentoVM> documentos;
 
     AdaptadorDocumentosVM adapter;
+
+    ImageButton botonCrearDocumentoVM;
+
+    MaterialAutoCompleteTextView spinnerClientes;
+
+    private ArrayAdapter<String> clientesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos_vm);
 
+        botonCrearDocumentoVM = findViewById(R.id.imageButtonCrearDocumentoVM);
+
+        botonCrearDocumentoVM.setOnClickListener(i -> registroDeDocumentosVM());
+
+        showFadeInAnimation(botonCrearDocumentoVM, 500);
+
         listaDocumentos = findViewById(R.id.RecyclerViewDocumntosVM);
         documentos = new ArrayList<>();
-        documentos.add(new DocumentoVM(1,2,new Date(),2,"","","","","","",""));
 
         listaDocumentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         adapter = new AdaptadorDocumentosVM(documentos);
@@ -139,6 +156,29 @@ public class activity_documentos_VM extends AppCompatActivity {
                 }
         );
 
+    }
+
+    private void showFadeInAnimation(View view, long duration){
+
+        AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f);
+        fadeIn.setDuration(duration);
+
+        view.clearAnimation();
+        view.startAnimation(fadeIn);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.setVisibility(View.VISIBLE);
+            }
+        }, duration);
+
+    }
+
+    private void registroDeDocumentosVM(){
+        Intent miIntent = new Intent(this, ActivityCrearDocumentoVM.class);
+        startActivity(miIntent);
+        finishAffinity();
     }
 
 }

@@ -24,4 +24,12 @@
         <item name="android:background">@color/fondo</item>
 
     </style>
+
+    <style name="TextInputEditText" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/azul_botones</item>
+        <item name="android:windowBackground">@color/fondo</item>
+
+    </style>
+
 </resources>
