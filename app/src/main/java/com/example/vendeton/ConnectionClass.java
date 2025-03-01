@@ -24,7 +24,7 @@ public class ConnectionClass {
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String connectionString = "jdbc:mysql://" + ip + ":" + port + "/" + db;
+            String connectionString = "jdbc:mysql://" + ip + ":" + port + "/" + db + "?noAccessToProcedureBodies=true";
             conn = DriverManager.getConnection(connectionString, username, password);
 
         }catch (Exception e){
