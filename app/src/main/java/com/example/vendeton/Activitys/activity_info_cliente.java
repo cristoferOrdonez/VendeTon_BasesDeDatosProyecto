@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ import com.example.vendeton.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -332,42 +334,60 @@ public class activity_info_cliente extends AppCompatActivity {
                 con = connectionClass.CONN();
                 for (CorreoElectronico correos:correosNuevos) {
                     String query = "call sp_insertarCorreoElectronico(?,?,?);";
-                    PreparedStatement stmt = con.prepareStatement(query);
-                    stmt.setLong(1, cliente.con_identificacion);
-                    stmt.setString(2, correos.cor_usuario);
-                    stmt.setString(3, correos.cor_dominio);
 
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        String mensaje = rs.getString("Mensaje");
-                        if (stmt != null) stmt.close();
-                        if (rs != null) rs.close();
-                        runOnUiThread(() -> {
-                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-                        });
+                    try (CallableStatement stmt = con.prepareCall(query)) {
+                        stmt.setLong(1, cliente.con_identificacion);
+                        stmt.setString(2, correos.cor_usuario);
+                        stmt.setString(3, correos.cor_dominio);
 
+                        boolean hasResults = stmt.execute();
+
+                        if (hasResults) {
+                            try (ResultSet rs = stmt.getResultSet()) {
+                                if (rs.next()) {
+                                    String mensaje = rs.getString("Mensaje");
+                                    runOnUiThread(() ->
+                                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            }
+                        }
+
+                    } catch (SQLException e) {
+                        Log.e("DB_ERROR", "Error", e);
+                        runOnUiThread(() ->
+                                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_LONG).show()
+                        );
                     }
-
 
 
                 }
 
                 for (NumeroTelefonico numeros: numerosNuevos) {
                     String query = "call  sp_insertarNumeroTelefonico(?,?,?);";
-                    PreparedStatement stmt = con.prepareStatement(query);
-                    stmt.setLong(1, cliente.con_identificacion);
-                    stmt.setInt(2, numeros.num_prefijo);
-                    stmt.setLong(3, numeros.num_numero);
+                    try (CallableStatement stmt = con.prepareCall(query)) {
+                        stmt.setLong(1, cliente.con_identificacion);
+                        stmt.setInt(2, numeros.num_prefijo);
+                        stmt.setLong(3, numeros.num_numero);
 
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        String mensaje = rs.getString("Mensaje");
-                        if (stmt != null) stmt.close();
-                        if (rs != null) rs.close();
-                        runOnUiThread(() -> {
-                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-                        });
+                        boolean hasResults = stmt.execute();
 
+                        if (hasResults) {
+                            try (ResultSet rs = stmt.getResultSet()) {
+                                if (rs.next()) {
+                                    String mensaje = rs.getString("Mensaje");
+                                    runOnUiThread(() ->
+                                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            }
+                        }
+
+                    } catch (SQLException e) {
+                        Log.e("DB_ERROR", "Error", e);
+                        runOnUiThread(() ->
+                                Toast.makeText(this, ""+ e.getMessage(), Toast.LENGTH_LONG).show()
+                        );
                     }
                 }
 
