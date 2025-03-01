@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.Entidades.CorreoElectronico;
+import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
 
 import java.math.BigDecimal;
@@ -45,6 +46,12 @@ public class AdaptadorCorreoElectronico extends RecyclerView.Adapter<AdaptadorCo
     public int getItemCount() {
         return listaCorreos.size();
 
+    }
+
+    // Method to add a single item
+    public void addItem(CorreoElectronico newItem) {
+        listaCorreos.add(newItem); // Add the new item
+        notifyDataSetChanged(); // Notify the adapter that the dataset has changed
     }
 
     public class EventoViewHolder extends RecyclerView.ViewHolder {
