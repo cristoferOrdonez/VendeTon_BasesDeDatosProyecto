@@ -326,6 +326,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_weight="1"
                 android:autoSizeMaxTextSize="16sp"
+                android:onClick="AgregarCorreoElectronico"
                 android:paddingLeft="10dp"
                 android:text="Agregar"
                 android:textSize="8sp" />

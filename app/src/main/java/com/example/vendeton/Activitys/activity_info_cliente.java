@@ -3,34 +3,23 @@ package com.example.vendeton.Activitys;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
-import android.telecom.Call;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Adaptadores.AdaptadorAreasTrabajo;
 import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
 import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
 import com.example.vendeton.ConnectionClass;
-import com.example.vendeton.Entidades.AreaDeTrabajo;
-import com.example.vendeton.Entidades.BalanceGeneral;
-import com.example.vendeton.Entidades.Contraparte;
+import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -53,22 +42,25 @@ public class activity_info_cliente extends AppCompatActivity {
     RecyclerView RecyclerViewNumeroTelefono, RecyclerViewCorreoElectronico;
     List<CorreoElectronico> listaCorreos;
     List<NumeroTelefonico> listaNumeros;
-    List<NumeroTelefonico> adicionales;
+    List<NumeroTelefonico> numerosNuevos;
+    List<CorreoElectronico> correosNuevos;
     AdaptadorNumeroTelefonico adaptadornumero;
+    AdaptadorCorreoElectronico adaptadorcorreo;
 
     ConnectionClass connectionClass;
     Connection con;
     ResultSet rs;
     String name, str;
 
-    Contraparte cliente;
+    ContraparteCliente cliente;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_editar_info_cliente);
-
 
         IdentificacionAcceder = findViewById(R.id.editTextIdentificacion);
         NombreAcceder = findViewById(R.id.editTextNombre);
@@ -117,7 +109,8 @@ public class activity_info_cliente extends AppCompatActivity {
             try {
                 listaNumeros = new ArrayList<>();
                 listaCorreos = new ArrayList<>();
-                adicionales = new ArrayList<>();
+                numerosNuevos = new ArrayList<>();
+                correosNuevos = new ArrayList<>();
                 con = connectionClass.CONN();
                 String query = "call sp_ConsultarContraparte(1001);";
                 PreparedStatement stmt = con.prepareStatement(query);
@@ -125,7 +118,7 @@ public class activity_info_cliente extends AppCompatActivity {
 
                 if(rs.next()){
                     int result;
-                    cliente = new Contraparte(rs.getInt("con_identificacion"),rs.getString("con_nombre"),
+                    cliente = new ContraparteCliente(rs.getInt("con_identificacion"),rs.getString("con_nombre"),
                             rs.getString("con_apellido"),rs.getString("con_calle"),rs.getString("con_barrio"),
                             rs.getString("con_ciudad"), rs.getString("con_direccion"));
                     runOnUiThread(() -> {
@@ -200,7 +193,7 @@ public class activity_info_cliente extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                AdaptadorCorreoElectronico adaptadorcorreo = new AdaptadorCorreoElectronico(listaCorreos);
+                adaptadorcorreo = new AdaptadorCorreoElectronico(listaCorreos);
                 RecyclerViewCorreoElectronico.setAdapter(adaptadorcorreo);
 
                 adaptadornumero= new AdaptadorNumeroTelefonico(listaNumeros);
@@ -288,6 +281,8 @@ public class activity_info_cliente extends AppCompatActivity {
         agregarNumeroTelefono.setVisibility(View.INVISIBLE);
         agregarCorreoElectronico.setVisibility(View.INVISIBLE);
 
+        inserts();
+
     }
 
 
@@ -304,17 +299,86 @@ public class activity_info_cliente extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) { // el "1" es el numero que pasaste como parametro
             if(resultCode == Activity.RESULT_OK){
-                String result=data.getStringExtra("datos");
-                // tu codigo para continuar procesando
-                NumeroTelefonico numeroregresado = data.getParcelableExtra("numero");
-                adicionales.add(numeroregresado);
-                adaptadornumero.addItem(numeroregresado);
+                if (data.getStringExtra("intencion").equals("numero")){
+                    NumeroTelefonico numeroregresado = data.getParcelableExtra("numero");
+                    numerosNuevos.add(numeroregresado);
+                    adaptadornumero.addItem(numeroregresado);
+                }
+                else if (data.getStringExtra("intencion").equals("correo")){
+                    CorreoElectronico correoregresado = data.getParcelableExtra("correo");
+                    correosNuevos.add(correoregresado);
+                    adaptadorcorreo.addItem(correoregresado);
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(this, "no se devolvio",Toast.LENGTH_SHORT).show();
             }
         }
     }//onActivityResult
+
+
+    public void AgregarCorreoElectronico(View view){
+        Intent miIntent = new Intent(this, activity_detalles_cliente.class);
+        miIntent.putExtra("con_identificacion", cliente.con_identificacion);
+        miIntent.putExtra("tipo", "correo");
+        startActivityForResult(miIntent,1);
+    }
+
+
+    public void inserts(){
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try{
+                con = connectionClass.CONN();
+                for (CorreoElectronico correos:correosNuevos) {
+                    String query = "call sp_insertarCorreoElectronico(?,?,?);";
+                    PreparedStatement stmt = con.prepareStatement(query);
+                    stmt.setLong(1, cliente.con_identificacion);
+                    stmt.setString(2, correos.cor_usuario);
+                    stmt.setString(3, correos.cor_dominio);
+
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String mensaje = rs.getString("Mensaje");
+                        if (stmt != null) stmt.close();
+                        if (rs != null) rs.close();
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+                        });
+
+                    }
+
+
+
+                }
+
+                for (NumeroTelefonico numeros: numerosNuevos) {
+                    String query = "call  sp_insertarNumeroTelefonico(?,?,?);";
+                    PreparedStatement stmt = con.prepareStatement(query);
+                    stmt.setLong(1, cliente.con_identificacion);
+                    stmt.setInt(2, numeros.num_prefijo);
+                    stmt.setLong(3, numeros.num_numero);
+
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String mensaje = rs.getString("Mensaje");
+                        if (stmt != null) stmt.close();
+                        if (rs != null) rs.close();
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+                        });
+
+                    }
+                }
+
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+    }
 
 }
 

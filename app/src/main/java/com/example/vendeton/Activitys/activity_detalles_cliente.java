@@ -6,19 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Adaptadores.AdaptadorAreasTrabajo;
-import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
-import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
 import com.example.vendeton.ConnectionClass;
-import com.example.vendeton.Entidades.AreaDeTrabajo;
-import com.example.vendeton.Entidades.Contraparte;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
@@ -26,11 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,18 +31,18 @@ public class activity_detalles_cliente extends AppCompatActivity {
     Connection con;
     ResultSet rs;
     String name, str, intencion;
-    int con_identificacion;
+    long con_identificacion;
     TextInputEditText PrimerCampo, SegundoCampo;
     TextInputLayout layoutPrimerCampo, layoutSegundoCampo;
     Button btnGuardar, btnCancelar;
     NumeroTelefonico numero;
-
+    CorreoElectronico correo;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        con_identificacion = getIntent().getIntExtra("con_identificacion",0);
+        con_identificacion = getIntent().getLongExtra("con_identificacion",0);
         intencion = getIntent().getStringExtra("tipo");
 
         super.onCreate(savedInstanceState);
@@ -82,9 +70,24 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
             Intent miIntent = new Intent(this, activity_info_cliente.class);
             miIntent.putExtra("numero", numero);
+            miIntent.putExtra("intencion", "numero");
             setResult(Activity.RESULT_OK, miIntent);
             finish();
         }
+        else if (intencion.equals("correo")){
+            correo= new CorreoElectronico(PrimerCampo.getText().toString(),
+                    SegundoCampo.getText().toString(),
+                    PrimerCampo.getText().toString()+SegundoCampo.getText().toString(),
+                    0,
+                    con_identificacion);
+
+            Intent miIntent = new Intent(this, activity_info_cliente.class);
+            miIntent.putExtra("correo", correo);
+            miIntent.putExtra("intencion", "correo");
+            setResult(Activity.RESULT_OK, miIntent);
+            finish();
+        }
+
     }
 
 
