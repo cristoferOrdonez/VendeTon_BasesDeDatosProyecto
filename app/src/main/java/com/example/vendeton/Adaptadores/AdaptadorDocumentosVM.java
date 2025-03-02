@@ -1,5 +1,7 @@
 package com.example.vendeton.Adaptadores;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Activitys.activity_info_cliente;
+import com.example.vendeton.Activitys.activity_ver_info_documento_vm;
 import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 
@@ -43,20 +47,17 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
         holder.textViewClienteDocumento.setText("Cliente: " + documento.con_nombre + " " + documento.con_apellido);
         holder.textViewTotalDocumento.setText("Total: " + documento.doc_total);
 
-        holder.botonEliminarDocumento.setOnClickListener(new View.OnClickListener() {
+        holder.botonVerDocumento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent miIntent = new Intent(v.getContext(), activity_ver_info_documento_vm.class);
+                miIntent.putExtra("documento", documento);
+                v.getContext().startActivity(miIntent);
+                ((Activity)v.getContext()).finishAffinity();
 
             }
         });
 
-        holder.botonEditarDocumento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -69,6 +70,7 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
 
         TextView textViewNumeroDocumento, textViewFechaDocumento, textViewClienteDocumento, textViewTotalDocumento;
         ImageButton botonEliminarDocumento, botonEditarDocumento;
+        ImageButton botonVerDocumento;
 
         public EventoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +82,7 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
 
             botonEliminarDocumento = itemView.findViewById(R.id.imageButtonEliminarDocumentoVM);
             botonEditarDocumento = itemView.findViewById(R.id.imageButtonEditarDocumentoVM);
+            botonVerDocumento = itemView.findViewById(R.id.imageButtonRevisarDocumentoVM);
         }
     }
 }
