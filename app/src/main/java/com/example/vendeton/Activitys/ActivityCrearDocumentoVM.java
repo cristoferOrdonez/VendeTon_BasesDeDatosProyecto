@@ -62,7 +62,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     String str;
 
-    Button botonAgregar, botonGuardar;
+    Button botonAgregar, botonGuardar, botonCancelar;
 
     int numeroDeDocumento;
 
@@ -79,6 +79,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
         setContentView(R.layout.activity_crear_documento_vm);
 
         botonGuardar = findViewById(R.id.botonAceptarCrearDocumentoVM);
+        botonCancelar = findViewById(R.id.botonCancelarCrearDocumentoVM);
 
         propositoDeCompraDocumentoVM = findViewById(R.id.editTextPropositoCompra);
 
@@ -102,6 +103,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
         botonAgregar.setOnClickListener(i -> agregarProductoVendido());
 
         botonGuardar.setOnClickListener(i -> crearDocumento());
+        botonCancelar.setOnClickListener(i -> irADocumentosVM());
 
     }
 
@@ -212,7 +214,6 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
     private void agregarProductoVendido() {
         Intent miIntent = new Intent(this, ActivityCrearDetalleDocumentoVM.class);
         startActivity(miIntent);
-        finish();
     }
 
     @Override
@@ -418,7 +419,9 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
                         runOnUiThread(() -> {
 
-                            Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+                            if(bodegaOrigen == this.bodegaOrigen.get(this.bodegaOrigen.size() - 1)){
+                                irADocumentosVM();
+                            }
 
                         });
 
@@ -433,6 +436,12 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
                 }
         );
 
+    }
+
+    public void irADocumentosVM(){
+        Intent miIntent = new Intent(this, ActivityDocumentosVM.class);
+        startActivity(miIntent);
+        finish();
     }
 
 }

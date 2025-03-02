@@ -1,16 +1,11 @@
 package com.example.vendeton.Activitys;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vendeton.Entidades.BodegaOrigen;
 import com.example.vendeton.R;
@@ -58,14 +53,14 @@ public class ActivityCrearBodegaOrigen extends AppCompatActivity {
 
         producto = getIntent().getStringExtra("producto");
 
-        establecerSpinnerProductos();
+        establecerSpinnerBodegas();
 
         botonAgregarBodegaOrigen.setOnClickListener(i -> crearBodegaOrigen());
         botonCancelar.setOnClickListener(i -> cancelarCreacionBodegaOrigen());
 
     }
 
-    public void establecerSpinnerProductos(){
+    public void establecerSpinnerBodegas(){
 
         listaBodegas = new ArrayList<>();
 

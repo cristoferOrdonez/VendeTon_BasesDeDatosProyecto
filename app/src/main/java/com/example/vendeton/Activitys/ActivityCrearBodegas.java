@@ -88,11 +88,6 @@ public class ActivityCrearBodegas extends AppCompatActivity {
 
                         stmt.executeUpdate();
 
-                        //while (rs.next()) {
-
-                            //numeroDeDocumento = rs.getInt("numero");
-
-                        //}
 
                         runOnUiThread(() -> {
 
