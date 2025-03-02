@@ -2,15 +2,23 @@ package com.example.vendeton;
 
 import android.app.Application;
 
-public class VendeTon extends Application {
+import com.example.vendeton.Entidades.ContraparteCliente;
+import com.example.vendeton.db.DbSesion;
 
+public class VendeTon extends Application {
+    public final static int USUARIO_PUBLICO = 0;
+    public final static int CLIENTE_MAYORISTA = 1;
+    public final static int ADMINISTRADOR = 2;
+    public static int estadoUsuario = USUARIO_PUBLICO;
+    public static ContraparteCliente usuario;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-
+        usuario = null;
+        DbSesion dbSesion=new DbSesion(getApplicationContext());
+        dbSesion.sesionActiva();
     }
 
     @Override

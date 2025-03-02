@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activitys.activity_iniciar_sesion">
+    tools:context=".Activitys.activity_iniciar_sesion_cliente">
 
     <ImageView
         android:id="@+id/imageView"
@@ -37,37 +37,12 @@
             app:startIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextCorreo"
+                android:id="@+id/editTextIdentificacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jost_light"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textColor="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:paddingVertical="15dp"
-            android:textColorHint="@color/gris_claro_hint"
-            app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-            app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/white"
-            app:startIconDrawable="@drawable/icono_candado_contrasena"
-            app:startIconTint="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextContrasena"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:fontFamily="@font/jost_light"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>

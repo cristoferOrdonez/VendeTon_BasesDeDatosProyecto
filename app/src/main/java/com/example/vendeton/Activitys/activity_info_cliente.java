@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
 import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
-import com.example.vendeton.ConnectionClass;
+import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
@@ -109,6 +109,31 @@ public class activity_info_cliente extends AppCompatActivity {
         executorService.execute(() -> {
 
             try {
+                // Inicialización de listas
+                listaNumeros = new ArrayList<>();
+                listaCorreos = new ArrayList<>();
+                numerosNuevos = new ArrayList<>();
+                correosNuevos = new ArrayList<>();
+
+                // 1. Conexión única reutilizable
+                try (Connection con = connectionClass.CONN()) {
+                    if (con == null) throw new SQLException("Conexión nula");
+
+                    // 2. Método genérico para ejecutar consultas
+                    ejecutarConsultaContraparte(con, 1001);
+                    ejecutarConsultaCorreos(con, 1001);
+                    ejecutarConsultaNumeros(con, 1001);
+
+                } // Auto-cierre de conexión gracias a try-with-resources
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+
+            /*try {
                 listaNumeros = new ArrayList<>();
                 listaCorreos = new ArrayList<>();
                 numerosNuevos = new ArrayList<>();
@@ -185,7 +210,7 @@ public class activity_info_cliente extends AppCompatActivity {
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
-            }
+            }*/
 
             runOnUiThread(() -> {
 
@@ -204,7 +229,94 @@ public class activity_info_cliente extends AppCompatActivity {
             });
     });
 
+
+
 }
+
+
+    private void ejecutarConsultaContraparte(Connection con, long id) {
+        String query = "call sp_ConsultarContraparte(?)";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setLong(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new ContraparteCliente(
+                            rs.getLong("con_identificacion"),
+                            rs.getString("con_nombre"),
+                            rs.getString("con_apellido"),
+                            rs.getString("con_calle"),
+                            rs.getString("con_barrio"),
+                            rs.getString("con_ciudad"),
+                            rs.getString("con_direccion")
+                    );
+                    actualizarUIcliente();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void ejecutarConsultaCorreos(Connection con, int id) {
+        String query = "call consultarCorreosElectronicos(?)";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    listaCorreos.add(new CorreoElectronico(
+                            rs.getString("cor_usuario"),
+                            rs.getString("cor_dominio"),
+                            rs.getString("cor_correo"),
+                            rs.getInt("cor_id"),
+                            rs.getInt("con_identificacion")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void ejecutarConsultaNumeros(Connection con, int id) {
+        String query = "call consultarNumerosTelefonicos(?)";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    listaNumeros.add(new NumeroTelefonico(
+                            rs.getInt("num_id"),
+                            rs.getInt("con_identificacion"),
+                            rs.getInt("num_prefijo"),
+                            rs.getLong("num_numero"),
+                            rs.getLong("num_numero_de_contacto")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    private void actualizarUIcliente() {
+        runOnUiThread(() -> {
+            IdentificacionAcceder.setText(String.valueOf(cliente.con_identificacion));
+            NombreAcceder.setText(cliente.con_nombre);
+            ApellidoAcceder.setText(cliente.con_apellido);
+            CiudadAcceder.setText(cliente.con_ciudad);
+            CalleAcceder.setText(cliente.con_calle);
+            BarrioAcceder.setText(cliente.con_barrio);
+        });
+    }
 
 
     public void connect() {
