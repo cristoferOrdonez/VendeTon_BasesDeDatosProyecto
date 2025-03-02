@@ -212,7 +212,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
     private void agregarProductoVendido() {
         Intent miIntent = new Intent(this, ActivityCrearDetalleDocumentoVM.class);
         startActivity(miIntent);
-
+        finish();
     }
 
     @Override

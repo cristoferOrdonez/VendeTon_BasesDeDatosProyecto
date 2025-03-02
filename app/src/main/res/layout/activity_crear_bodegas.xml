@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Activitys.ActivityCrearBodegas">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_weight="1"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/roslindale_condensed_medium_edu"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="20dp"
+        android:text="Registro de bodegas"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:theme="@style/Theme.VendeTon.ActivityTitles"
+        android:visibility="visible" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:orientation="vertical"
+            android:theme="@style/TextInputEditText">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutNombre"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutAlto"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alto"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextAlto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutAncho"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ancho"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextAncho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutLargo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Largo"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextLargo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCalle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calle"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextCalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutBarrio"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Barrio"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextBarrio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCiudad"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ciudad"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:startIconTint="@color/white"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextCiudad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layoutBotones"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.9"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/botonCancelarCrearBodega"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="18sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginVertical="30dp"
+            style="@style/Theme.VendeTon.Botones"
+            android:layout_height="match_parent"
+            android:text="Cancelar"
+            android:textSize="8sp"/>
+
+        <Button
+            android:id="@+id/botonAceptarCrearBodega"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginVertical="30dp"
+            style="@style/Theme.VendeTon.Botones"
+            android:text="Aceptar"
+            android:textSize="8sp"/>
+    </LinearLayout>
+
+</LinearLayout>
