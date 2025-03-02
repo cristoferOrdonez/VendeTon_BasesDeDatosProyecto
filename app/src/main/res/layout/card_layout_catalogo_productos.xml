@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,7 +12,8 @@
     card_view:cardBackgroundColor="@color/fondo_secundario"
     card_view:cardCornerRadius="23dp"
     card_view:cardElevation="6dp"
-    card_view:contentPadding="10dp">
+    card_view:contentPadding="10dp"
+    tools:context=".Activitys.activity_informe_catalogo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,74 +27,64 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/textViewNumeroDocumentoVM"
+                android:id="@+id/textViewCatalogoNombreProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roslindale_condensed_medium_edu"
-                android:text="Numero del documento venta mayorista"
+                android:text="Producto"
                 android:textColor="@color/gris_oscuro_box_background_color"
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
-
             <ImageButton
-                android:id="@+id/imageButtonRevisarDocumentoVM"
+                android:id="@+id/imageButtonEditarEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitXY"
-                card_view:srcCompat="@drawable/icono_revisar_documento" />
+                card_view:srcCompat="@drawable/icono_editar_mis_eventos" />
 
             <ImageButton
-                android:id="@+id/imageButtonEditarDocumentoVM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                card_view:srcCompat="@drawable/icono_editar_mis_card" />
-
-            <ImageButton
-                android:id="@+id/imageButtonEliminarDocumentoVM"
+                android:id="@+id/imageButtonEliminarEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="7dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitXY"
-                card_view:srcCompat="@drawable/icono_eliminar_mis_card" />
+                card_view:srcCompat="@drawable/icono_eliminar_mis_eventos" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textViewFechaDocumentoVM"
+            android:id="@+id/textViewCatalogoPrecioPorMayor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_regular"
             android:padding="10dp"
-            android:text="Fecha del dcumento venta mayorista"
+            android:text="Precio al por mayor"
             android:textColor="@color/colorTexto"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/textViewNombreClienteDocumentoVM"
+            android:id="@+id/textViewCatalogoPrecioPorMenor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_regular"
             android:padding="10dp"
-            android:text="Nombre del cliente"
+            android:text="Precio al por menor"
             android:textColor="@color/colorTexto"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/textViewTotalDocumentoVM"
+            android:id="@+id/textViewCostoECatalogoExistencias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_regular"
             android:padding="10dp"
-            android:text="Lugar total del documento"
+            android:text="Existencias"
             android:textColor="@color/colorTexto"
             android:textSize="15sp" />
 

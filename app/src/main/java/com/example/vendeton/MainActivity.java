@@ -35,19 +35,17 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     con = connectionClass.CONN();
-
-                    String query = "CALL sp_mostrarTodosLosDocumentosVentaMayorista();";
+                    String query = "SELECT COUNT(*) AS cantidad FROM contraparte;";
                     PreparedStatement stmt = con.prepareStatement(query);
                     ResultSet rs = stmt.executeQuery();
-                    rs.next();
-                    String mensaje = "" + rs.getString("doc_proposito_de_compra");
+                    if(rs.next()){
+                        int result;
+                        result= rs.getInt("cantidad");
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, ""+ result, Toast.LENGTH_SHORT).show();
+                        });
+                    }
 
-                runOnUiThread(() -> {
-
-
-                    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-
-                });
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);
