@@ -21,23 +21,24 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class activity_iniciar_sesion_cliente extends AppCompatActivity {
+public class activity_iniciar_sesion_admin extends AppCompatActivity {
 
     TextInputEditText EditTextIdentificacion, EditTextContrasena;
     Button ButtonAcceder;
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio_de_sesion_cliente);
+        setContentView(R.layout.activity_inicio_de_sesion_admin);
 
         EditTextIdentificacion = findViewById(R.id.editTextIdentificacion);
+        EditTextContrasena = findViewById(R.id.editTextContrasena);
 
         ButtonAcceder = findViewById(R.id.botonAccederCuenta);
 
         ButtonAcceder.setOnClickListener((View view) -> {
-           revisar(view);
+            revisar(view);
         });
 
 
@@ -45,9 +46,8 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
     }
 
     public void revisar(View view){
-        VendeTon.username = "jose";
-        VendeTon.password = "contrasena";
-
+        VendeTon.username = EditTextIdentificacion.getText().toString();
+        VendeTon.password = EditTextContrasena.getText().toString();
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
@@ -55,12 +55,10 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
             Boolean comprobacion = con.comprobarconexion();
 
             if (comprobacion){
-                long identificacion = Long.parseLong(EditTextIdentificacion.getText().toString());
                 DbSesion dbSesion= new DbSesion(this);
-                dbSesion.mantenerSesionIniciada(1, identificacion);
-                VendeTon.identificacion = identificacion;
+                dbSesion.mantenerSesionIniciada(1, 0);
                 runOnUiThread(() -> {
-                    Intent intent = new Intent(this, activity_info_cliente.class);
+                    Intent intent = new Intent(this, activity_pagina_inicial.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 });

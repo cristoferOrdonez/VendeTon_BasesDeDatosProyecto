@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
 import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
+import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.Entidades.CorreoElectronico;
@@ -109,108 +110,24 @@ public class activity_info_cliente extends AppCompatActivity {
         executorService.execute(() -> {
 
             try {
-                // Inicialización de listas
                 listaNumeros = new ArrayList<>();
                 listaCorreos = new ArrayList<>();
                 numerosNuevos = new ArrayList<>();
                 correosNuevos = new ArrayList<>();
 
-                // 1. Conexión única reutilizable
                 try (Connection con = connectionClass.CONN()) {
                     if (con == null) throw new SQLException("Conexión nula");
 
-                    // 2. Método genérico para ejecutar consultas
-                    ejecutarConsultaContraparte(con, 1001);
-                    ejecutarConsultaCorreos(con, 1001);
-                    ejecutarConsultaNumeros(con, 1001);
+                    ejecutarConsultaContraparte(con, VendeTon.identificacion);
+                    ejecutarConsultaCorreos(con, VendeTon.identificacion);
+                    ejecutarConsultaNumeros(con, VendeTon.identificacion);
 
-                } // Auto-cierre de conexión gracias a try-with-resources
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-
-
-
-            /*try {
-                listaNumeros = new ArrayList<>();
-                listaCorreos = new ArrayList<>();
-                numerosNuevos = new ArrayList<>();
-                correosNuevos = new ArrayList<>();
-                con = connectionClass.CONN();
-                String query = "call sp_ConsultarContraparte(1001);";
-                PreparedStatement stmt = con.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery();
-
-                if(rs.next()){
-                    int result;
-                    cliente = new ContraparteCliente(rs.getInt("con_identificacion"),rs.getString("con_nombre"),
-                            rs.getString("con_apellido"),rs.getString("con_calle"),rs.getString("con_barrio"),
-                            rs.getString("con_ciudad"), rs.getString("con_direccion"));
-                    runOnUiThread(() -> {
-                        IdentificacionAcceder.setText(""+cliente.con_identificacion);
-                        NombreAcceder.setText(cliente.con_nombre);
-                        ApellidoAcceder.setText(cliente.con_apellido);
-                        CiudadAcceder.setText(cliente.con_ciudad);
-                        CalleAcceder.setText(cliente.con_calle);
-                        BarrioAcceder.setText(cliente.con_barrio);
-                    });
-                }
-
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-
-                con = connectionClass.CONN();
-                query = "call consultarCorreosElectronicos(1001);";
-                stmt = con.prepareStatement(query);
-                rs = stmt.executeQuery();
-
-                while(rs.next()){
-                    CorreoElectronico correo = new CorreoElectronico(rs.getString("cor_usuario"),rs.getString("cor_dominio"),
-                            rs.getString("cor_correo"),rs.getInt("cor_id"),rs.getInt("con_identificacion"));
-                    listaCorreos.add(correo);
-                }
-
-
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-
-                con = connectionClass.CONN();
-                query = "call  consultarNumerosTelefonicos(1001);";
-                stmt = con.prepareStatement(query);
-                rs = stmt.executeQuery();
-                while(rs.next()){
-                    NumeroTelefonico numero = new NumeroTelefonico(rs.getInt("num_id"), rs.getInt("con_identificacion"),
-                            rs.getInt("num_prefijo"), rs.getLong("num_numero"), rs.getLong("num_numero_de_contacto"));
-                    listaNumeros.add(numero);
-                }
-
-
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }*/
 
             runOnUiThread(() -> {
 
@@ -260,11 +177,11 @@ public class activity_info_cliente extends AppCompatActivity {
     }
 
 
-    private void ejecutarConsultaCorreos(Connection con, int id) {
+    private void ejecutarConsultaCorreos(Connection con, long id) {
         String query = "call consultarCorreosElectronicos(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -283,11 +200,11 @@ public class activity_info_cliente extends AppCompatActivity {
     }
 
 
-    private void ejecutarConsultaNumeros(Connection con, int id) {
+    private void ejecutarConsultaNumeros(Connection con, long id) {
         String query = "call consultarNumerosTelefonicos(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
