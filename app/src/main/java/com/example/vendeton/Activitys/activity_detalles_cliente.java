@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,7 +31,7 @@ public class activity_detalles_cliente extends AppCompatActivity {
     ConnectionClass connectionClass;
     Connection con;
     ResultSet rs;
-    String name, str, intencion;
+    String name, str, intencion, vista, objeto;
     long con_identificacion;
     TextInputEditText PrimerCampo, SegundoCampo;
     TextInputLayout layoutPrimerCampo, layoutSegundoCampo;
@@ -44,6 +45,8 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
         con_identificacion = getIntent().getLongExtra("con_identificacion",0);
         intencion = getIntent().getStringExtra("tipo");
+        vista = getIntent().getStringExtra("vista");
+        objeto = getIntent().getStringExtra("objeto");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_editar_dos_campos);
@@ -52,42 +55,93 @@ public class activity_detalles_cliente extends AppCompatActivity {
         SegundoCampo = findViewById(R.id.editTextSegundoCampo);
         layoutPrimerCampo = findViewById(R.id.layoutPrimerCampo);
         layoutSegundoCampo = findViewById(R.id.layoutSegundoCampo);
+        btnGuardar = findViewById(R.id.BotonDetalleGuardar);
 
         if (intencion.equals("numero")){
             layoutPrimerCampo.setHint("Prefijo");
             layoutSegundoCampo.setHint("Número");
+            if (vista.equals("editar")){
+                numero = getIntent().getParcelableExtra("numero");
+                PrimerCampo.setText(""+numero.num_prefijo);
+                SegundoCampo.setText(""+numero.num_numero);
+            }
         } else{
             layoutPrimerCampo.setHint("Usuario");
             layoutSegundoCampo.setHint("Dominio");
+            if (vista.equals("editar")){
+                correo = getIntent().getParcelableExtra("correo");
+                PrimerCampo.setText(""+correo.cor_usuario);
+                SegundoCampo.setText(""+correo.cor_dominio);
+            }
         }
+
+
 
 }
     public void guardar(View view){
         if (intencion.equals("numero")){
-            numero = new NumeroTelefonico(0,con_identificacion,Integer.parseInt(PrimerCampo.getText().toString()),
-                    Long.parseLong(SegundoCampo.getText().toString()),
-                    Long.parseLong(PrimerCampo.getText().toString()+SegundoCampo.getText().toString()));
-
-            Intent miIntent = new Intent(this, activity_info_cliente.class);
-            miIntent.putExtra("numero", numero);
-            miIntent.putExtra("intencion", "numero");
-            setResult(Activity.RESULT_OK, miIntent);
-            finish();
+            if (vista.equals("editar")){
+                numero.num_prefijo_anterior = numero.num_prefijo;
+                numero.num_prefijo = Integer.parseInt(PrimerCampo.getText().toString());
+                numero.num_numero_anterior = numero.num_numero;
+                numero.num_numero = Long.parseLong(SegundoCampo.getText().toString());
+                if (objeto.equals("nuevo")){
+                    activity_info_cliente.numerosNuevos.add(numero);
+                }
+                else{
+                    activity_info_cliente.numerosActualizar.add(numero);
+                }
+            } else{
+                numero = new NumeroTelefonico(0,con_identificacion,Integer.parseInt(PrimerCampo.getText().toString()),
+                        Long.parseLong(SegundoCampo.getText().toString()),
+                        Long.parseLong(PrimerCampo.getText().toString()+SegundoCampo.getText().toString()));
+                activity_info_cliente.numerosNuevos.add(numero);
+            }
+            activity_info_cliente.listaNumeros.add(numero);
         }
         else if (intencion.equals("correo")){
-            correo= new CorreoElectronico(PrimerCampo.getText().toString(),
-                    SegundoCampo.getText().toString(),
-                    PrimerCampo.getText().toString()+SegundoCampo.getText().toString(),
-                    0,
-                    con_identificacion);
+            if (vista.equals("editar")){
+                correo.cor_dominio_anterior = correo.cor_dominio;
+                correo.cor_usuario_anterior = correo.cor_usuario;
+                correo.cor_usuario = PrimerCampo.getText().toString();
+                correo.cor_dominio = SegundoCampo.getText().toString();
+                if (objeto.equals("nuevo")){
+                    activity_info_cliente.correosNuevos.add(correo);
+                }
+                else{
+                    activity_info_cliente.correosActualizar.add(correo);
+                }
+            }
+            else{
+                correo= new CorreoElectronico(PrimerCampo.getText().toString(),
+                        SegundoCampo.getText().toString(),
+                        PrimerCampo.getText().toString()+SegundoCampo.getText().toString(),
+                        0,
+                        con_identificacion);
+                activity_info_cliente.correosNuevos.add(correo);
+            }
 
-            Intent miIntent = new Intent(this, activity_info_cliente.class);
-            miIntent.putExtra("correo", correo);
-            miIntent.putExtra("intencion", "correo");
-            setResult(Activity.RESULT_OK, miIntent);
-            finish();
+            activity_info_cliente.listaCorreos.add(correo);
         }
 
+        finish();
+
+    }
+
+    public void cancelar(View view){
+        if (vista.equals("solo_vista")){
+            Intent miIntent = new Intent(this, activity_info_cliente.class);
+            setResult(Activity.RESULT_CANCELED, miIntent);
+            finish();
+        }
+        else{
+            OnBackPressed();
+        }
+
+    }
+
+    private void OnBackPressed() {
+        super.getOnBackPressedDispatcher();
     }
 
 

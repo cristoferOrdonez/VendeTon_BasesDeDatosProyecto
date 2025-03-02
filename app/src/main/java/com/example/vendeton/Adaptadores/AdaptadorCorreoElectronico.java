@@ -5,15 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Activitys.activity_detalles_cliente;
+import com.example.vendeton.Activitys.activity_info_cliente;
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -40,6 +45,7 @@ public class AdaptadorCorreoElectronico extends RecyclerView.Adapter<AdaptadorCo
 
        holder.textViewContenidoDominio.setText(Item.cor_dominio);
        holder.textViewContenidoUsuario.setText(Item.cor_usuario);
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.vendeton.Adaptadores;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Activitys.activity_detalles_cliente;
+import com.example.vendeton.Activitys.activity_info_cliente;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
 
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -43,6 +47,8 @@ public class AdaptadorNumeroTelefonico extends RecyclerView.Adapter<AdaptadorNum
        NumeroTelefonico Item = listaNumeros.get(position);
        holder.textViewContenidoUsuario.setText("+"+Item.num_prefijo);
         holder.textViewContenidoDominio.setText(""+Item.num_numero);
+
+
     }
 
     @Override

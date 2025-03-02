@@ -188,6 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jost_regular"
+                android:paddingTop="15dp"
                 android:text="Numero de teléfono"
                 android:textColor="@color/white" />
 
@@ -262,6 +263,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jost_regular"
+                android:paddingTop="15dp"
                 android:text="Correo Electrónico"
                 android:textColor="@color/white" />
 
@@ -339,7 +341,7 @@
         android:id="@+id/layoutBotonesCuenta"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"
+        android:layout_weight="1.5"
         android:orientation="vertical">
 
         <Button
@@ -348,25 +350,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="18sp"
+            android:onClick="editarInformacion"
             android:text="Editar"
-            android:textSize="8sp"
-            android:onClick="editarInformacion"/>
-
-        <Button
-            android:id="@+id/BotonCerrarSesion"
-            style="@style/Theme.VendeTon.Botones"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:autoSizeMaxTextSize="18sp"
-            android:text="Cerrar Sesion"
             android:textSize="8sp" />
 
     </LinearLayout>
@@ -380,7 +369,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/BotonGuardarCambios"
+            android:id="@+id/BotonDetalleEditar"
             style="@style/Theme.VendeTon.Botones"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -391,19 +380,6 @@
             android:autoSizeMaxTextSize="18sp"
             android:onClick="guardarInformacion"
             android:text="Guardar"
-            android:textSize="8sp" />
-
-        <Button
-            android:id="@+id/BotonCancelarCambios"
-            style="@style/Theme.VendeTon.Botones"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:autoSizeMaxTextSize="18sp"
-            android:text="Cancelar"
             android:textSize="8sp" />
 
     </LinearLayout>
