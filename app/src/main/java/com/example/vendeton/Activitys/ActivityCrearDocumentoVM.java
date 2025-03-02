@@ -33,10 +33,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import com.example.vendeton.pickers.MostrarDatePicker;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,7 +47,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     private TextInputLayout layoutFechaDocumentoVM;
 
-    private TextInputEditText fechaDocumentoVM, totalDocumentoVM;
+    private TextInputEditText fechaDocumentoVM, totalDocumentoVM, propositoDeCompraDocumentoVM;
     private Integer[] fecha = {0, -1, 0};
 
     ArrayList<String> listaClientes;
@@ -59,7 +62,9 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     String str;
 
-    Button botonAgregar;
+    Button botonAgregar, botonGuardar;
+
+    int numeroDeDocumento;
 
     public static ArrayList<DetalleProductoVendido> detalles;
     public static ArrayList<BodegaOrigen> bodegaOrigen;
@@ -72,6 +77,10 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_documento_vm);
+
+        botonGuardar = findViewById(R.id.botonAceptarCrearDocumentoVM);
+
+        propositoDeCompraDocumentoVM = findViewById(R.id.editTextPropositoCompra);
 
         totalDocumentoVM = findViewById(R.id.editTextTotal);
 
@@ -91,6 +100,8 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
         botonAgregar = findViewById(R.id.botonAgregarDetalleDocumentoVM);
         botonAgregar.setOnClickListener(i -> agregarProductoVendido());
+
+        botonGuardar.setOnClickListener(i -> crearDocumento());
 
     }
 
@@ -270,6 +281,106 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void crearDocumento(){
+        insertarDocumento();
+        for(int i = 0; i < detalles.size(); i++){
+            insertarDetalle(detalles.get(i));
+        }
+    }
+
+    public void insertarDocumento(){
+
+        connectionClass = new ConnectionClass();
+        connect();
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+
+                    try {
+                        con = connectionClass.CONN();
+
+                        String query = "SELECT fn_insertarDocumentoVentaMayorista(?,?,?,?) AS numero;";
+                        PreparedStatement stmt = con.prepareStatement(query);
+                        Date x = new Date(fecha[0]- 1900,fecha[1] - 1,fecha[2]);
+
+                        String cliente = spinnerClientes.getText().toString();
+                        String identiicacionS = cliente.substring(0, cliente.indexOf(" -"));
+                        int identificacion = Integer.parseInt(identiicacionS);
+
+
+                        stmt.setDate(1, x);
+                        stmt.setFloat(2, Integer.parseInt(totalDocumentoVM.getText().toString()));
+                        stmt.setLong(3, identificacion);
+                        stmt.setString(4, propositoDeCompraDocumentoVM.getText().toString());
+
+                        ResultSet rs = stmt.executeQuery();
+
+                        while (rs.next()) {
+
+                            numeroDeDocumento = rs.getInt("numero");
+
+                        }
+
+                        runOnUiThread(() -> {
+
+                            Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+
+                        });
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    runOnUiThread(() -> {
+
+
+                    });
+                }
+        );
+
+    }
+
+    public void insertarDetalle(DetalleProductoVendido detalle){
+
+        connectionClass = new ConnectionClass();
+        connect();
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+
+                    try {
+                        con = connectionClass.CONN();
+
+                        String query = "CALL sp_insertarDetalleProductoVendido(?,?,?,?);";
+                        PreparedStatement stmt = con.prepareStatement(query);
+
+
+                        stmt.setInt(1, numeroDeDocumento);
+                        stmt.setString(2, detalle.producto);
+                        stmt.setInt(3, detalle.cantidad);
+                        stmt.setFloat(4, detalle.precio_unitario);
+
+                        ResultSet rs = stmt.executeQuery();
+
+                        runOnUiThread(() -> {
+
+                            Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+
+                        });
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    runOnUiThread(() -> {
+
+
+                    });
+                }
+        );
+
     }
 
 }

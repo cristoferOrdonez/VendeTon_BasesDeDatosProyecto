@@ -24,7 +24,7 @@ public class MostrarDatePicker {
             this.fecha[1] = month;
             this.fecha[0] = year;
 
-            fechaEvento.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+            fechaEvento.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
         }, fecha[0], fecha[1], fecha[2]);
 
         picker.show();

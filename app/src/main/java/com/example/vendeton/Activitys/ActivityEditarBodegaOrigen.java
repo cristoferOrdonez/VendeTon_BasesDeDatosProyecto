@@ -136,14 +136,17 @@ public class ActivityEditarBodegaOrigen extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < ActivityCrearDetalleDocumentoVM.bodegasOrigen.size(); i++){
-            if(ActivityCrearDetalleDocumentoVM.bodegasOrigen.get(i).bodega.compareTo(bodega) == 0){
-                BodegaOrigen bodegaOrigen = ActivityCrearDetalleDocumentoVM.bodegasOrigen.get(i);
-                bodegaOrigen.producto = producto;
-                bodegaOrigen.bodega = bodega;
-                bodegaOrigen.cantidad = Integer.parseInt(editTextCantidad.getText().toString());
+        if(ActivityCrearDetalleDocumentoVM.bodegasOrigen != null) {
+            for (int i = 0; i < ActivityCrearDetalleDocumentoVM.bodegasOrigen.size(); i++) {
+                if (ActivityCrearDetalleDocumentoVM.bodegasOrigen.get(i).bodega.compareTo(bodega) == 0) {
+                    BodegaOrigen bodegaOrigen = ActivityCrearDetalleDocumentoVM.bodegasOrigen.get(i);
+                    bodegaOrigen.producto = producto;
+                    bodegaOrigen.bodega = bodega;
+                    bodegaOrigen.cantidad = Integer.parseInt(editTextCantidad.getText().toString());
+                }
             }
         }
+
 
         finish();
 

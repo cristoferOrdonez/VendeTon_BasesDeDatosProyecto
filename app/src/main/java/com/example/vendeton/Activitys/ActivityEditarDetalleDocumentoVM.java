@@ -245,12 +245,14 @@ public class ActivityEditarDetalleDocumentoVM extends AppCompatActivity {
 
         DetalleProductoVendido detalle = null;
 
-        for(int i = 0; i < ActivityCrearDocumentoVM.detalles.size(); i++){
-            if(ActivityCrearDocumentoVM.detalles.get(i).producto.compareTo(producto) == 0){
+
+        for (int i = 0; i < ActivityCrearDocumentoVM.detalles.size(); i++) {
+            if (ActivityCrearDocumentoVM.detalles.get(i).producto.compareTo(producto) == 0) {
                 detalle = ActivityCrearDocumentoVM.detalles.get(i);
                 break;
             }
         }
+
 
         spinnerProductos.setText(detalle.producto);
         editTextCantidad.setText("" + detalle.cantidad);
@@ -339,11 +341,7 @@ public class ActivityEditarDetalleDocumentoVM extends AppCompatActivity {
     }
 
     public void cancelarCreacionDetalle(){
-        for(int i = 0; i < ActivityCrearDocumentoVM.bodegaOrigen.size(); i++){
-            if(ActivityCrearDocumentoVM.bodegaOrigen.get(i).producto.compareTo(producto) == 0){
-                ActivityCrearDocumentoVM.bodegaOrigen.remove(i);
-            }
-        }
+
         finish();
     }
 }
