@@ -5,10 +5,6 @@ public class InfoSesion {
     private long IdentificacionSesion;
 
     public InfoSesion(long id, int tipoSesion, long identificacionSesion){
-
-        if (identificacionSesion == 0) {
-            throw new IllegalArgumentException("Identificación no puede ser nulo o vacío");
-        }
         this.TipoSesion = tipoSesion;
         this.IdentificacionSesion = identificacionSesion;
     };

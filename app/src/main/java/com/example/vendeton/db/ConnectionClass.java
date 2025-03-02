@@ -3,6 +3,7 @@ package com.example.vendeton.db;
 import android.util.Log;
 
 import com.example.vendeton.Entidades.ContraparteCliente;
+import com.example.vendeton.VendeTon;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,9 +20,9 @@ public class ConnectionClass {
 
     protected static String port = "3306";
 
-    protected static String username = "farid";
+    protected static String username = VendeTon.username;
 
-    protected static String password = "contrasena";
+    protected static String password = VendeTon.password;
 
     public Connection CONN(){
 
@@ -37,6 +38,23 @@ public class ConnectionClass {
         }
 
         return conn;
+
+    }
+
+    public boolean comprobarconexion(){
+
+        Connection conn = null;
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            String connectionString = "jdbc:mysql://" + ip + ":" + port + "/" + db + "?noAccessToProcedureBodies=true";
+            conn = DriverManager.getConnection(connectionString, username, password);
+
+        }catch (Exception e){
+            return false;
+        }
+
+        return true;
 
     }
 

@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Adaptadores.AdaptadorBalanceGeneral;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.R;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,7 +47,6 @@ public class activity_pagina_inicial extends AppCompatActivity {
         connectionClass = new ConnectionClass();
         connect();
 
-/*
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
 
@@ -90,7 +92,7 @@ public class activity_pagina_inicial extends AppCompatActivity {
 
 
                 }
-        );*/
+        );
     }
 
 
