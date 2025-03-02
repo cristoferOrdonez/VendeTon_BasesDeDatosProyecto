@@ -113,12 +113,6 @@ public class ActivityDocumentosVM extends AppCompatActivity {
 
                     runOnUiThread(() -> {
 
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-
                     });
                 }
         );
@@ -144,13 +138,6 @@ public class ActivityDocumentosVM extends AppCompatActivity {
                     }
 
                     runOnUiThread(() -> {
-
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(this, str,Toast.LENGTH_SHORT).show();
 
                     });
                 }

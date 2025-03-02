@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:CardView="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
-    tools:context=".Activitys.ActivityCrearDocumentoVM">
+    xmlns:CardView="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activitys.ActivityCrearDetalleDocumentoVM">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:fontFamily="@font/roslindale_condensed_medium_edu"
         android:paddingHorizontal="45dp"
         android:paddingVertical="20dp"
-        android:text="Registro de venta mayorista"
+        android:text="Registro de producto vendido"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -38,37 +38,11 @@
             android:theme="@style/TextInputEditText">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutFechaDocumento"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Fecha"
-                android:paddingVertical="15dp"
-                android:textColorHint="@color/gris_claro_hint"
-                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                app:startIconTint="@color/white"
-                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextFechaDocumento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:fontFamily="@font/jost_regular"
-                    android:inputType="none"
-                    android:maxLines="1"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutCliente"
+                android:id="@+id/layoutProducto"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cliente"
+                android:hint="Producto"
                 android:paddingVertical="15dp"
                 android:textColorHint="@color/gris_claro_hint"
                 app:startIconTint="@color/white"
@@ -77,13 +51,90 @@
                 app:endIconTint="@color/white">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/spinnerClientes"
+                    android:id="@+id/spinnerProducto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jost_regular"
                     android:inputType="none"
                     android:textColor="@color/white"
                     app:dropDownBackgroundTint="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutPrecioUnitario"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio unitario"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:startIconTint="@color/white" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPrecioUnitario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCantidad"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cantidad"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:startIconTint="@color/white" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextCantidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutMonto"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Monto"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:startIconTint="@color/white" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -113,12 +164,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textViewProducto"
+                        android:id="@+id/textViewBodega"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/roslindale_condensed_medium_edu"
-                        android:text="Producto"
+                        android:text="Bodega"
                         android:textAlignment="center"
                         android:textColor="@color/gris_oscuro_box_background_color"
                         android:textSize="20sp"
@@ -136,29 +187,17 @@
                         android:textSize="20sp"
                         android:textStyle="normal" />
 
-                    <TextView
-                        android:id="@+id/textViewMonto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roslindale_condensed_medium_edu"
-                        android:text="Monto"
-                        android:textAlignment="center"
-                        android:textColor="@color/gris_oscuro_box_background_color"
-                        android:textSize="20sp"
-                        android:textStyle="normal" />
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecyclerViewDetalles"
+                android:id="@+id/RecyclerViewBodegasOrigen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/botonAgregarDetalleDocumentoVM"
+                android:id="@+id/botonAgregarBodegaOrigen"
                 style="@style/Theme.VendeTon.Botones"
                 android:layout_width="140dp"
                 android:layout_height="0dp"
@@ -171,55 +210,6 @@
                 android:text="Agregar"
                 android:textSize="8sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutTotal"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Total"
-                android:paddingVertical="15dp"
-                android:textColorHint="@color/gris_claro_hint"
-                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:startIconTint="@color/white" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTotal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/jost_regular"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutPropositoCompra"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Proposito de compra"
-                android:paddingVertical="15dp"
-                android:textColorHint="@color/gris_claro_hint"
-                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:startIconTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPropositoCompra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/jost_regular"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
     </ScrollView>
 
@@ -230,7 +220,7 @@
         android:layout_weight="1.9"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/botonCancelarCrearDocumentoVM"
+            android:id="@+id/botonCancelarCrearDetalle"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="18sp"
@@ -243,7 +233,7 @@
             android:textSize="8sp"/>
 
         <Button
-            android:id="@+id/botonAceptarCrearDocumentoVM"
+            android:id="@+id/botonAceptarCrearDetalle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -254,6 +244,7 @@
             style="@style/Theme.VendeTon.Botones"
             android:text="Aceptar"
             android:textSize="8sp"/>
+
     </LinearLayout>
 
 </LinearLayout>

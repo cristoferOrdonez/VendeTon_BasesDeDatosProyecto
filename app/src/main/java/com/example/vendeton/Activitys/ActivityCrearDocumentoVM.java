@@ -1,16 +1,29 @@
 package com.example.vendeton.Activitys;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendeton.Adaptadores.AdaptadorDetallesProductosVendidos;
+import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
+import com.example.vendeton.Entidades.BodegaOrigen;
 import com.example.vendeton.Entidades.ContraparteCliente;
+import com.example.vendeton.Entidades.DetalleProductoVendido;
 import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 import com.example.vendeton.db.ConnectionClass;
@@ -31,7 +44,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     private TextInputLayout layoutFechaDocumentoVM;
 
-    private TextInputEditText fechaDocumentoVM;
+    private TextInputEditText fechaDocumentoVM, totalDocumentoVM;
     private Integer[] fecha = {0, -1, 0};
 
     ArrayList<String> listaClientes;
@@ -46,11 +59,24 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     String str;
 
+    Button botonAgregar;
+
+    public static ArrayList<DetalleProductoVendido> detalles;
+    public static ArrayList<BodegaOrigen> bodegaOrigen;
+
+    RecyclerView listaDetalles;
+
+    AdaptadorDetallesProductosVendidos adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_documento_vm);
+
+        totalDocumentoVM = findViewById(R.id.editTextTotal);
+
+        detalles = new ArrayList<>();
+        bodegaOrigen = new ArrayList<>();
 
         layoutFechaDocumentoVM = findViewById(R.id.layoutFechaDocumento);
         fechaDocumentoVM = findViewById(R.id.editTextFechaDocumento);
@@ -63,6 +89,37 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
         establecerSpinnerClientes();
 
+        botonAgregar = findViewById(R.id.botonAgregarDetalleDocumentoVM);
+        botonAgregar.setOnClickListener(i -> agregarProductoVendido());
+
+    }
+
+    public void establecerDetalles(){
+        listaDetalles = findViewById(R.id.RecyclerViewDetalles);
+        listaDetalles.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
+        adapter = new AdaptadorDetallesProductosVendidos(detalles);
+        listaDetalles.setAdapter(adapter);
+        listaDetalles.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                int position = rv.getChildAdapterPosition(child);
+
+                String producto = detalles.get(position).producto;
+                mostrarDialogo(producto);
+                return true;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 
     private void mostrarDatePicker() {
@@ -108,11 +165,6 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
                     runOnUiThread(() -> {
 
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
 
                     });
                 }
@@ -140,17 +192,84 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
                     runOnUiThread(() -> {
 
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(this, str,Toast.LENGTH_SHORT).show();
-
                     });
                 }
         );
 
+    }
+
+    private void agregarProductoVendido() {
+        Intent miIntent = new Intent(this, ActivityCrearDetalleDocumentoVM.class);
+        startActivity(miIntent);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(detalles == null){
+            detalles = new ArrayList<>();
+        }
+        establecerDetalles();
+        actualizarTotal();
+
+    }
+
+    private void actualizarTotal(){
+
+        float nuevoTotal = 0;
+
+        for(int i = 0; i < detalles.size(); i++){
+            nuevoTotal += detalles.get(i).monto;
+        }
+
+        if(totalDocumentoVM == null){
+            totalDocumentoVM = findViewById(R.id.editTextTotal);
+        }
+
+        totalDocumentoVM.setText("" + nuevoTotal);
+
+    }
+
+    public void abrirDetalle(String producto){
+        Intent miIntent = new Intent(this, ActivityEditarDetalleDocumentoVM.class);
+        miIntent.putExtra("producto", producto);
+        startActivity(miIntent);
+    }
+
+    public void mostrarDialogo(String producto){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                for(int i = 0; i < bodegaOrigen.size(); i++){
+                    if(bodegaOrigen.get(i).producto.compareTo(producto) == 0){
+                        bodegaOrigen.remove(i);
+                    }
+                }
+
+                for(int i = 0; i < detalles.size(); i++){
+                    if(detalles.get(i).producto.compareTo(producto) == 0){
+                        detalles.remove(i);
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+        builder.setNegativeButton("Editar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                abrirDetalle(producto);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }
