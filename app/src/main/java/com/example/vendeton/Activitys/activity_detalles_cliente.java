@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.vendeton.ConnectionClass;
+import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
