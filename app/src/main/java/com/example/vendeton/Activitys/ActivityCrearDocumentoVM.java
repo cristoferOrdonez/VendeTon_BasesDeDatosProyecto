@@ -285,9 +285,7 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
     public void crearDocumento(){
         insertarDocumento();
-        for(int i = 0; i < detalles.size(); i++){
-            insertarDetalle(detalles.get(i));
-        }
+
     }
 
     public void insertarDocumento(){
@@ -309,9 +307,14 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
                         String identiicacionS = cliente.substring(0, cliente.indexOf(" -"));
                         int identificacion = Integer.parseInt(identiicacionS);
 
+                        int total = 0;
+                        for (DetalleProductoVendido detalle : detalles) {
+                            total += detalle.monto;
+                        }
+
 
                         stmt.setDate(1, x);
-                        stmt.setFloat(2, Integer.parseInt(totalDocumentoVM.getText().toString()));
+                        stmt.setFloat(2, total);
                         stmt.setLong(3, identificacion);
                         stmt.setString(4, propositoDeCompraDocumentoVM.getText().toString());
 
@@ -326,11 +329,14 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
                         runOnUiThread(() -> {
 
                             Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+                            for(int i = 0; i < detalles.size(); i++){
+                                insertarDetalle(detalles.get(i));
+                            }
 
                         });
 
                     } catch (Exception e) {
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
 
                     runOnUiThread(() -> {
@@ -367,11 +373,57 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
                         runOnUiThread(() -> {
 
                             Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+                            if(detalle == detalles.get(detalles.size()-1)){
+                                for(int i = 0; i < bodegaOrigen.size(); i++){
+                                    insertarBodegaOrigen(bodegaOrigen.get(i));
+                                }
+                            }
 
                         });
 
                     } catch (Exception e) {
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(() -> {
+
+
+                    });
+                }
+        );
+
+    }
+
+    public void insertarBodegaOrigen(BodegaOrigen bodegaOrigen){
+
+        connectionClass = new ConnectionClass();
+        connect();
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+
+                    try {
+                        con = connectionClass.CONN();
+
+                        String query = "CALL sp_insertarRegistra(?,?,?,?);";
+                        PreparedStatement stmt = con.prepareStatement(query);
+
+
+                        stmt.setInt(1, numeroDeDocumento);
+                        stmt.setString(2, bodegaOrigen.producto);
+                        stmt.setString(3, bodegaOrigen.bodega);
+                        stmt.setInt(4, bodegaOrigen.cantidad);
+
+                        ResultSet rs = stmt.executeQuery();
+
+                        runOnUiThread(() -> {
+
+                            Toast.makeText(this, ""+numeroDeDocumento, Toast.LENGTH_SHORT).show();
+
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                     runOnUiThread(() -> {
