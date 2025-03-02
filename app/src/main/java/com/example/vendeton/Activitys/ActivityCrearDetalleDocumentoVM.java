@@ -126,7 +126,10 @@ public class ActivityCrearDetalleDocumentoVM extends AppCompatActivity {
             }
         });
 
-        botonAceptar.setOnClickListener(i -> crearDetalle());
+        botonAceptar.setOnClickListener(i -> {
+            if(comprobar())
+                crearDetalle();
+        });
         botonAgregarBodegaOrigen.setOnClickListener(I -> agregarBodegaOrigen());
         botonCancelar.setOnClickListener(i -> cancelarCreacionDetalle());
 
@@ -403,5 +406,27 @@ public class ActivityCrearDetalleDocumentoVM extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         bodegasOrigen = null;
+    }
+
+    public boolean comprobar(){
+
+        boolean flag = true;
+
+        if(spinnerProductos.getText().toString().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe seleccionar un producto", Toast.LENGTH_LONG).show();
+        }
+
+        if(editTextCantidad.getText().toString().compareTo("") == 0 || Integer.parseInt(editTextCantidad.getText().toString()) <= 0){
+            flag = false;
+            Toast.makeText(this, "La cantidad debe ser mayor a 0", Toast.LENGTH_LONG).show();
+        }
+
+        if(bodegasOrigen.isEmpty()){
+            flag = false;
+            Toast.makeText(this, "Debe indicar de que bodegas salen los productos", Toast.LENGTH_SHORT).show();
+        }
+
+        return flag;
     }
 }

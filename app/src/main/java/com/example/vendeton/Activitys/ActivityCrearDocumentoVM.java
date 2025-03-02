@@ -102,7 +102,10 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
         botonAgregar = findViewById(R.id.botonAgregarDetalleDocumentoVM);
         botonAgregar.setOnClickListener(i -> agregarProductoVendido());
 
-        botonGuardar.setOnClickListener(i -> crearDocumento());
+        botonGuardar.setOnClickListener(i -> {
+            if(comprobar())
+                crearDocumento();
+        });
         botonCancelar.setOnClickListener(i -> irADocumentosVM());
 
     }
@@ -302,7 +305,10 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
 
                         String query = "SELECT fn_insertarDocumentoVentaMayorista(?,?,?,?) AS numero;";
                         PreparedStatement stmt = con.prepareStatement(query);
+
                         Date x = new Date(fecha[0]- 1900,fecha[1] - 1,fecha[2]);
+                        if(fechaDocumentoVM.getText().toString().compareTo("") == 0)
+                            x = null;
 
                         String cliente = spinnerClientes.getText().toString();
                         String identiicacionS = cliente.substring(0, cliente.indexOf(" -"));
@@ -442,6 +448,28 @@ public class ActivityCrearDocumentoVM extends AppCompatActivity {
         Intent miIntent = new Intent(this, ActivityDocumentosVM.class);
         startActivity(miIntent);
         finish();
+    }
+
+    public boolean comprobar(){
+
+        boolean flag = true;
+
+        if(spinnerClientes.getText().toString().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe seleccionar un cliente", Toast.LENGTH_LONG).show();
+        }
+
+        if(propositoDeCompraDocumentoVM.getText().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe especificar el proposito de compra", Toast.LENGTH_LONG).show();
+        }
+
+        if(detalles.isEmpty()){
+            flag = false;
+            Toast.makeText(this, "Debe indicar los productos vendidos", Toast.LENGTH_SHORT).show();
+        }
+
+        return flag;
     }
 
 }

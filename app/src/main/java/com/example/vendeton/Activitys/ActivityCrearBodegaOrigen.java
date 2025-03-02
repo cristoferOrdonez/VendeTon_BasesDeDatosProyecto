@@ -55,7 +55,10 @@ public class ActivityCrearBodegaOrigen extends AppCompatActivity {
 
         establecerSpinnerBodegas();
 
-        botonAgregarBodegaOrigen.setOnClickListener(i -> crearBodegaOrigen());
+        botonAgregarBodegaOrigen.setOnClickListener(i -> {
+            if(comprobar())
+                crearBodegaOrigen();
+        });
         botonCancelar.setOnClickListener(i -> cancelarCreacionBodegaOrigen());
 
     }
@@ -171,6 +174,23 @@ public class ActivityCrearBodegaOrigen extends AppCompatActivity {
 
         finish();
 
+    }
+
+    public boolean comprobar(){
+
+        boolean flag = true;
+
+        if(spinnerBodegas.getText().toString().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe seleccionar una bodega", Toast.LENGTH_LONG).show();
+        }
+
+        if(editTextCantidad.getText().toString().compareTo("") == 0 || Integer.parseInt(editTextCantidad.getText().toString()) <= 0){
+            flag = false;
+            Toast.makeText(this, "La cantidad debe ser mayor a 0", Toast.LENGTH_LONG).show();
+        }
+
+        return flag;
     }
 
     public void cancelarCreacionBodegaOrigen(){

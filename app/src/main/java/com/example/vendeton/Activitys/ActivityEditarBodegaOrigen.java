@@ -58,7 +58,10 @@ public class ActivityEditarBodegaOrigen extends AppCompatActivity {
 
         establecerSpinnerProductos();
 
-        botonAgregarBodegaOrigen.setOnClickListener(i -> actualizarBodegaOrigen());
+        botonAgregarBodegaOrigen.setOnClickListener(i -> {
+            if(comprobar())
+                actualizarBodegaOrigen();
+        });
 
         establecerDatosPrevios();
 
@@ -150,6 +153,23 @@ public class ActivityEditarBodegaOrigen extends AppCompatActivity {
 
         finish();
 
+    }
+
+    public boolean comprobar(){
+
+        boolean flag = true;
+
+        if(spinnerBodegas.getText().toString().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe seleccionar una bodega", Toast.LENGTH_LONG).show();
+        }
+
+        if(editTextCantidad.getText().toString().compareTo("") == 0 || Integer.parseInt(editTextCantidad.getText().toString()) <= 0){
+            flag = false;
+            Toast.makeText(this, "La cantidad debe ser mayor a 0", Toast.LENGTH_LONG).show();
+        }
+
+        return flag;
     }
 
     public void cancelarCreacionBodegaOrigen(){

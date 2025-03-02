@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -119,7 +120,10 @@ public class ActivityEditarDetalleDocumentoVM extends AppCompatActivity {
             }
         });
 
-        botonAceptar.setOnClickListener(i -> actualizarDetalle());
+        botonAceptar.setOnClickListener(i -> {
+            if(comprobar())
+                actualizarDetalle();
+        });
         botonAgregarBodegaOrigen.setOnClickListener(I -> agregarBodegaOrigen());
 
         establecerDatosPrevios();
@@ -343,5 +347,27 @@ public class ActivityEditarDetalleDocumentoVM extends AppCompatActivity {
     public void cancelarCreacionDetalle(){
 
         finish();
+    }
+
+    public boolean comprobar(){
+
+        boolean flag = true;
+
+        if(spinnerProductos.getText().toString().toString().compareTo("") == 0){
+            flag = false;
+            Toast.makeText(this, "Debe seleccionar un producto", Toast.LENGTH_LONG).show();
+        }
+
+        if(editTextCantidad.getText().toString().compareTo("") == 0 || Integer.parseInt(editTextCantidad.getText().toString()) <= 0){
+            flag = false;
+            Toast.makeText(this, "La cantidad debe ser mayor a 0", Toast.LENGTH_LONG).show();
+        }
+
+        if(bodegasOrigen.isEmpty()){
+            flag = false;
+            Toast.makeText(this, "Debe indicar de que bodegas salen los productos", Toast.LENGTH_SHORT).show();
+        }
+
+        return flag;
     }
 }

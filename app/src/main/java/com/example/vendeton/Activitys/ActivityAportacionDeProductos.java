@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -210,21 +211,38 @@ public class ActivityAportacionDeProductos extends AppCompatActivity {
                         String query = "CALL sp_insertarProductoEnBodega(?,?,?);";
                         CallableStatement stmt = con.prepareCall(query);
 
+                        int cantidad = 0;
+                        if(editTextCantidad.getText().toString().compareTo("") == 0){
+                            cantidad = 0;
+                        } else {
+                            cantidad = Integer.parseInt(editTextCantidad.getText().toString());
+                        }
 
                         stmt.setString(1, spinnerProductos.getText().toString());
                         stmt.setString(2, spinnerBodegas.getText().toString());
-                        stmt.setInt(3, Integer.parseInt(editTextCantidad.getText().toString()));
+                        stmt.setInt(3, cantidad);
 
-                        stmt.executeUpdate();
+                        boolean hasResults = stmt.execute();
 
+                        if (hasResults) {
+                            try (ResultSet rs = stmt.getResultSet()) {
+                                if (rs.next()) {
+                                    String mensaje = rs.getString("Mensaje");
+                                    runOnUiThread(() ->
+                                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            }
+                        } else {
 
-                        runOnUiThread(() -> {
+                            runOnUiThread(() -> {
 
-                            Intent miIntent = new Intent(this, ActivityReporteProductosPorBodega.class);
-                            startActivity(miIntent);
-                            finish();
+                                Intent miIntent = new Intent(this, ActivityReporteProductosPorBodega.class);
+                                startActivity(miIntent);
+                                finish();
 
-                        });
+                            });
+                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -86,16 +86,27 @@ public class ActivityCrearBodegas extends AppCompatActivity {
                         stmt.setString(6, editTextBarrio.getText().toString());
                         stmt.setString(7, editTextCiudad.getText().toString());
 
-                        stmt.executeUpdate();
+                        boolean hasResults = stmt.execute();
 
+                        if (hasResults) {
+                            try (ResultSet rs = stmt.getResultSet()) {
+                                if (rs.next()) {
+                                    String mensaje = rs.getString("Mensaje");
+                                    runOnUiThread(() ->
+                                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            }
+                        } else {
 
-                        runOnUiThread(() -> {
+                            runOnUiThread(() -> {
 
-                            Intent miIntent = new Intent(this, ActivityBodegas.class);
-                            startActivity(miIntent);
-                            finish();
+                                Intent miIntent = new Intent(this, ActivityBodegas.class);
+                                startActivity(miIntent);
+                                finish();
 
-                        });
+                            });
+                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();
