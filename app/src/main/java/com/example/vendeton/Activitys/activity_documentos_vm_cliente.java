@@ -49,10 +49,6 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos_vm);
 
-        botonVerDocumentoVM = findViewById(R.id.imageButtonEditarEvento);
-
-        botonVerDocumentoVM.setOnClickListener(i -> vistaDeDocumentosVM());
-
         listaDocumentos = findViewById(R.id.RecyclerViewDocumentosVM);
         documentos = new ArrayList<>();
 
@@ -136,9 +132,6 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
 
     }
 
-    public void vistaDeDocumentosVM(){
-
-    }
 
 
     /*

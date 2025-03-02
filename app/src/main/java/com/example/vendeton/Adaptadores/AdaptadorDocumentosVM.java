@@ -77,7 +77,7 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
             textViewFechaDocumento = itemView.findViewById(R.id.textViewFechaDocumentoVM);
             textViewClienteDocumento = itemView.findViewById(R.id.textViewNombreClienteDocumentoVM);
             textViewTotalDocumento = itemView.findViewById(R.id.textViewTotalDocumentoVM);
-            botonVerDocumento = itemView.findViewById(R.id.imageButtonEditarEvento);
+            botonVerDocumento = itemView.findViewById(R.id.imageButtonRevisarDocumentoVM);
         }
     }
 }

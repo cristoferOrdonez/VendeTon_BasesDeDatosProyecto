@@ -41,6 +41,7 @@ public class AdaptadorInformeCatalogoProductos extends RecyclerView.Adapter<Adap
        holder.textViewCatalogoPrecioPorMayor.setText("Precio al por mayor: $"+ Item.precio_al_por_mayor);
        holder.textViewCatalogoPrecioPorMenor.setText("Precio al por menor: $"+ Item.precio_al_por_menor);
        holder.textViewCatalogoExistencias.setText("Existencias: "+ Item.existencias);
+
     }
 
     @Override
