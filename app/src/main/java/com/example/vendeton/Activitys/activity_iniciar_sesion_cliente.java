@@ -45,8 +45,8 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
     }
 
     public void revisar(View view){
-        VendeTon.username = "jose";
-        VendeTon.password = "contrasena";
+        VendeTon.username = "CelularRoot";
+        VendeTon.password = "CelularRoot";
 
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();

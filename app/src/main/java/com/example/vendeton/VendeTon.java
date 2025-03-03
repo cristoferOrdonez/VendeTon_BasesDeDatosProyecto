@@ -11,8 +11,8 @@ public class VendeTon extends Application {
     public final static int ADMINISTRADOR = 2;
     public static int estadoUsuario = USUARIO_PUBLICO;
     public static ContraparteCliente usuario;
-    public static String username;
-    public static String password;
+    public static String username = "CelularRoot";
+    public static String password = "CelularRoot";
     public static long identificacion;
 
 
@@ -20,8 +20,8 @@ public class VendeTon extends Application {
     public void onCreate() {
         super.onCreate();
         usuario = null;
-        username = null;
-        password = null;
+        username = "CelularRoot";
+        password = "CelularRoot";
         DbSesion dbSesion=new DbSesion(getApplicationContext());
         dbSesion.sesionActiva();
     }

@@ -49,14 +49,14 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos_vm);
 
-        listaDocumentos = findViewById(R.id.RecyclerViewDocumentosVM);
+        listaDocumentos = findViewById(R.id.RecyclerViewDocumntosVM);
         documentos = new ArrayList<>();
 
         listaDocumentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         adapter = new AdaptadorDocumentosVM(documentos);
         listaDocumentos.setAdapter(adapter);
-        VendeTon.username = "farid";
-        VendeTon.password = "contrasena";
+        //VendeTon.username = "farid";
+        //VendeTon.password = "contrasena";
         VendeTon.identificacion = 1001;
         connectionClass = new ConnectionClass();
         connect();
