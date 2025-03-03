@@ -86,7 +86,6 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         Intent intent = new Intent(this, activity_info_cliente.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     });
 

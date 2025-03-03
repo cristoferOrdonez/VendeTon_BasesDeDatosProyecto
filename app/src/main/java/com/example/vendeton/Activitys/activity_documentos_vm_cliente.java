@@ -39,7 +39,7 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
 
     AdaptadorDocumentosVMCliente adapter;
 
-    ImageButton botonVerDocumentoVM, imageButtonEditar, imageButtonEliminar;
+    ImageButton botonVerDocumentoVM, imageButtonEditar, imageButtonEliminar, imageButtonCrearDocumentoVM;
 
     MaterialAutoCompleteTextView spinnerClientes;
 
@@ -58,6 +58,9 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         listaDocumentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         adapter = new AdaptadorDocumentosVMCliente(documentos);
         listaDocumentos.setAdapter(adapter);
+        imageButtonCrearDocumentoVM = findViewById(R.id.imageButtonCrearDocumentoVM);
+        imageButtonCrearDocumentoVM.setVisibility(View.GONE);
+
         VendeTon.username = "farid";
         VendeTon.password = "contrasena";
         VendeTon.identificacion = 1001;

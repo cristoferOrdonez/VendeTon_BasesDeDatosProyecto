@@ -43,6 +43,8 @@ public class AdaptadorDocumentosVMCliente extends RecyclerView.Adapter<Adaptador
         holder.textViewFechaDocumento.setText("Fecha: " + documento.fecha);
         holder.textViewClienteDocumento.setText("Cliente: " + documento.con_nombre + " " + documento.con_apellido);
         holder.textViewTotalDocumento.setText("Total: " + documento.doc_total);
+        holder.botonEditarDocumento.setVisibility(View.GONE);
+        holder.botonEliminarDocumento.setVisibility(View.GONE);
 
         holder.botonVerDocumento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +80,7 @@ public class AdaptadorDocumentosVMCliente extends RecyclerView.Adapter<Adaptador
             textViewTotalDocumento = itemView.findViewById(R.id.textViewTotalDocumentoVM);
 
             botonEliminarDocumento = itemView.findViewById(R.id.imageButtonEliminarDocumentoVM);
-            botonEliminarDocumento.setVisibility(View.GONE);
             botonEditarDocumento = itemView.findViewById(R.id.imageButtonEditarDocumentoVM);
-            botonEliminarDocumento.setVisibility(View.GONE);
             botonVerDocumento = itemView.findViewById(R.id.imageButtonRevisarDocumentoVM);
         }
     }
