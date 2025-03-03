@@ -1,19 +1,14 @@
 package com.example.vendeton.Activitys;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Adaptadores.AdaptadorCorreoElectronico;
 import com.example.vendeton.Adaptadores.AdaptadorInformeCatalogoProductos;
-import com.example.vendeton.Adaptadores.AdaptadorNumeroTelefonico;
 import com.example.vendeton.Entidades.CatalogoProducto;
-import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
-import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
 
 import java.sql.Connection;
@@ -36,7 +31,7 @@ public class activity_informe_catalogo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informe_catalogo_productos);
 
-        RecyclerViewCatalogo = findViewById(R.id.RecyclerViewCatalogoProductos);
+        RecyclerViewCatalogo = findViewById(R.id.RecyclerViewClientes);
         RecyclerViewCatalogo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
