@@ -52,12 +52,15 @@
         <activity
             android:name=".Activitys.ActivityDocumentosVM"
             android:exported="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activitys.ActivitySeleccionUsuario"
+            android:exported="false" >
         </activity>
         <activity
             android:name=".MainActivity"
@@ -77,7 +80,8 @@
         </activity>
         <activity
             android:name=".Activitys.activity_iniciar_sesion_cliente"
-            android:label="Iniciar sesion Cliente" >
+            android:label="Iniciar sesion Cliente">
+
         </activity>
         <activity
             android:name=".Activitys.activity_info_cliente"
@@ -87,6 +91,17 @@
             android:name=".Activitys.activity_pagina_inicial"
             android:label="Pagina Inicial" >
         </activity>
+    <activity
+        android:name=".Activitys.activity_informe_catalogo"
+        android:label = "Informe Catalogo"
+        android:exported="false">
+
+    </activity>
+    <activity
+        android:name=".Activitys.activity_documentos_vm_cliente"
+        android:label = "Documentos Cliente"
+        android:exported="false">
+    </activity>
     </application>
 
 </manifest>
