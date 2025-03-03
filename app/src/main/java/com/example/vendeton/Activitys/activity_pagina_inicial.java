@@ -119,6 +119,7 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
         actionBarDrawerToggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.getMenu().findItem(R.id.Documentos).setVisible(false);
     }
 
     @Override
@@ -127,12 +128,12 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
         if(item.getItemId() == R.id.Contrapartes){
             //Intent intent = new Intent(this, Pomodoro.class);
             //startActivity(intent);
-            finish();
+            //finish();
         } else {
 
-            Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
 
         }
+
 
         return false;
     }
