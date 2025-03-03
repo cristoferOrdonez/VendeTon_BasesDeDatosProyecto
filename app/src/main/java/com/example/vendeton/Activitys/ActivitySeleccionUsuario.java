@@ -32,9 +32,18 @@ public class ActivitySeleccionUsuario extends AppCompatActivity {
 
         } else if(VendeTon.estadoUsuario == VendeTon.CLIENTE_MAYORISTA){
             Toast.makeText(this,"CLIENTE_MAYORISTA",Toast.LENGTH_SHORT);
+            Intent intent = new Intent(this, activity_info_cliente.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
-        else {
+        else if(VendeTon.estadoUsuario == VendeTon.USUARIO_PUBLICO) {
             Toast.makeText(this,"USUARIO_PUBLICO",Toast.LENGTH_SHORT);
+            Intent intent = new Intent(this, activity_informe_catalogo.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this,"SIN_REGISTRAR",Toast.LENGTH_SHORT);
         }
 
 

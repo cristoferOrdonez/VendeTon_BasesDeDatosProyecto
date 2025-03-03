@@ -3,21 +3,28 @@ package com.example.vendeton.Activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vendeton.R;
+import com.example.vendeton.VendeTon;
 
 public class activity_reportes extends AppCompatActivity {
 
     LinearLayout layoutClientes, layoutEmpleados, layoutProveedores, layoutProductos, layoutBodegas, layoutMateriales, layoutOtrosReportes;
+    ImageButton botonAtras;
+
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informes);
+
+        botonAtras = findViewById(R.id.imageButtonAtrasInformes);
+        botonAtras.setOnClickListener(i -> volver());
 
         layoutClientes = findViewById(R.id.LayoutReportesCliente);
         layoutClientes.setOnClickListener(v -> {
@@ -64,5 +71,18 @@ public class activity_reportes extends AppCompatActivity {
 
 
 
+    }
+
+    private void volver() {
+        if (VendeTon.estadoUsuario == VendeTon.ADMINISTRADOR){
+            Intent miIntent = new Intent(this, activity_pagina_inicial.class);
+            startActivity(miIntent);
+            finish();
+        }
+        else if (VendeTon.estadoUsuario == VendeTon.CLIENTE_MAYORISTA){
+            Intent miIntent = new Intent(this, activity_info_cliente.class);
+            startActivity(miIntent);
+            finish();
+        }
     }
 }
