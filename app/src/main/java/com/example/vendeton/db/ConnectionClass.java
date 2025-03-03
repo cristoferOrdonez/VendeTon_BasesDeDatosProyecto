@@ -16,7 +16,7 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.0.4";
+    protected static String ip = "192.168.1.4";
 
     protected static String port = "3306";
 
@@ -60,7 +60,7 @@ public class ConnectionClass {
 
     public static ContraparteCliente ejecutarConsultaContraparte(Connection con, long id) {
         ContraparteCliente cliente = null;
-        String query = "call sp_ConsultarContraparte(?)";
+        String query = "call sp_consultarContraparte(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
             stmt.setLong(1, id);

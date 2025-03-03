@@ -1,7 +1,13 @@
 package com.example.vendeton.Activitys;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,9 +43,11 @@ public class activity_ver_info_documento_vm extends AppCompatActivity {
     DocumentoVM documento;
     RecyclerView RecyclerViewDetalles;
     ConnectionClass connectionClass;
+    Button BotonInfoDocumentoVMAceptar;
 
     AdaptadorDetallesProductosVendidos adapter;
 
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_info_documentos_vm);
@@ -52,8 +60,46 @@ public class activity_ver_info_documento_vm extends AppCompatActivity {
         fechaDocumentoVM = findViewById(R.id.editTextFechaDocumento);
         clienteVM = findViewById(R.id.editTextCliente);
 
+        fechaDocumentoVM.setEnabled(false);
+        clienteVM.setEnabled(false);
+        propositoDeCompraDocumentoVM.setEnabled(false);
+        totalDocumentoVM.setEnabled(false);
+
+        BotonInfoDocumentoVMAceptar = findViewById(R.id.BotonInfoDocumentoVMAceptar);
+
+        BotonInfoDocumentoVMAceptar.setOnClickListener(View -> {
+            finish();
+        });
+
         RecyclerViewDetalles = findViewById(R.id.RecyclerViewDetalles);
         RecyclerViewDetalles.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
+        RecyclerViewDetalles.addOnItemTouchListener(new RecyclerView.OnItemTouchListener(){
+
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                int position = rv.getChildAdapterPosition(child);
+
+                DetalleProductoVendido detalle = listadetalles.get(position);
+                Intent intent = new Intent(activity_ver_info_documento_vm.this, activity_ver_info_detalle_vm.class);
+                intent.putExtra("detalle", detalle);
+                startActivity(intent);
+
+                return true;
+
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+
 
         propositoDeCompraDocumentoVM.setText(documento.proposito_de_compra);
         totalDocumentoVM.setText(""+documento.doc_total);

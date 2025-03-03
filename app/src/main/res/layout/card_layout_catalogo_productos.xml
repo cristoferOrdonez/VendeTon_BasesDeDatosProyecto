@@ -37,25 +37,6 @@
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
-            <ImageButton
-                android:id="@+id/imageButtonEditarEvento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                card_view:srcCompat="@drawable/icono_editar_mis_eventos" />
-
-            <ImageButton
-                android:id="@+id/imageButtonEliminarEvento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="7dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                card_view:srcCompat="@drawable/icono_eliminar_mis_eventos" />
-
         </LinearLayout>
 
         <TextView

@@ -2,6 +2,7 @@ package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
+import com.example.vendeton.Adaptadores.AdaptadorDocumentosVMCliente;
 import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 import com.example.vendeton.VendeTon;
@@ -35,9 +37,9 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
 
     ArrayList<DocumentoVM> documentos;
 
-    AdaptadorDocumentosVM adapter;
+    AdaptadorDocumentosVMCliente adapter;
 
-    ImageButton botonVerDocumentoVM;
+    ImageButton botonVerDocumentoVM, imageButtonEditar, imageButtonEliminar;
 
     MaterialAutoCompleteTextView spinnerClientes;
 
@@ -52,11 +54,12 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         listaDocumentos = findViewById(R.id.RecyclerViewDocumntosVM);
         documentos = new ArrayList<>();
 
+
         listaDocumentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
-        adapter = new AdaptadorDocumentosVM(documentos);
+        adapter = new AdaptadorDocumentosVMCliente(documentos);
         listaDocumentos.setAdapter(adapter);
-        //VendeTon.username = "farid";
-        //VendeTon.password = "contrasena";
+        VendeTon.username = "farid";
+        VendeTon.password = "contrasena";
         VendeTon.identificacion = 1001;
         connectionClass = new ConnectionClass();
         connect();
