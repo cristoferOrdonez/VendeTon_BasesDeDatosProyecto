@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Secciones">
+
+        <menu>
+
+            <item android:id="@+id/Contrapartes"
+                android:title="Contrapartes">
+            </item>
+            <item android:id="@+id/Mercancia"
+                android:title="Mercancia">
+            </item>
+            <item android:id="@+id/Documentos"
+                android:title="Documentos">
+            </item>
+            <item android:id="@+id/SuministroYEntrega"
+                android:title="Suministro y entrega">
+            </item>
+            <item android:id="@+id/Reportes"
+                android:title="Reportes">
+            </item>
+
+        </menu>
+
+    </item>
+
+</menu>
