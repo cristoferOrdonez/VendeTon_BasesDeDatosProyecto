@@ -81,11 +81,12 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
                     }
 
                     DbSesion dbSesion = new DbSesion(this);
-                    dbSesion.mantenerSesionIniciada(1, identificacion);
+                    dbSesion.mantenerSesionIniciada(VendeTon.CLIENTE_MAYORISTA, identificacion);
                     VendeTon.identificacion = identificacion;
 
                     runOnUiThread(() -> {
                         Intent intent = new Intent(this, activity_info_cliente.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     });
 

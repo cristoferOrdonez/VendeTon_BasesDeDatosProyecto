@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbLocalVendeton extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=4;
     private static final String DATABASE_NOMBRE = "datos.db";
 
     public static final String TABLE_INFO_SESION="t_sesion";

@@ -16,13 +16,10 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.1.9";
+    protected static String ip = "192.168.1.4";
 
     protected static String port = "3306";
 
-    protected static String username = VendeTon.username;
-
-    protected static String password = VendeTon.password;
 
     public Connection CONN(){
 
@@ -31,7 +28,7 @@ public class ConnectionClass {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String connectionString = "jdbc:mysql://" + ip + ":" + port + "/" + db + "?noAccessToProcedureBodies=true";
-            conn = DriverManager.getConnection(connectionString, username, password);
+            conn = DriverManager.getConnection(connectionString, VendeTon.username, VendeTon.password);
 
         }catch (Exception e){
             Log.e("ERRO", Objects.requireNonNull(e.getMessage()));
@@ -48,7 +45,7 @@ public class ConnectionClass {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String connectionString = "jdbc:mysql://" + ip + ":" + port + "/" + db + "?noAccessToProcedureBodies=true";
-            conn = DriverManager.getConnection(connectionString, username, password);
+            conn = DriverManager.getConnection(connectionString, VendeTon.username, VendeTon.password);
 
         }catch (Exception e){
             return false;
@@ -68,6 +65,12 @@ public class ConnectionClass {
             try (ResultSet rs = stmt.executeQuery()) {
 
                 if (rs.next()) {
+                    try{
+                        int column =rs.findColumn("con_identificacion");
+                    }catch (SQLException e){
+                        return null;
+                    }
+
                      cliente = new ContraparteCliente(
                             rs.getLong("con_identificacion"),
                             rs.getString("con_nombre"),

@@ -62,7 +62,7 @@ public class activity_detalles_cliente extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                cancelar();
             }
 
         });
@@ -94,6 +94,12 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
 
     public void guardar(View view){
+        if (PrimerCampo.getText().toString().isEmpty() || SegundoCampo.getText().toString().isEmpty()){
+            Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         if (intencion.equals("numero")){
             /*Boolean result validacionNumero();
             if (!result)
@@ -162,6 +168,18 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
         finish();
 
+    }
+
+    public void cancelar (){
+        if (objeto != "nuevo"){
+            if (intencion.equals("numero") && numero != null){
+                activity_info_cliente.listaNumeros.add(numero);
+            }
+            if (intencion.equals("correo") && correo != null){
+                activity_info_cliente.listaCorreos.add(correo);
+            }
+        }
+        finish();
     }
 /*
     private boolean validacionNumero() {

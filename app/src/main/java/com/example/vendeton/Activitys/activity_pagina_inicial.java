@@ -18,6 +18,7 @@ import com.example.vendeton.Adaptadores.AdaptadorBalanceGeneral;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.R;
+import com.example.vendeton.db.DbSesion;
 import com.google.android.material.navigation.NavigationView;
 
 import java.sql.Connection;
@@ -146,7 +147,11 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
             Intent intent = new Intent(this, activity_reportes.class);
             startActivity(intent);
         }
-        else {
+        else if (item.getItemId()==R.id.CerrarSesion){
+            DbSesion dbSesion=new DbSesion(this);
+            dbSesion.cerrarSesion();
+        }
+        else{
 
             Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
 

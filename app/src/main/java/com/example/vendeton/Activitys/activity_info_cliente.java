@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +30,8 @@ import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.Entidades.CorreoElectronico;
 import com.example.vendeton.Entidades.NumeroTelefonico;
 import com.example.vendeton.R;
+import com.example.vendeton.db.DbSesion;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -41,7 +47,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-public class activity_info_cliente extends AppCompatActivity {
+public class activity_info_cliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextInputEditText IdentificacionAcceder, NombreAcceder, ApellidoAcceder, CiudadAcceder, BarrioAcceder, CalleAcceder;
     TextInputLayout layoutIdentificacion, layoutNombre, layoutApellido, layoutCiudad, layoutBarrio, layoutCalle;
@@ -65,6 +71,12 @@ public class activity_info_cliente extends AppCompatActivity {
     String name, str;
 
     ContraparteCliente cliente;
+
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -113,6 +125,21 @@ public class activity_info_cliente extends AppCompatActivity {
 
         establecerAdaptadores();
 
+
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.navigationView);
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        actionBarDrawerToggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.Contrapartes).setVisible(false);
+        navigationView.getMenu().findItem(R.id.Mercancia).setVisible(false);
+        navigationView.getMenu().findItem(R.id.SuministroYEntrega).setVisible(false);
 }
 
 
@@ -746,7 +773,7 @@ public class activity_info_cliente extends AppCompatActivity {
                     }
                 }
 
-                for (NumeroTelefonico numeros: numerosNuevos) {
+                for (NumeroTelefonico numeros: numerosEliminar) {
                     query = "call  sp_eliminarNumeroTelefonico(?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setInt(1, numeros.num_prefijo);
@@ -788,5 +815,30 @@ public class activity_info_cliente extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+        if(item.getItemId() == R.id.Documentos){
+            Intent miIntent = new Intent(this, ActivityDocumentos.class);
+            startActivity(miIntent);
+            finish();
+        } else if (item.getItemId() == R.id.Reportes) {
+            Intent intent = new Intent(this, activity_informe_catalogo.class);
+            startActivity(intent);
+        }
+        else if (item.getItemId()==R.id.CerrarSesion){
+            DbSesion dbSesion=new DbSesion(this);
+            dbSesion.cerrarSesion();
+        }
+        else{
+
+            Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
+
+        }
+
+        return false;
+    }
 }
 

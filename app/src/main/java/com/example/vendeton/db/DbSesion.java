@@ -7,15 +7,18 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.vendeton.Activitys.activity_pagina_inicial;
+import com.example.vendeton.Activitys.ActivitySeleccionUsuario;
 import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.Entidades.InfoSesion;
 import com.example.vendeton.VendeTon;
 
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class DbSesion extends DbLocalVendeton{
@@ -37,10 +40,12 @@ public class DbSesion extends DbLocalVendeton{
         db.delete(TABLE_INFO_SESION, null, null);
         db.close();
         VendeTon.usuario = null;
-        VendeTon.estadoUsuario = VendeTon.USUARIO_PUBLICO;
+        VendeTon.username = null;
+        VendeTon.password = null;
+        VendeTon.identificacion = 0;
+        VendeTon.estadoUsuario = VendeTon.SIN_REGISTRAR;
         this.getWritableDatabase().close();
-
-        Intent intent = new Intent(context, activity_pagina_inicial.class);
+        Intent intent = new Intent(context, ActivitySeleccionUsuario.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
@@ -63,15 +68,16 @@ public class DbSesion extends DbLocalVendeton{
         boolean sesionActiva = false;
         if (cursorInfo.moveToFirst()) {
             InfoSesion infoSesion = new InfoSesion(0, cursorInfo.getInt(1), cursorInfo.getLong(2));
-            sesionActiva = (infoSesion.getTipoSesion() != 0);
+            sesionActiva = (infoSesion.getTipoSesion() != -1 || infoSesion.getTipoSesion() != 0);
+            VendeTon.estadoUsuario = infoSesion.getTipoSesion();
+            VendeTon.identificacion = infoSesion.getIdentificacionSesion();
         }
         cursorInfo.close();
         return sesionActiva;
     }
 
     public void sesionActiva(){
-        long identificacion=0;
-        ContraparteCliente result = null;
+        long identificacion;
         DbLocalVendeton dbHelper = new DbLocalVendeton(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursorInfo = db.rawQuery("SELECT * FROM " + TABLE_INFO_SESION, null);
@@ -82,30 +88,49 @@ public class DbSesion extends DbLocalVendeton{
 
             if (verificarSesionActiva()) {
                 if (infoSesion.getTipoSesion() == VendeTon.CLIENTE_MAYORISTA) {
+                    VendeTon.username = "farid";
+                    VendeTon.password = "contrasena";
 
-                    // ACCEDER A LA BASE DE DATOS Y TRAER INFO
-                    ConnectionClass connectionClass = new ConnectionClass();
-                    try (Connection con = connectionClass.CONN()) {
-                        if (con == null) throw new SQLException("Conexión nula");
+                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+                    executorService.execute(() -> {
+                                ConnectionClass connectionClass = new ConnectionClass();
+                                try (Connection con = connectionClass.CONN()) {
+                                    if (con == null) throw new SQLException("Conexión nula");
+                                    ContraparteCliente resultado = ConnectionClass.ejecutarConsultaContraparte(con, identificacion);
+                                    if (resultado == null) {
+                                        cerrarSesion();
+                                        return;
+                                    }
 
-                        result = ConnectionClass.ejecutarConsultaContraparte(con, identificacion);
+                                    VendeTon.usuario = resultado;
+                                    VendeTon.estadoUsuario = VendeTon.CLIENTE_MAYORISTA;
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
-                    VendeTon.usuario = result;
-                    VendeTon.estadoUsuario = VendeTon.CLIENTE_MAYORISTA;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                    executorService.shutdown();
 
-                    //RESTRICCIONES
-
-                } else {
+                } else if (infoSesion.getTipoSesion() == VendeTon.ADMINISTRADOR){
 
                     // ADMINISTRADOR
                     VendeTon.usuario = null;        // NO HAY INFORMACION PARA GUARDAR
                     VendeTon.estadoUsuario = VendeTon.ADMINISTRADOR;
+                    VendeTon.username = "farid";
+                    VendeTon.password = "contrasena";
                 }
+
+            } else if (infoSesion.getTipoSesion() == VendeTon.USUARIO_PUBLICO){
+                VendeTon.username = "usuario_publico";
+                VendeTon.password = "";
             }
+            else {
+                cerrarSesion();
+                return;
+            }
+        } else {
+            identificacion = 0;
         }
         cursorInfo.close();
     }
