@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -56,10 +57,21 @@ public class activity_detalles_cliente extends AppCompatActivity {
         layoutPrimerCampo = findViewById(R.id.layoutPrimerCampo);
         layoutSegundoCampo = findViewById(R.id.layoutSegundoCampo);
         btnGuardar = findViewById(R.id.BotonDetalleGuardar);
+        btnCancelar = findViewById(R.id.BotonDetalleCancelar);
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+
+        });
 
         if (intencion.equals("numero")){
             layoutPrimerCampo.setHint("Prefijo");
             layoutSegundoCampo.setHint("Número");
+            PrimerCampo.setInputType(InputType.TYPE_CLASS_NUMBER);
+            SegundoCampo.setInputType(InputType.TYPE_CLASS_NUMBER);
             if (vista.equals("editar")){
                 numero = getIntent().getParcelableExtra("numero");
                 PrimerCampo.setText(""+numero.num_prefijo);
@@ -128,21 +140,7 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
     }
 
-    public void cancelar(View view){
-        if (vista.equals("solo_vista")){
-            Intent miIntent = new Intent(this, activity_info_cliente.class);
-            setResult(Activity.RESULT_CANCELED, miIntent);
-            finish();
-        }
-        else{
-            OnBackPressed();
-        }
 
-    }
-
-    private void OnBackPressed() {
-        super.getOnBackPressedDispatcher();
-    }
 
 
     public void connect() {
