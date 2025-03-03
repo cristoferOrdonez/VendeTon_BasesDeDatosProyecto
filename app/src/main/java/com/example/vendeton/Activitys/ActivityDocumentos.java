@@ -12,29 +12,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vendeton.R;
 
-public class ActivityMercancia extends AppCompatActivity {
+public class ActivityDocumentos extends AppCompatActivity {
 
-    ImageButton botonAtras, botonProductos;
+    ImageButton botonAtras, botonVentasMayoristas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mercancia);
+        setContentView(R.layout.activity_documentos);
 
         botonAtras = findViewById(R.id.imageButtonAtras);
-        botonProductos = findViewById(R.id.imageButtonProductos);
+        botonVentasMayoristas = findViewById(R.id.imageButtonVentasMayoristas);
 
         botonAtras.setOnClickListener(i -> volverMenuPrincipal());
-        botonProductos.setOnClickListener(i -> irAProuctos());
-
-    }
-
-    private void irAProuctos() {
-
-
-        Intent miIntent = new Intent(this, ActivityProductos.class);
-        startActivity(miIntent);
-        finish();
+        botonVentasMayoristas.setOnClickListener(i -> irADocumentosVM());
 
     }
 
@@ -45,4 +36,13 @@ public class ActivityMercancia extends AppCompatActivity {
         finish();
 
     }
+
+    private void irADocumentosVM() {
+
+        Intent miIntent = new Intent(this, ActivityDocumentosVM.class);
+        startActivity(miIntent);
+        finish();
+
+    }
+
 }

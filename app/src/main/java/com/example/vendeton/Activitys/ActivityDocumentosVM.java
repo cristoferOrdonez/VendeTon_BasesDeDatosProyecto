@@ -42,7 +42,7 @@ public class ActivityDocumentosVM extends AppCompatActivity {
 
     AdaptadorDocumentosVM adapter;
 
-    ImageButton botonCrearDocumentoVM;
+    ImageButton botonCrearDocumentoVM, botonAtras;
 
     MaterialAutoCompleteTextView spinnerClientes;
 
@@ -52,6 +52,9 @@ public class ActivityDocumentosVM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos_vm);
+
+        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras.setOnClickListener(i -> volverADocumentos());
 
         botonCrearDocumentoVM = findViewById(R.id.imageButtonCrearDocumentoVM);
 
@@ -116,6 +119,14 @@ public class ActivityDocumentosVM extends AppCompatActivity {
                     });
                 }
         );
+
+    }
+
+    private void volverADocumentos() {
+
+        Intent miIntent = new Intent(this, ActivityDocumentos.class);
+        startActivity(miIntent);
+        finish();
 
     }
 

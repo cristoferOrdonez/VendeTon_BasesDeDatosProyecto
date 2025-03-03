@@ -31,7 +31,7 @@ import java.util.concurrent.Executors;
 
 public class ActivityProductos extends AppCompatActivity {
 
-    ImageButton botonCrearProducto;
+    ImageButton botonCrearProducto, botonAtras;
     RecyclerView listaProductos;
     ArrayList<Producto> productos;
     AdaptadorProductos adapter;
@@ -44,6 +44,8 @@ public class ActivityProductos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras.setOnClickListener(i -> irAMercancia());
         botonCrearProducto = findViewById(R.id.imageButtonCrearBodega);
 
         botonCrearProducto.setOnClickListener(i -> registroDeBodegas());
@@ -109,6 +111,14 @@ public class ActivityProductos extends AppCompatActivity {
                     });
                 }
         );
+
+    }
+
+    private void irAMercancia() {
+
+        Intent miIntent = new Intent(this, ActivityMercancia.class);
+        startActivity(miIntent);
+        finish();
 
     }
 

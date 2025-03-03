@@ -129,9 +129,18 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
             //Intent intent = new Intent(this, Pomodoro.class);
             //startActivity(intent);
             //finish();
-        } else {
-
-
+        } else if (item.getItemId() == R.id.Mercancia){
+            Intent miIntent = new Intent(this, ActivityMercancia.class);
+            startActivity(miIntent);
+            finish();
+        } else if(item.getItemId() == R.id.Documentos){
+            Intent miIntent = new Intent(this, ActivityDocumentos.class);
+            startActivity(miIntent);
+            finish();
+        } else if(item.getItemId() == R.id.SuministroYEntrega){
+            Intent miIntent = new Intent(this, ActivityEntregadosYSuministrados.class);
+            startActivity(miIntent);
+            finish();
         }
 
 
