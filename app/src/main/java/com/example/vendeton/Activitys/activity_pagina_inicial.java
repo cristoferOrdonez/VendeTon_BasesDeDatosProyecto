@@ -1,10 +1,16 @@
 package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +18,7 @@ import com.example.vendeton.Adaptadores.AdaptadorBalanceGeneral;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.Entidades.BalanceGeneral;
 import com.example.vendeton.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +29,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-public class activity_pagina_inicial extends AppCompatActivity {
+public class activity_pagina_inicial extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     RecyclerView RecyclerViewBalance;
     ConnectionClass connectionClass;
@@ -33,6 +40,11 @@ public class activity_pagina_inicial extends AppCompatActivity {
 
     ResultSet rs;
     String name, str;
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -92,9 +104,38 @@ public class activity_pagina_inicial extends AppCompatActivity {
 
 
                 }
+
+
         );
+
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.navigationView);
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        actionBarDrawerToggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.Contrapartes){
+            //Intent intent = new Intent(this, Pomodoro.class);
+            //startActivity(intent);
+            finish();
+        } else {
+
+            Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
+
+        }
+
+        return false;
+    }
 
     public void connect() {
 
