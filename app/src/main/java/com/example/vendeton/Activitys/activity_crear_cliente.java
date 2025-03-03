@@ -152,6 +152,7 @@ public class activity_crear_cliente extends AppCompatActivity {
 
     public void guardarInformacion(View view){
         inserts();
+        finish();
     }
 
     /*@Override
