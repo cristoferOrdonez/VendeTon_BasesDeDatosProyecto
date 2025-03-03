@@ -15,21 +15,29 @@
         android:theme="@style/Theme.VendeTon"
         tools:targetApi="31">
         <activity
-            android:name=".Activitys.ActivityReporteProductosPorBodega"
-            android:exported="false" >
-
+            android:name=".Activitys.ActivityCrearProducto"
+            android:exported="false" />
+        <activity
+            android:name=".Activitys.ActivityProductos"
+            android:exported="false">
         </activity>
         <activity
+            android:name=".Activitys.ActivityReporteProductosPorBodega"
+            android:exported="false" />
+        <activity
             android:name=".Activitys.ActivityAportacionDeProductos"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activitys.ActivityCrearBodegas"
             android:exported="false" />
         <activity
             android:name=".Activitys.ActivityBodegas"
-            android:exported="false">
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activitys.ActivityControlDeProductosEntregadosYSuministro"
@@ -51,58 +59,39 @@
             android:exported="false" />
         <activity
             android:name=".Activitys.ActivityDocumentosVM"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activitys.ActivitySeleccionUsuario"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activitys.activity_detalles_cliente"
-            android:label="Detalles Cliente" >
-        </activity>
+            android:label="Detalles Cliente" />
         <activity
             android:name=".Activitys.activity_ver_info_documento_vm"
-            android:label="Info documentoVM" >
-        </activity>
+            android:label="Info documentoVM" />
         <activity
             android:name=".Activitys.activity_iniciar_sesion_admin"
-            android:label="Iniciar sesion Admin" >
-        </activity>
+            android:label="Iniciar sesion Admin" />
         <activity
             android:name=".Activitys.activity_iniciar_sesion_cliente"
-            android:label="Iniciar sesion Cliente">
-
-        </activity>
+            android:label="Iniciar sesion Cliente" />
         <activity
             android:name=".Activitys.activity_info_cliente"
-            android:label="Info Cliente" >
-        </activity>
+            android:label="Info Cliente" />
         <activity
             android:name=".Activitys.activity_pagina_inicial"
-            android:label="Pagina Inicial" >
-        </activity>
-    <activity
-        android:name=".Activitys.activity_informe_catalogo"
-        android:label = "Informe Catalogo"
-        android:exported="false">
-
-    </activity>
-    <activity
-        android:name=".Activitys.activity_documentos_vm_cliente"
-        android:label = "Documentos Cliente"
-        android:exported="false">
-    </activity>
+            android:label="Pagina Inicial" />
+        <activity
+            android:name=".Activitys.activity_informe_catalogo"
+            android:exported="false"
+            android:label="Informe Catalogo" />
+        <activity
+            android:name=".Activitys.activity_documentos_vm_cliente"
+            android:exported="false"
+            android:label="Documentos Cliente" />
     </application>
 
 </manifest>
