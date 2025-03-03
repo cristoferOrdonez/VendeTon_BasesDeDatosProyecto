@@ -12,27 +12,26 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vendeton.R;
 
-public class ActivityMercancia extends AppCompatActivity {
+public class ActivityEntregadosYSuministrados extends AppCompatActivity {
 
-    ImageButton botonAtras, botonProductos;
+    ImageButton botonAtras, botonBodegas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mercancia);
+        setContentView(R.layout.activity_entregados_ysuministrados);
 
         botonAtras = findViewById(R.id.imageButtonAtras);
-        botonProductos = findViewById(R.id.imageButtonProductos);
+        botonBodegas = findViewById(R.id.imageButtonBodegas);
 
         botonAtras.setOnClickListener(i -> volverMenuPrincipal());
-        botonProductos.setOnClickListener(i -> irAProuctos());
+        botonBodegas.setOnClickListener(i -> irABodegas());
 
     }
 
-    private void irAProuctos() {
+    private void irABodegas() {
 
-
-        Intent miIntent = new Intent(this, ActivityProductos.class);
+        Intent miIntent = new Intent(this, ActivityBodegas.class);
         startActivity(miIntent);
         finish();
 
@@ -45,4 +44,5 @@ public class ActivityMercancia extends AppCompatActivity {
         finish();
 
     }
+
 }

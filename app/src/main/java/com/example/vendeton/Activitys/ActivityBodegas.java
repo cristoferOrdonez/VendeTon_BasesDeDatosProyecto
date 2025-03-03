@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 
 public class ActivityBodegas extends AppCompatActivity {
 
-    ImageButton botonCrearBodega;
+    ImageButton botonCrearBodega, botonAtras;
 
     RecyclerView listaBodegas;
 
@@ -46,6 +46,9 @@ public class ActivityBodegas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bodegas);
         botonCrearBodega = findViewById(R.id.imageButtonCrearBodega);
+        botonAtras = findViewById(R.id.imageButtonAtras);
+
+        botonAtras.setOnClickListener(I -> volverASuministroYEntrega());
 
         botonCrearBodega.setOnClickListener(i -> registroDeBodegas());
 
@@ -107,6 +110,14 @@ public class ActivityBodegas extends AppCompatActivity {
                     });
                 }
         );
+
+    }
+
+    private void volverASuministroYEntrega() {
+
+        Intent miIntent = new Intent(this, ActivityBodegas.class);
+        startActivity(miIntent);
+        finish();
 
     }
 
