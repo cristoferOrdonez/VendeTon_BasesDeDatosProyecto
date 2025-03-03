@@ -9,23 +9,98 @@
     tools:context=".Activitys.ActivityMercancia">
 
     <ImageButton
-        android:id="@+id/imageButtonProductos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="60dp"
-        android:background="@color/fondo"
-        app:srcCompat="@drawable/producto" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roslindaletext_medium_edu"
-        android:paddingHorizontal="45dp"
-        android:paddingVertical="20dp"
-        android:text="Productos"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:id="@+id/imageButtonBackPomodoro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back_left_button" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButtonProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="60dp"
+                android:background="@color/fondo"
+                app:srcCompat="@drawable/producto" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roslindaletext_medium_edu"
+                android:paddingHorizontal="45dp"
+                android:paddingVertical="20dp"
+                android:text="Productos"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+            <ImageButton
+                android:id="@+id/imageButtonMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="60dp"
+                android:background="@color/fondo"
+                app:srcCompat="@drawable/material" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roslindaletext_medium_edu"
+                android:paddingHorizontal="45dp"
+                android:paddingVertical="20dp"
+                android:text="Materiales"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/imageButtonTipoDeProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="60dp"
+                android:background="@color/fondo"
+                app:srcCompat="@drawable/tipo_de_producto" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roslindaletext_medium_edu"
+                android:paddingHorizontal="45dp"
+                android:paddingVertical="20dp"
+                android:text="Tipos de producto"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/imageButtonUnidadDeMedida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="60dp"
+                android:background="@color/fondo"
+                app:srcCompat="@drawable/unidad_de_medida" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roslindaletext_medium_edu"
+                android:paddingHorizontal="45dp"
+                android:paddingVertical="20dp"
+                android:text="Unidades de medida"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
