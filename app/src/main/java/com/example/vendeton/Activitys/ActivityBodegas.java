@@ -115,7 +115,7 @@ public class ActivityBodegas extends AppCompatActivity {
 
     private void volverASuministroYEntrega() {
 
-        Intent miIntent = new Intent(this, ActivityBodegas.class);
+        Intent miIntent = new Intent(this, ActivityEntregadosYSuministrados.class);
         startActivity(miIntent);
         finish();
 
