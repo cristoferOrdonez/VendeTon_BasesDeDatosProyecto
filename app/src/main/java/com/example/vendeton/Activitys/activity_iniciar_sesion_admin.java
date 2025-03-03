@@ -58,7 +58,6 @@ public class activity_iniciar_sesion_admin extends AppCompatActivity {
                 dbSesion.mantenerSesionIniciada(1, 0);
                 runOnUiThread(() -> {
                     Intent intent = new Intent(this, activity_pagina_inicial.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 });
             }

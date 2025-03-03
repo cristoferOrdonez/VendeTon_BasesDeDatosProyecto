@@ -125,9 +125,9 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == R.id.Contrapartes){
-            //Intent intent = new Intent(this, Pomodoro.class);
-            //startActivity(intent);
-            finish();
+            Intent intent = new Intent(this, activity_contrapartes.class);
+            startActivity(intent);
+
         } else if (item.getItemId() == R.id.Mercancia) {
 
         } else if (item.getItemId() == R.id.Documentos) {
@@ -135,7 +135,8 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
         } else if (item.getItemId() == R.id.SuministroYEntrega) {
 
         } else if (item.getItemId() == R.id.Reportes) {
-
+            Intent intent = new Intent(this, activity_reportes.class);
+            startActivity(intent);
         }
         else {
 

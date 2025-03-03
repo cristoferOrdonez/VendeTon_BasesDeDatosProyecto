@@ -90,8 +90,15 @@ public class activity_detalles_cliente extends AppCompatActivity {
 
 
 }
+
+
+
     public void guardar(View view){
         if (intencion.equals("numero")){
+            /*Boolean result validacionNumero();
+            if (!result)
+                return;*/
+
             if (vista.equals("editar")){
                 numero.num_prefijo_anterior = numero.num_prefijo;
                 numero.num_prefijo = Integer.parseInt(PrimerCampo.getText().toString());
@@ -120,6 +127,10 @@ public class activity_detalles_cliente extends AppCompatActivity {
                 activity_crear_cliente.listaNumeros.add(numero);
         }
         else if (intencion.equals("correo")){
+            /*Boolean result validacionCorreo();
+            if (!result)
+                return;*/
+
             if (vista.equals("editar")){
                 correo.cor_dominio_anterior = correo.cor_dominio;
                 correo.cor_usuario_anterior = correo.cor_usuario;
@@ -152,9 +163,13 @@ public class activity_detalles_cliente extends AppCompatActivity {
         finish();
 
     }
+/*
+    private boolean validacionNumero() {
+    }
 
-
-
+    private boolean validacionCorreo() {
+    }
+*/
 
     public void connect() {
 
