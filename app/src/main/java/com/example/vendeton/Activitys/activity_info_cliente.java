@@ -364,6 +364,7 @@ public class activity_info_cliente extends AppCompatActivity {
         miIntent.putExtra("con_identificacion", cliente.con_identificacion);
         miIntent.putExtra("tipo", "numero");
         miIntent.putExtra("vista", "agregar");
+        miIntent.putExtra("objeto", "nuevo");
         startActivity(miIntent);
     }
 
@@ -372,6 +373,7 @@ public class activity_info_cliente extends AppCompatActivity {
         miIntent.putExtra("con_identificacion", cliente.con_identificacion);
         miIntent.putExtra("tipo", "correo");
         miIntent.putExtra("vista", "agregar");
+        miIntent.putExtra("objeto", "nuevo");
         startActivity(miIntent);
     }
 

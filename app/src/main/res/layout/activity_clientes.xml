@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     android:orientation="vertical"
-    xmlns:CardView="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activitys.activity_detalles_cliente">
+    tools:context=".Activitys.activity_clientes">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="18dp"
+        android:layout_height="150dp"
         android:layout_weight="1"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/roslindale_condensed_medium_edu"
         android:paddingHorizontal="45dp"
         android:paddingVertical="20dp"
-        android:text="Catálogo de productos"
+        android:text="Clientes"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -25,16 +26,16 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingHorizontal="30dp"
-            android:theme="@style/TextInputEditText"
-            android:orientation="vertical" >
+            android:theme="@style/TextInputEditText">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecyclerViewClientes"
@@ -42,6 +43,5 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 
 </LinearLayout>

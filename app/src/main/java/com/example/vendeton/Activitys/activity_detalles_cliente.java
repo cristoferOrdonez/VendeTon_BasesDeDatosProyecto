@@ -97,19 +97,27 @@ public class activity_detalles_cliente extends AppCompatActivity {
                 numero.num_prefijo = Integer.parseInt(PrimerCampo.getText().toString());
                 numero.num_numero_anterior = numero.num_numero;
                 numero.num_numero = Long.parseLong(SegundoCampo.getText().toString());
+
                 if (objeto.equals("nuevo")){
-                    activity_info_cliente.numerosNuevos.add(numero);
+                    if (con_identificacion != -1)
+                        activity_info_cliente.numerosNuevos.add(numero);
                 }
                 else{
-                    activity_info_cliente.numerosActualizar.add(numero);
+                    if (con_identificacion != -1)
+                        activity_info_cliente.numerosActualizar.add(numero);
                 }
             } else{
                 numero = new NumeroTelefonico(0,con_identificacion,Integer.parseInt(PrimerCampo.getText().toString()),
                         Long.parseLong(SegundoCampo.getText().toString()),
                         Long.parseLong(PrimerCampo.getText().toString()+SegundoCampo.getText().toString()));
-                activity_info_cliente.numerosNuevos.add(numero);
+
+                if (con_identificacion != -1)
+                    activity_info_cliente.numerosNuevos.add(numero);
             }
-            activity_info_cliente.listaNumeros.add(numero);
+            if (con_identificacion != -1)
+                activity_info_cliente.listaNumeros.add(numero);
+            else
+                activity_crear_cliente.listaNumeros.add(numero);
         }
         else if (intencion.equals("correo")){
             if (vista.equals("editar")){
@@ -118,10 +126,12 @@ public class activity_detalles_cliente extends AppCompatActivity {
                 correo.cor_usuario = PrimerCampo.getText().toString();
                 correo.cor_dominio = SegundoCampo.getText().toString();
                 if (objeto.equals("nuevo")){
-                    activity_info_cliente.correosNuevos.add(correo);
+                    if (con_identificacion != -1)
+                        activity_info_cliente.correosNuevos.add(correo);
                 }
                 else{
-                    activity_info_cliente.correosActualizar.add(correo);
+                    if (con_identificacion != -1)
+                        activity_info_cliente.correosActualizar.add(correo);
                 }
             }
             else{
@@ -130,10 +140,13 @@ public class activity_detalles_cliente extends AppCompatActivity {
                         PrimerCampo.getText().toString()+SegundoCampo.getText().toString(),
                         0,
                         con_identificacion);
-                activity_info_cliente.correosNuevos.add(correo);
+                if (con_identificacion != -1)
+                    activity_info_cliente.correosNuevos.add(correo);
             }
-
-            activity_info_cliente.listaCorreos.add(correo);
+            if (con_identificacion != -1)
+                activity_info_cliente.listaCorreos.add(correo);
+            else
+                activity_crear_cliente.listaCorreos.add(correo);
         }
 
         finish();
