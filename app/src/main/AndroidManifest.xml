@@ -102,17 +102,23 @@
         <activity
             android:name=".Activitys.activity_crear_cliente"
             android:label = "Documentos Cliente"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".Activitys.activity_ver_info_detalle_vm"
+            android:label = "Documentos Cliente"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_clientes"
+            android:label = "Clientes"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activitys.activity_ver_info_detalle_vm"
-            android:label = "Documentos Cliente"
-            android:exported="false">
         </activity>
     </application>
 

@@ -128,7 +128,16 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
             //Intent intent = new Intent(this, Pomodoro.class);
             //startActivity(intent);
             finish();
-        } else {
+        } else if (item.getItemId() == R.id.Mercancia) {
+
+        } else if (item.getItemId() == R.id.Documentos) {
+
+        } else if (item.getItemId() == R.id.SuministroYEntrega) {
+
+        } else if (item.getItemId() == R.id.Reportes) {
+
+        }
+        else {
 
             Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
 
