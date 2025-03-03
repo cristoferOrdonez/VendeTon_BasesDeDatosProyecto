@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class ActivitySeleccionUsuario extends AppCompatActivity {
 
-    Button AccederAdmin, AccederClienteMayorista;
+    Button AccederAdmin, AccederClienteMayorista, AccederUsuarioPublico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class ActivitySeleccionUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_seleccion_usuario);
         AccederAdmin = findViewById(R.id.accederAdministrador);
         AccederClienteMayorista = findViewById(R.id.accederClienteMayorista);
+        AccederUsuarioPublico = findViewById(R.id.accederUusarioPublico);
 
         if(VendeTon.estadoUsuario == VendeTon.ADMINISTRADOR){
             Toast.makeText(this,"ADMINISTRADOR",Toast.LENGTH_SHORT);
@@ -39,14 +40,20 @@ public class ActivitySeleccionUsuario extends AppCompatActivity {
 
         AccederAdmin.setOnClickListener((View view) -> {
             Intent intent = new Intent(this, activity_iniciar_sesion_admin.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
 
         AccederClienteMayorista.setOnClickListener((View view) -> {
             Intent intent = new Intent(this, activity_iniciar_sesion_cliente.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
+
+        AccederUsuarioPublico.setOnClickListener((View view) -> {
+            VendeTon.username = "usuario_publico";
+            VendeTon.password = "";
+            Intent intent = new Intent(this, activity_informe_catalogo.class);
+            startActivity(intent);
+        });
+
     }
 }

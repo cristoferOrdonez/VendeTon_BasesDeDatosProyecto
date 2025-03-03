@@ -13,6 +13,7 @@ import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.db.DbSesion;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vendeton.R;
@@ -40,8 +41,6 @@ public class activity_iniciar_sesion_admin extends AppCompatActivity {
         ButtonAcceder.setOnClickListener((View view) -> {
             revisar(view);
         });
-
-
 
     }
 

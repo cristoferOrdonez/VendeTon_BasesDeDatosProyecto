@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
 import com.example.vendeton.db.DbSesion;
@@ -18,6 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.vendeton.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -37,39 +43,71 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
         ButtonAcceder = findViewById(R.id.botonAccederCuenta);
 
         ButtonAcceder.setOnClickListener((View view) -> {
-           revisar(view);
+            revisar(view);
         });
-
 
 
     }
 
-    public void revisar(View view){
-        VendeTon.username = "CelularRoot";
-        VendeTon.password = "CelularRoot";
-
+    public void revisar(View view) {
+        VendeTon.username = "farid";
+        VendeTon.password = "contrasena";
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            ConnectionClass con = new ConnectionClass();
-            Boolean comprobacion = con.comprobarconexion();
+            ConnectionClass connection = new ConnectionClass();
+            Boolean comprobacion = connection.comprobarconexion();
+            Connection con = null;
 
-            if (comprobacion){
-                long identificacion = Long.parseLong(EditTextIdentificacion.getText().toString());
-                DbSesion dbSesion= new DbSesion(this);
-                dbSesion.mantenerSesionIniciada(1, identificacion);
-                VendeTon.identificacion = identificacion;
-                runOnUiThread(() -> {
-                    Intent intent = new Intent(this, activity_info_cliente.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                });
-            }
-            else{
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "Conexión fallada",Toast.LENGTH_SHORT).show();
-                });
+            try {
+                if (comprobacion) {
+                    long identificacion = Long.parseLong(EditTextIdentificacion.getText().toString());
+                    String query = "call sp_existeContraparteCliente(?)";
+                    con = connection.CONN();
+
+
+                    try (PreparedStatement stmt = con.prepareStatement(query)) {
+                        stmt.setLong(1, identificacion);
+                        boolean hasResults = stmt.execute();
+                        //ResultSet rs = stmt.executeQuery();
+
+                        if (hasResults) {
+                            // Si existe algún resultado
+                            runOnUiThread(() ->
+                                    Toast.makeText(this, "Identificación errónea", Toast.LENGTH_SHORT).show()
+                            );
+                            return;
+                        }
+                    }
+
+                    DbSesion dbSesion = new DbSesion(this);
+                    dbSesion.mantenerSesionIniciada(1, identificacion);
+                    VendeTon.identificacion = identificacion;
+
+                    runOnUiThread(() -> {
+                        Intent intent = new Intent(this, activity_info_cliente.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    });
+
+                } else {
+                    runOnUiThread(() ->
+                            Toast.makeText(this, "Conexión fallida", Toast.LENGTH_SHORT).show()
+                    );
+                }
+            } catch (SQLException | NumberFormatException e) {
+                e.printStackTrace();
+                runOnUiThread(() ->
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
+            } finally {
+                try {
+                    if (con != null) con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
+        executorService.shutdown();
     }
 }

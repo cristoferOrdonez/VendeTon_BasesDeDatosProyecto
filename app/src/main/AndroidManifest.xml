@@ -55,7 +55,7 @@
 
         </activity>
         <activity
-            android:name=".Activitys.ActivitySeleccionUsuario"
+            android:name=".Activitys.activity_documentos_vm_cliente"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,10 +99,15 @@
 
     </activity>
     <activity
-        android:name=".Activitys.activity_documentos_vm_cliente"
+        android:name=".Activitys.ActivitySeleccionUsuario"
         android:label = "Documentos Cliente"
         android:exported="false">
     </activity>
+        <activity
+            android:name=".Activitys.activity_ver_info_detalle_vm"
+            android:label = "Documentos Cliente"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>
