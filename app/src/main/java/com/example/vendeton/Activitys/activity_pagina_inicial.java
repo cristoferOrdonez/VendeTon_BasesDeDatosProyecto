@@ -126,8 +126,8 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == R.id.Contrapartes){
-            //Intent intent = new Intent(this, Pomodoro.class);
-            //startActivity(intent);
+            Intent miIntent = new Intent(this, activity_contrapartes.class);
+            startActivity(miIntent);
             //finish();
         } else if (item.getItemId() == R.id.Mercancia){
             Intent miIntent = new Intent(this, ActivityMercancia.class);
@@ -141,8 +141,16 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
             Intent miIntent = new Intent(this, ActivityEntregadosYSuministrados.class);
             startActivity(miIntent);
             finish();
-        }
 
+        } else if (item.getItemId() == R.id.Reportes) {
+            Intent intent = new Intent(this, activity_reportes.class);
+            startActivity(intent);
+        }
+        else {
+
+            Toast.makeText(this, "AUN NO SE HA ESTABLECIDO EL CLICK LISTENER PARA ESTA OPCIÓN", Toast.LENGTH_SHORT).show();
+
+        }
 
         return false;
     }

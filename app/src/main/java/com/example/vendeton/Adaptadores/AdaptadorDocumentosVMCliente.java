@@ -11,34 +11,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Activitys.activity_info_cliente;
 import com.example.vendeton.Activitys.activity_ver_info_documento_vm;
 import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 
-import org.w3c.dom.Document;
-
 import java.util.ArrayList;
 
-public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumentosVM.EventoViewHolder>{
+public class AdaptadorDocumentosVMCliente extends RecyclerView.Adapter<AdaptadorDocumentosVMCliente.EventoViewHolder>{
 
     ArrayList<DocumentoVM> listaDocumentosVM;
 
-    public AdaptadorDocumentosVM(ArrayList<DocumentoVM> listaEventos) {
+    public AdaptadorDocumentosVMCliente(ArrayList<DocumentoVM> listaEventos) {
         this.listaDocumentosVM = listaEventos;
     }
 
     @NonNull
     @Override
-    public AdaptadorDocumentosVM.EventoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdaptadorDocumentosVMCliente.EventoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout_documentos_vm, parent, false);
 
-        return new AdaptadorDocumentosVM.EventoViewHolder(view);
+        return new AdaptadorDocumentosVMCliente.EventoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorDocumentosVM.EventoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdaptadorDocumentosVMCliente.EventoViewHolder holder, int position) {
 
         DocumentoVM documento = listaDocumentosVM.get(position);
 
@@ -46,7 +43,19 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
         holder.textViewFechaDocumento.setText("Fecha: " + documento.fecha);
         holder.textViewClienteDocumento.setText("Cliente: " + documento.con_nombre + " " + documento.con_apellido);
         holder.textViewTotalDocumento.setText("Total: " + documento.doc_total);
+        holder.botonEditarDocumento.setVisibility(View.GONE);
+        holder.botonEliminarDocumento.setVisibility(View.GONE);
 
+        holder.botonVerDocumento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent miIntent = new Intent(v.getContext(), activity_ver_info_documento_vm.class);
+                miIntent.putExtra("documento", documento);
+                v.getContext().startActivity(miIntent);
+                //((Activity)v.getContext()).finishAffinity();
+
+            }
+        });
 
     }
 

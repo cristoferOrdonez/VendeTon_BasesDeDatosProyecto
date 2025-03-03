@@ -60,7 +60,7 @@ public class ConnectionClass {
 
     public static ContraparteCliente ejecutarConsultaContraparte(Connection con, long id) {
         ContraparteCliente cliente = null;
-        String query = "call sp_ConsultarContraparte(?)";
+        String query = "call sp_consultarContraparte(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
             stmt.setLong(1, id);
