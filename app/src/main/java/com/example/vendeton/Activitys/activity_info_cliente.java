@@ -364,6 +364,7 @@ public class activity_info_cliente extends AppCompatActivity {
         miIntent.putExtra("con_identificacion", cliente.con_identificacion);
         miIntent.putExtra("tipo", "numero");
         miIntent.putExtra("vista", "agregar");
+        miIntent.putExtra("objeto", "nuevo");
         startActivity(miIntent);
     }
 
@@ -372,6 +373,7 @@ public class activity_info_cliente extends AppCompatActivity {
         miIntent.putExtra("con_identificacion", cliente.con_identificacion);
         miIntent.putExtra("tipo", "correo");
         miIntent.putExtra("vista", "agregar");
+        miIntent.putExtra("objeto", "nuevo");
         startActivity(miIntent);
     }
 
@@ -392,6 +394,9 @@ public class activity_info_cliente extends AppCompatActivity {
         RecyclerViewCorreoElectronico.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                if (agregarNumeroTelefono.getVisibility() == View.GONE)
+                    return false;
+
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 int position = rv.getChildAdapterPosition(child);
 
@@ -418,6 +423,9 @@ public class activity_info_cliente extends AppCompatActivity {
         RecyclerViewNumeroTelefono.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                if(agregarCorreoElectronico.getVisibility() == View.GONE)
+                    return false;
+
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 int position = rv.getChildAdapterPosition(child);
 
@@ -443,8 +451,6 @@ public class activity_info_cliente extends AppCompatActivity {
 
     public void mostrarDialogo(CorreoElectronico correoel){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Eliminar Evento");
-        //builder.setMessage("¿Está seguro de que desea eliminar este evento?");
 
         builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override
@@ -501,8 +507,6 @@ public class activity_info_cliente extends AppCompatActivity {
 
     public void mostrarDialogo(NumeroTelefonico numerote){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Eliminar Evento");
-        //builder.setMessage("¿Está seguro de que desea eliminar este evento?");
 
         builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override
@@ -519,7 +523,7 @@ public class activity_info_cliente extends AppCompatActivity {
                 if (!nuevo)
                     numerosEliminar.add(numerote);
 
-                listaCorreos.remove(numerote);
+                listaNumeros.remove(numerote);
 
                 adaptadornumero.notifyDataSetChanged();
 
@@ -564,8 +568,40 @@ public class activity_info_cliente extends AppCompatActivity {
         executorService.execute(() -> {
             try{
                 con = connectionClass.CONN();
+
+                    String query = "call sp_modificarContraparte(?,?,?,?,?,?,?);";
+
+                    try (CallableStatement stmt = con.prepareCall(query)) {
+                        stmt.setLong(1, cliente.con_identificacion);
+                        stmt.setString(2, NombreAcceder.getText().toString());
+                        stmt.setString(3, ApellidoAcceder.getText().toString());
+                        stmt.setString(4, CalleAcceder.getText().toString());
+                        stmt.setString(5, BarrioAcceder.getText().toString());
+                        stmt.setString(6, CiudadAcceder.getText().toString());
+                        stmt.setString(7, CalleAcceder.getText().toString()+","+BarrioAcceder.getText().toString()+","+CiudadAcceder.getText().toString());
+
+                        boolean hasResults = stmt.execute();
+
+                        if (hasResults) {
+                            try (ResultSet rs = stmt.getResultSet()) {
+                                if (rs.next()) {
+                                    String mensaje = rs.getString("Mensaje");
+                                    runOnUiThread(() ->
+                                            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            }
+                        }
+
+                    } catch (SQLException e) {
+                        Log.e("DB_ERROR", "Error", e);
+                        runOnUiThread(() ->
+                                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_LONG).show()
+                        );
+                    }
+
                 for (CorreoElectronico correos:correosNuevos) {
-                    String query = "call sp_insertarCorreoElectronico(?,?,?);";
+                    query = "call sp_insertarCorreoElectronico(?,?,?);";
 
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setLong(1, cliente.con_identificacion);
@@ -596,7 +632,7 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
                 for (CorreoElectronico correos:correosActualizar) {
-                    String query = "call sp_modificarCorreoElectronico(?,?,?,?);";
+                    query = "call sp_modificarCorreoElectronico(?,?,?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setString(1, correos.cor_usuario_anterior);
                         stmt.setString(2, correos.cor_dominio_anterior);
@@ -626,7 +662,7 @@ public class activity_info_cliente extends AppCompatActivity {
 
 
                 for (CorreoElectronico correos:correosEliminar) {
-                    String query = "call sp_eliminarCorreoElectronico(?,?);";
+                    query = "call sp_eliminarCorreoElectronico(?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setString(1, correos.cor_usuario);
                         stmt.setString(2, correos.cor_dominio);
@@ -653,7 +689,7 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
                 for (NumeroTelefonico numeros: numerosNuevos) {
-                    String query = "call  sp_insertarNumeroTelefonico(?,?,?);";
+                    query = "call  sp_insertarNumeroTelefonico(?,?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setLong(1, cliente.con_identificacion);
                         stmt.setInt(2, numeros.num_prefijo);
@@ -682,7 +718,7 @@ public class activity_info_cliente extends AppCompatActivity {
 
 
                 for ( NumeroTelefonico numeros:numerosActualizar) {
-                    String query = "call sp_modificarNumeroTelefonico(?,?,?,?);";
+                    query = "call sp_modificarNumeroTelefonico(?,?,?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setInt(1, numeros.num_prefijo_anterior);
                         stmt.setLong(2, numeros.num_numero_anterior);
@@ -711,7 +747,7 @@ public class activity_info_cliente extends AppCompatActivity {
                 }
 
                 for (NumeroTelefonico numeros: numerosNuevos) {
-                    String query = "call  sp_eliminarNumeroTelefonico(?,?);";
+                    query = "call  sp_eliminarNumeroTelefonico(?,?);";
                     try (CallableStatement stmt = con.prepareCall(query)) {
                         stmt.setInt(1, numeros.num_prefijo);
                         stmt.setLong(2, numeros.num_numero);

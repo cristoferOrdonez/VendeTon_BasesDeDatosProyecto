@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:CardView="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
-    tools:context=".Activitys.activity_ver_info_documento_vm">
+    tools:context=".Activitys.activity_info_cliente">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,71 +16,118 @@
         android:fontFamily="@font/roslindale_condensed_medium_edu"
         android:paddingHorizontal="45dp"
         android:paddingVertical="20dp"
-        android:text="Venta mayorista"
+        android:text="Detalle del producto"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:theme="@style/Theme.VendeTon.ActivityTitles"
         android:visibility="visible" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
-
+        android:layout_weight="10"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingHorizontal="30dp"
-            android:theme="@style/TextInputEditText">
+            android:theme="@style/TextInputEditText"
+            android:orientation="vertical" >
+
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutFechaDocumento"
+                android:id="@+id/layoutNombreProducto"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fecha"
+                android:hint="Nombre"
                 android:paddingVertical="15dp"
                 android:textColorHint="@color/gris_claro_hint"
                 app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
                 app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:startIconTint="@color/white">
+                app:endIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextFechaDocumento"
+                    android:id="@+id/editTextDetalleNombreProducto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:fontFamily="@font/jost_regular"
-                    android:inputType="none"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDetallePrecioUnitario"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio Unitario"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextDetallePrecioUnitario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@color/white" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutCliente"
+                android:id="@+id/layoutDetalleCantidad"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Cliente"
+                android:layout_height="wrap_content"
+                android:hint="Cantidad"
                 android:paddingVertical="15dp"
                 android:textColorHint="@color/gris_claro_hint"
-                CardView:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                CardView:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                CardView:endIconMode="clear_text"
-                CardView:endIconTint="@color/white"
-                CardView:startIconTint="@color/white">
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextCliente"
+                    android:id="@+id/editTextDetalleCantidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
+                    android:fontFamily="@font/jost_regular"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDetalleMonto"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Monto"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/gris_claro_hint"
+                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
+                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextDetalleMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/jost_regular"
                     android:inputType="number"
                     android:maxLines="1"
@@ -89,140 +135,19 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textViewProductos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/jost_regular"
-                android:text="Productos"
-                android:textColor="@color/white" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/CardViewProductosHeader"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="13dp"
-                android:layout_marginBottom="8dp"
-                CardView:cardBackgroundColor="@color/fondo_secundario"
-                CardView:cardCornerRadius="23dp"
-                CardView:cardElevation="6dp"
-                CardView:contentPadding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textViewProducto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roslindale_condensed_medium_edu"
-                        android:text="Producto"
-                        android:textAlignment="center"
-                        android:textColor="@color/gris_oscuro_box_background_color"
-                        android:textSize="20sp"
-                        android:textStyle="normal" />
-
-                    <TextView
-                        android:id="@+id/textViewCantidad"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roslindale_condensed_medium_edu"
-                        android:text="Cantidad"
-                        android:textAlignment="center"
-                        android:textColor="@color/gris_oscuro_box_background_color"
-                        android:textSize="20sp"
-                        android:textStyle="normal" />
-
-                    <TextView
-                        android:id="@+id/textViewMonto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roslindale_condensed_medium_edu"
-                        android:text="Monto"
-                        android:textAlignment="center"
-                        android:textColor="@color/gris_oscuro_box_background_color"
-                        android:textSize="20sp"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecyclerViewDetalles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutTotal"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Total"
-                android:paddingVertical="15dp"
-                android:textColorHint="@color/gris_claro_hint"
-                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:startIconTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTotal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/jost_regular"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutPropositoCompra"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Proposito de compra"
-                android:paddingVertical="15dp"
-                android:textColorHint="@color/gris_claro_hint"
-                app:boxBackgroundColor="@color/gris_oscuro_background_edit_text"
-                app:boxStrokeColor="@drawable/cambio_color_text_input_edit_text"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:startIconTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPropositoCompra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/jost_regular"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
-        android:id="@+id/layoutBotonInfoDocumentoVM"
+        android:id="@+id/layoutBotonDetalle"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/BotonInfoDocumentoVMAceptar"
+            android:id="@+id/BotonDetalleAceptar"
             style="@style/Theme.VendeTon.Botones"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -236,5 +161,6 @@
             android:textSize="8sp" />
 
     </LinearLayout>
+
 
 </LinearLayout>

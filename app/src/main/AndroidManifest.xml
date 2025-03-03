@@ -20,11 +20,12 @@
         <activity
             android:name=".Activitys.ActivityDocumentos"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activitys.ActivityReporteProductosPorBodega"
+            android:exported="false" >
+
         </activity>
         <activity
             android:name=".Activitys.ActivityMercancia"
@@ -34,9 +35,6 @@
             android:exported="false" />
         <activity
             android:name=".Activitys.ActivityProductos"
-            android:exported="false" />
-        <activity
-            android:name=".Activitys.ActivityReporteProductosPorBodega"
             android:exported="false" />
         <activity
             android:name=".Activitys.ActivityAportacionDeProductos"
@@ -70,7 +68,14 @@
             android:exported="false" />
         <activity
             android:name=".Activitys.ActivitySeleccionUsuario"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -80,6 +85,10 @@
         <activity
             android:name=".Activitys.activity_ver_info_documento_vm"
             android:label="Info documentoVM" />
+        <activity
+            android:name=".Activitys.activity_reportes"
+            android:label="Reportes" >
+        </activity>
         <activity
             android:name=".Activitys.activity_iniciar_sesion_admin"
             android:label="Iniciar sesion Admin" />
@@ -91,15 +100,77 @@
             android:label="Info Cliente" />
         <activity
             android:name=".Activitys.activity_pagina_inicial"
-            android:label="Pagina Inicial" />
+            android:label="Pagina Inicial" >
+        </activity>
+    <activity
+        android:name=".Activitys.activity_informe_catalogo"
+        android:label = "Informe Catalogo"
+        android:exported="false">
+
+    </activity>
+    <activity
+        android:name=".Activitys.activity_documentos_vm_cliente"
+        android:label = "Documentos Cliente"
+        android:exported="false">
+    </activity>
         <activity
-            android:name=".Activitys.activity_informe_catalogo"
-            android:exported="false"
-            android:label="Informe Catalogo" />
+            android:name=".Activitys.activity_crear_cliente"
+            android:label = "Documentos Cliente"
+            android:exported="false">
+
+        </activity>
         <activity
-            android:name=".Activitys.activity_documentos_vm_cliente"
-            android:exported="false"
-            android:label="Documentos Cliente" />
+            android:name=".Activitys.activity_ver_info_detalle_vm"
+            android:label = "Documentos Cliente"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_clientes"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_bodegas"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_clientes"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_empleados"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_materiales"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_productos"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_reportes_proveedores"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_otros_reportes"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Activitys.activity_contrapartes"
+            android:label = "Clientes"
+            android:exported="false">
+        </activity>
+
+
     </application>
 
 </manifest>
