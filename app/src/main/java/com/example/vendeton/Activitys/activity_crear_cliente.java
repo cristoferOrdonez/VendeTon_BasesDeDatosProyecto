@@ -63,8 +63,8 @@ public class activity_crear_cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_editar_info_cliente);
 
-        VendeTon.username = "farid";
-        VendeTon.password = "contrasena";
+        //VendeTon.username = "farid";
+        //VendeTon.password = "contrasena";
 
         IdentificacionAcceder = findViewById(R.id.editTextIdentificacion);
         NombreAcceder = findViewById(R.id.editTextNombre);

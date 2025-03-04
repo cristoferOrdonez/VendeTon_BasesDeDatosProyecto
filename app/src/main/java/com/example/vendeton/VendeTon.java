@@ -13,8 +13,8 @@ public class VendeTon extends Application {
 
     public static int estadoUsuario = SIN_REGISTRAR;
     public static ContraparteCliente usuario;
-    public static String username = "CelularRoot";
-    public static String password = "CelularRoot";
+    public static String username;
+    public static String password;
     public static long identificacion;
 
 
