@@ -151,6 +151,12 @@ public class activity_crear_cliente extends AppCompatActivity {
     }
 
     public void guardarInformacion(View view){
+        if (IdentificacionAcceder.getText().toString().isBlank() || NombreAcceder.getText().toString().isBlank()
+                || ApellidoAcceder.getText().toString().isBlank() || CiudadAcceder.getText().toString().isBlank()
+                || BarrioAcceder.getText().toString().isBlank() || CalleAcceder.getText().toString().isBlank()){
+            Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
         inserts();
         finish();
     }
