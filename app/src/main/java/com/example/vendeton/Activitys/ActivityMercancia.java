@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vendeton.R;
 import com.example.vendeton.VendeTon;
@@ -22,7 +18,7 @@ public class ActivityMercancia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mercancia);
 
-        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras = findViewById(R.id.imageButtonAtras20);
         botonProductos = findViewById(R.id.imageButtonProductos);
 
         botonAtras.setOnClickListener(i -> volverMenuPrincipal());

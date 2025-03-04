@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendeton.Adaptadores.AdaptadorBodegas;
-import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
 import com.example.vendeton.Entidades.Bodega;
-import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 import com.example.vendeton.db.ConnectionClass;
 
@@ -46,7 +44,7 @@ public class ActivityBodegas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bodegas);
         botonCrearBodega = findViewById(R.id.imageButtonCrearBodega);
-        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras = findViewById(R.id.imageButtonAtras20);
 
         botonAtras.setOnClickListener(I -> volverASuministroYEntrega());
 
@@ -66,19 +64,14 @@ public class ActivityBodegas extends AppCompatActivity {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-
                     try {
                         con = connectionClass.CONN();
-
                         String query = "CALL sp_consultarBodegasGeneral();";
                         PreparedStatement stmt = con.prepareStatement(query);
                         ResultSet rs = stmt.executeQuery();
                         Bodega bodega;
-
                         while (rs.next()) {
-
                             bodega = new Bodega(
-
                                     rs.getShort("bod_id"),
                                     rs.getString("bod_nombre"),
                                     rs.getInt("bod_alto"),
@@ -90,17 +83,11 @@ public class ActivityBodegas extends AppCompatActivity {
                                     rs.getString("bod_ciudad"),
                                     rs.getString("bod_direccion")
                             );
-
                             bodegas.add(bodega);
-
                         }
-
                         runOnUiThread(() -> {
-
                             adapter.notifyDataSetChanged();
-
                         });
-
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

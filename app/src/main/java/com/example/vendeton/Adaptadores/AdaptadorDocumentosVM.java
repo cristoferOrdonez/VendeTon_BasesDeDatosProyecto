@@ -48,6 +48,17 @@ public class AdaptadorDocumentosVM extends RecyclerView.Adapter<AdaptadorDocumen
         holder.textViewTotalDocumento.setText("Total: " + documento.doc_total);
 
 
+        holder.botonVerDocumento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent miIntent = new Intent(v.getContext(), activity_ver_info_documento_vm.class);
+                miIntent.putExtra("documento", documento);
+                v.getContext().startActivity(miIntent);
+                //((Activity)v.getContext()).finishAffinity();
+
+            }
+        });
+
     }
 
     @Override

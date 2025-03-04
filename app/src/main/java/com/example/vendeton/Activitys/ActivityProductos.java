@@ -6,18 +6,13 @@ import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Adaptadores.AdaptadorBodegas;
 import com.example.vendeton.Adaptadores.AdaptadorProductos;
-import com.example.vendeton.Entidades.Bodega;
 import com.example.vendeton.Entidades.Producto;
 import com.example.vendeton.R;
 import com.example.vendeton.db.ConnectionClass;
@@ -44,11 +39,14 @@ public class ActivityProductos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
-        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras = findViewById(R.id.imageButtonAtras20);
         botonAtras.setOnClickListener(i -> irAMercancia());
         botonCrearProducto = findViewById(R.id.imageButtonCrearBodega);
 
         botonCrearProducto.setOnClickListener(i -> registroDeBodegas());
+
+
+
 
         showFadeInAnimation(botonCrearProducto, 500);
 

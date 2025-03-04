@@ -41,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
+                android:layout_marginRight="10dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitXY"
                 card_view:srcCompat="@drawable/icono_revisar_documento" />

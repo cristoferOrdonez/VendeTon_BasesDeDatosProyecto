@@ -252,7 +252,7 @@ public class activity_info_cliente extends AppCompatActivity implements Navigati
                     runOnUiThread(() -> {
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(300);
                         } catch (InterruptedException e){
                             e.printStackTrace();
                         }
@@ -348,7 +348,7 @@ public class activity_info_cliente extends AppCompatActivity implements Navigati
             runOnUiThread(() -> {
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(300);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 }

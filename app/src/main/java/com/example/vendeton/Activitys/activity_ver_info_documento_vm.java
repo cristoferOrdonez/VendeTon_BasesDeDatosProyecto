@@ -2,11 +2,12 @@ package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-
+import 	android.icu.text.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -100,10 +101,12 @@ public class activity_ver_info_documento_vm extends AppCompatActivity {
             }
         });
 
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String fecha = df.format(documento.fecha);
 
         propositoDeCompraDocumentoVM.setText(documento.proposito_de_compra);
         totalDocumentoVM.setText(""+documento.doc_total);
-        fechaDocumentoVM.setText(""+documento.fecha);
+        fechaDocumentoVM.setText(""+fecha);
         clienteVM.setText(""+documento.con_nombre);
 
 
@@ -126,7 +129,7 @@ public class activity_ver_info_documento_vm extends AppCompatActivity {
         runOnUiThread(() -> {
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(600);
             } catch (InterruptedException e){
                 e.printStackTrace();
             }

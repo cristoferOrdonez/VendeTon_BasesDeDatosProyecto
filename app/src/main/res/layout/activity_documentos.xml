@@ -9,7 +9,7 @@
     tools:context=".Activitys.ActivityDocumentos">
 
     <ImageButton
-        android:id="@+id/imageButtonAtras"
+        android:id="@+id/imageButtonAtras20"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="12dp"
@@ -37,6 +37,7 @@
                 android:background="@color/fondo"
                 app:srcCompat="@drawable/ventas_mayoristas" />
             <TextView
+                android:id="@+id/TextViewVentasMayoristas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roslindaletext_medium_edu"
@@ -54,6 +55,7 @@
                 android:background="@color/fondo"
                 app:srcCompat="@drawable/ventas_minoristas" />
             <TextView
+                android:id="@+id/TextViewVentasMinoristas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roslindaletext_medium_edu"
@@ -72,6 +74,7 @@
                 android:background="@color/fondo"
                 app:srcCompat="@drawable/pago_a_empleados" />
             <TextView
+                android:id="@+id/TextViewPagosAEmpleados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roslindaletext_medium_edu"
@@ -90,6 +93,7 @@
                 android:background="@color/fondo"
                 app:srcCompat="@drawable/compra_materiales" />
             <TextView
+                android:id="@+id/TextViewComprasDeMateriales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roslindaletext_medium_edu"
@@ -108,6 +112,7 @@
                 android:background="@color/fondo"
                 app:srcCompat="@drawable/pago_arriendo" />
             <TextView
+                android:id="@+id/TextViewPagosDelArriendo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roslindaletext_medium_edu"
