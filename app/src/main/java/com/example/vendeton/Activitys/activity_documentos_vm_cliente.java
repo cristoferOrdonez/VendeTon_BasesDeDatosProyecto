@@ -72,9 +72,9 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         imageButtonCrearDocumentoVM = findViewById(R.id.imageButtonCrearDocumentoVM);
         imageButtonCrearDocumentoVM.setVisibility(View.GONE);
 
-        VendeTon.username = "farid";
-        VendeTon.password = "contrasena";
-        VendeTon.identificacion = 1001;
+        //VendeTon.username = "farid";
+       // VendeTon.password = "contrasena";
+        //VendeTon.identificacion = 1001;
         connectionClass = new ConnectionClass();
         connect();
 

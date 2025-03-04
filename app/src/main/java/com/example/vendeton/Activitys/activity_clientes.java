@@ -57,8 +57,8 @@ public class activity_clientes extends AppCompatActivity {
     }
 
     public void retrieve(){
-        VendeTon.username = "farid";
-        VendeTon.password = "contrasena";
+        //VendeTon.username = "farid";
+        //VendeTon.password = "contrasena";
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             try {
