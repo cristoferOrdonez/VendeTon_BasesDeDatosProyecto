@@ -124,6 +124,7 @@ public class DbSesion extends DbLocalVendeton{
             } else if (infoSesion.getTipoSesion() == VendeTon.USUARIO_PUBLICO){
                 VendeTon.username = "usuario_publico";
                 VendeTon.password = "";
+
             }
             else {
                 cerrarSesion();
