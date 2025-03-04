@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -137,6 +138,7 @@ public class activity_info_cliente extends AppCompatActivity implements Navigati
         actionBarDrawerToggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.Reportes).setTitle("Catálogo");
         navigationView.getMenu().findItem(R.id.Contrapartes).setVisible(false);
         navigationView.getMenu().findItem(R.id.Mercancia).setVisible(false);
         navigationView.getMenu().findItem(R.id.SuministroYEntrega).setVisible(false);

@@ -6,8 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     tools:context=".Activitys.ActivityCrearBodegas">
+
+    <ImageButton
+        android:id="@+id/imageButtonAtras13"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        CardView:layout_constraintStart_toStartOf="parent"
+        CardView:layout_constraintTop_toTopOf="parent"
+        CardView:srcCompat="@drawable/arrow_back_left_button" />
 
     <TextView
         android:layout_width="match_parent"
@@ -75,16 +86,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardViewMaterialesCompradosPorProveedor"
-                CardView:cardBackgroundColor="@color/fondo_secundario"
-                CardView:cardCornerRadius="23dp"
-                CardView:cardElevation="6dp"
-                CardView:contentPadding="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="13dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                CardView:cardBackgroundColor="@color/fondo_secundario"
+                CardView:cardCornerRadius="23dp"
+                CardView:cardElevation="6dp"
+                CardView:contentPadding="13dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,7 +124,6 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </LinearLayout>

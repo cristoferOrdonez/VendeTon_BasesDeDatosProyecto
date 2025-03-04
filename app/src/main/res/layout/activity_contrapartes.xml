@@ -8,6 +8,18 @@
     android:orientation="vertical"
     tools:context=".Activitys.activity_contrapartes">
 
+    <ImageButton
+        android:id="@+id/imageButtonAtras6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back_left_button" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

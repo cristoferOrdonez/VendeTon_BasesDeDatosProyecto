@@ -48,9 +48,18 @@ public class ActivityDocumentos extends AppCompatActivity {
 
     private void irADocumentosVM() {
 
-        Intent miIntent = new Intent(this, ActivityDocumentosVM.class);
-        startActivity(miIntent);
-        finish();
+        if (VendeTon.estadoUsuario == VendeTon.ADMINISTRADOR){
+            Intent miIntent = new Intent(this, ActivityDocumentosVM.class);
+            startActivity(miIntent);
+            finish();
+        }
+        else if (VendeTon.estadoUsuario == VendeTon.CLIENTE_MAYORISTA){
+            Intent miIntent = new Intent(this, activity_documentos_vm_cliente.class);
+            startActivity(miIntent);
+            finish();
+        }
+
+
 
     }
 

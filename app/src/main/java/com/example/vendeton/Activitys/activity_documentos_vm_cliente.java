@@ -1,6 +1,7 @@
 package com.example.vendeton.Activitys;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
 import com.example.vendeton.Adaptadores.AdaptadorDocumentosVMCliente;
 import com.example.vendeton.Entidades.DocumentoVM;
+import com.example.vendeton.MainActivity;
 import com.example.vendeton.R;
 import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
@@ -39,7 +41,7 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
 
     AdaptadorDocumentosVMCliente adapter;
 
-    ImageButton botonVerDocumentoVM, imageButtonEditar, imageButtonEliminar, imageButtonCrearDocumentoVM;
+    ImageButton botonVerDocumentoVM, imageButtonEditar, imageButtonEliminar, imageButtonCrearDocumentoVM, imageButtonAtras;
 
     MaterialAutoCompleteTextView spinnerClientes;
 
@@ -54,6 +56,15 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         listaDocumentos = findViewById(R.id.RecyclerViewDocumntosVM);
         documentos = new ArrayList<>();
 
+        imageButtonAtras = findViewById(R.id.imageButtonAtras);
+        imageButtonAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent miIntent = new Intent(activity_documentos_vm_cliente.this, activity_info_cliente.class);
+                startActivity(miIntent);
+                finishAffinity();
+            }
+        });
 
         listaDocumentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         adapter = new AdaptadorDocumentosVMCliente(documentos);
