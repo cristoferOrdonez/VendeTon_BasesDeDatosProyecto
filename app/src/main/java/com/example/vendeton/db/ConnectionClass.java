@@ -31,7 +31,7 @@ public class ConnectionClass {
             conn = DriverManager.getConnection(connectionString, VendeTon.username, VendeTon.password);
 
         }catch (Exception e){
-            Log.e("ERRO", Objects.requireNonNull(e.getMessage()));
+            Log.e("ERROR", Objects.requireNonNull(e.getMessage()));
         }
 
         return conn;

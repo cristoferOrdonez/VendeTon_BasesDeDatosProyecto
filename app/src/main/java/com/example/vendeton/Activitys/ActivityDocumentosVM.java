@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,13 +17,11 @@ import com.example.vendeton.Entidades.DocumentoVM;
 import com.example.vendeton.R;
 import com.example.vendeton.db.ConnectionClass;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,7 +39,7 @@ public class ActivityDocumentosVM extends AppCompatActivity {
 
     AdaptadorDocumentosVM adapter;
 
-    ImageButton botonCrearDocumentoVM, botonAtras;
+    ImageButton botonCrearDocumentoVM, botonAtras, botonRevisarDocumento;
 
     MaterialAutoCompleteTextView spinnerClientes;
 
@@ -53,7 +50,7 @@ public class ActivityDocumentosVM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos_vm);
 
-        botonAtras = findViewById(R.id.imageButtonAtras);
+        botonAtras = findViewById(R.id.imageButtonAtras20);
         botonAtras.setOnClickListener(i -> volverADocumentos());
 
         botonCrearDocumentoVM = findViewById(R.id.imageButtonCrearDocumentoVM);

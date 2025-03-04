@@ -76,8 +76,6 @@ public class ActivityCrearBodegas extends AppCompatActivity {
 
                         String query = "CALL sp_insertarBodega(?,?,?,?,?,?,?);";
                         CallableStatement stmt = con.prepareCall(query);
-
-
                         stmt.setString(1, editTextNombre.getText().toString());
                         stmt.setInt(2, Integer.parseInt(editTextAlto.getText().toString()));
                         stmt.setInt(3, Integer.parseInt(editTextAncho.getText().toString()));

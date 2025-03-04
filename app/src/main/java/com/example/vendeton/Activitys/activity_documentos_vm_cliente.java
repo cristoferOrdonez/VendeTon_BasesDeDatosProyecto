@@ -11,10 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendeton.Adaptadores.AdaptadorDocumentosVM;
 import com.example.vendeton.Adaptadores.AdaptadorDocumentosVMCliente;
 import com.example.vendeton.Entidades.DocumentoVM;
-import com.example.vendeton.MainActivity;
 import com.example.vendeton.R;
 import com.example.vendeton.VendeTon;
 import com.example.vendeton.db.ConnectionClass;
@@ -56,7 +54,7 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         listaDocumentos = findViewById(R.id.RecyclerViewDocumntosVM);
         documentos = new ArrayList<>();
 
-        imageButtonAtras = findViewById(R.id.imageButtonAtras);
+        imageButtonAtras = findViewById(R.id.imageButtonAtras20);
         imageButtonAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +80,7 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
         executorService.execute(() -> {
 
                     try {
-
                         con = connectionClass.CONN();
-
                         String query = "CALL sp_mostrarDocumentoVentaMayoristaId(?);";
                         PreparedStatement stmt = con.prepareStatement(query);
                         stmt.setLong(1, VendeTon.identificacion);
@@ -106,9 +102,7 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
                                     rs.getString("con_ciudad"),
                                     rs.getString("con_direccion")
                             );
-
                             documentos.add(documento);
-
                         }
 
                         runOnUiThread(() -> {

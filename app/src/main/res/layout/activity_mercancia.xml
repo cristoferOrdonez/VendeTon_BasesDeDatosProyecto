@@ -9,7 +9,7 @@
     tools:context=".Activitys.ActivityMercancia">
 
     <ImageButton
-        android:id="@+id/imageButtonAtras"
+        android:id="@+id/imageButtonAtras20"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="12dp"

@@ -88,8 +88,8 @@ public class DbSesion extends DbLocalVendeton{
 
             if (verificarSesionActiva()) {
                 if (infoSesion.getTipoSesion() == VendeTon.CLIENTE_MAYORISTA) {
-                    VendeTon.username = "farid";
-                    VendeTon.password = "contrasena";
+                    VendeTon.username = "cliente_mayorista";
+                    VendeTon.password = "clientemayorista";
 
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
                     executorService.execute(() -> {
@@ -117,8 +117,8 @@ public class DbSesion extends DbLocalVendeton{
                     // ADMINISTRADOR
                     VendeTon.usuario = null;        // NO HAY INFORMACION PARA GUARDAR
                     VendeTon.estadoUsuario = VendeTon.ADMINISTRADOR;
-                    VendeTon.username = "farid";
-                    VendeTon.password = "contrasena";
+                    VendeTon.username = "administrador";
+                    VendeTon.password = "administrador";
                 }
 
             } else if (infoSesion.getTipoSesion() == VendeTon.USUARIO_PUBLICO){

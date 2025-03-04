@@ -50,8 +50,8 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
     }
 
     public void revisar(View view) {
-        VendeTon.username = "farid";
-        VendeTon.password = "contrasena";
+        VendeTon.username = "cliente_mayorista";
+        VendeTon.password = "clientemayorista";
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
@@ -82,6 +82,7 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
 
                     DbSesion dbSesion = new DbSesion(this);
                     dbSesion.mantenerSesionIniciada(VendeTon.CLIENTE_MAYORISTA, identificacion);
+                    VendeTon.estadoUsuario = VendeTon.CLIENTE_MAYORISTA;
                     VendeTon.identificacion = identificacion;
 
                     runOnUiThread(() -> {

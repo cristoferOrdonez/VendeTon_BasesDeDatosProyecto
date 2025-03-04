@@ -69,6 +69,14 @@ public class activity_reportes extends AppCompatActivity {
             startActivity(miIntent);
         });
 
+        if (VendeTon.estadoUsuario != VendeTon.ADMINISTRADOR){
+            layoutClientes.setVisibility(LinearLayout.GONE);
+            layoutEmpleados.setVisibility(LinearLayout.GONE);
+            layoutProveedores.setVisibility(LinearLayout.GONE);
+            layoutBodegas.setVisibility(LinearLayout.GONE);
+            layoutMateriales.setVisibility(LinearLayout.GONE);
+            layoutOtrosReportes.setVisibility(LinearLayout.GONE);
+        }
 
 
     }

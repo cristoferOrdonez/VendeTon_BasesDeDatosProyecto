@@ -1,5 +1,6 @@
 package com.example.vendeton.Activitys;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,8 +40,9 @@ public class ActivityReporteProductosPorBodega extends AppCompatActivity {
     Connection con;
     String str;
 
-    ImageButton botonCrearAporteDeProducto;
+    ImageButton botonCrearAporteDeProducto, botonAtras;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class ActivityReporteProductosPorBodega extends AppCompatActivity {
         botonCrearAporteDeProducto = findViewById(R.id.imageButtonCrearAporteDeProductos);
 
         botonCrearAporteDeProducto.setOnClickListener(i -> registroDeProductos());
+        botonAtras = findViewById(R.id.imageButtonAtras20);
+        botonAtras.setOnClickListener(i -> volver());
 
         showFadeInAnimation(botonCrearAporteDeProducto, 500);
 
@@ -103,6 +107,12 @@ public class ActivityReporteProductosPorBodega extends AppCompatActivity {
         );
 
 
+    }
+
+    private void volver() {
+        Intent miIntent = new Intent(this, activity_reportes_bodegas.class);
+        startActivity(miIntent);
+        finish();
     }
 
     private void registroDeProductos() {

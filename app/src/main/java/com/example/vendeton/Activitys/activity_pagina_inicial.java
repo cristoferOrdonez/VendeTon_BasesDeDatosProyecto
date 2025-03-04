@@ -92,7 +92,7 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
                     runOnUiThread(() -> {
 
                         try {
-                            Thread.sleep(800);
+                            Thread.sleep(300);
 
                         } catch (InterruptedException e){
                             e.printStackTrace();
@@ -181,7 +181,7 @@ public class activity_pagina_inicial extends AppCompatActivity implements Naviga
                     runOnUiThread(() -> {
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(300);
                         } catch (InterruptedException e){
                             e.printStackTrace();
                         }
