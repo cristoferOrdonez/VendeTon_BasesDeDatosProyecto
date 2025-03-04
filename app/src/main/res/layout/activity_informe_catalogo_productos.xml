@@ -8,6 +8,18 @@
     xmlns:CardView="http://schemas.android.com/apk/res-auto"
     tools:context=".Activitys.activity_detalles_cliente">
 
+    <ImageButton
+        android:id="@+id/imageButtonAtras5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        CardView:layout_constraintStart_toStartOf="parent"
+        CardView:layout_constraintTop_toTopOf="parent"
+        CardView:srcCompat="@drawable/arrow_back_left_button" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="18dp"

@@ -1,6 +1,7 @@
 package com.example.vendeton.Activitys;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class activity_informe_catalogo extends AppCompatActivity {
+    ImageButton imageButtonAtras;
     RecyclerView RecyclerViewCatalogo;
     Connection con;
     List<CatalogoProducto> listaCatalogo;
@@ -30,6 +32,9 @@ public class activity_informe_catalogo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informe_catalogo_productos);
+
+        imageButtonAtras = findViewById(R.id.imageButtonAtras5);
+        imageButtonAtras.setOnClickListener(v -> irAtras());
 
         RecyclerViewCatalogo = findViewById(R.id.RecyclerViewClientes);
         RecyclerViewCatalogo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
@@ -75,5 +80,9 @@ public class activity_informe_catalogo extends AppCompatActivity {
             });
         });
 
+    }
+
+    private void irAtras() {
+        finish();
     }
 }
