@@ -50,8 +50,10 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
     }
 
     public void revisar(View view) {
-        VendeTon.username = "cliente_mayorista";
-        VendeTon.password = "clientemayorista";
+        //VendeTon.username = "cliente_mayorista";
+        //VendeTon.password = "clientemayorista";
+        VendeTon.username = "administrador";
+        VendeTon.password = "administrador";
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
@@ -63,9 +65,9 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
                 if (comprobacion) {
                     long identificacion = Long.parseLong(EditTextIdentificacion.getText().toString());
                     String query = "call sp_existeContraparteCliente(?)";
-                    con = connection.CONN();
+                    //con = connection.CONN();
 
-
+/*
                     try (PreparedStatement stmt = con.prepareStatement(query)) {
                         stmt.setLong(1, identificacion);
                         boolean hasResults = stmt.execute();
@@ -79,6 +81,8 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
                             return;
                         }
                     }
+
+ */
 
                     DbSesion dbSesion = new DbSesion(this);
                     dbSesion.mantenerSesionIniciada(VendeTon.CLIENTE_MAYORISTA, identificacion);
@@ -96,7 +100,7 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
                             Toast.makeText(this, "Conexión fallida", Toast.LENGTH_SHORT).show()
                     );
                 }
-            } catch (SQLException | NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
                 runOnUiThread(() ->
                         Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()

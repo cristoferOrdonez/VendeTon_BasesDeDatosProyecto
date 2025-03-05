@@ -16,7 +16,7 @@ public class ConnectionClass {
 
     protected static String db = "ventas";
 
-    protected static String ip = "192.168.1.4";
+    public static String ip = "192.168.10.28";
 
     protected static String port = "3306";
 

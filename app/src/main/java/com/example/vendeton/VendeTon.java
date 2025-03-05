@@ -1,7 +1,13 @@
 package com.example.vendeton;
 
+import android.app.AlertDialog;
 import android.app.Application;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
+import android.app.Activity;
 
+import com.example.vendeton.Activitys.ActivityCrearDocumentoVM;
 import com.example.vendeton.Entidades.ContraparteCliente;
 import com.example.vendeton.db.DbSesion;
 
@@ -21,6 +27,7 @@ public class VendeTon extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         usuario = null;
         username = null;
         password = null;
