@@ -173,7 +173,7 @@ public class activity_info_cliente extends AppCompatActivity implements Navigati
 
 
     private void ejecutarConsultaCorreos(Connection con, long id) {
-        String query = "call consultarCorreosElectronicos(?)";
+        String query = "call sp_consultarCorreosElectronicos(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
             stmt.setLong(1, id);
@@ -196,7 +196,7 @@ public class activity_info_cliente extends AppCompatActivity implements Navigati
 
 
     private void ejecutarConsultaNumeros(Connection con, long id) {
-        String query = "call consultarNumerosTelefonicos(?)";
+        String query = "call sp_consultarNumerosTelefonicos(?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
             stmt.setLong(1, id);

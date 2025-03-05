@@ -88,8 +88,10 @@ public class DbSesion extends DbLocalVendeton{
 
             if (verificarSesionActiva()) {
                 if (infoSesion.getTipoSesion() == VendeTon.CLIENTE_MAYORISTA) {
-                    VendeTon.username = "cliente_mayorista";
-                    VendeTon.password = "clientemayorista";
+                    //VendeTon.username = "cliente_mayorista";
+                    //VendeTon.password = "clientemayorista";
+                    VendeTon.password = "administrador";
+                    VendeTon.username = "administrador";
 
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
                     executorService.execute(() -> {
