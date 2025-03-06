@@ -31,7 +31,7 @@ public class ActivitySeleccionUsuario extends AppCompatActivity {
         builder.setMessage("Indique la dirección ip del servidor");
         builder.setView(dirIp);
 
-        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -40,7 +40,7 @@ public class ActivitySeleccionUsuario extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
