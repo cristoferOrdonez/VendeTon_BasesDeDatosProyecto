@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -112,7 +113,9 @@ public class activity_documentos_vm_cliente extends AppCompatActivity {
                         });
 
                     } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "La contraparte no tiene documentos.", Toast.LENGTH_SHORT).show();
+                        });
                     }
 
                 }

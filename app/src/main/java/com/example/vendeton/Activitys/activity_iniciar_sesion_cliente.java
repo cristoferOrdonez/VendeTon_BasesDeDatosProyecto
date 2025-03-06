@@ -24,6 +24,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,6 +57,7 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
         //VendeTon.password = "clientemayorista";
         VendeTon.username = "administrador";
         VendeTon.password = "administrador";
+        List<Integer> idclientes = new ArrayList<>();
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
@@ -64,25 +68,35 @@ public class activity_iniciar_sesion_cliente extends AppCompatActivity {
             try {
                 if (comprobacion) {
                     long identificacion = Long.parseLong(EditTextIdentificacion.getText().toString());
-                    String query = "call sp_existeContraparteCliente(?)";
-                    //con = connection.CONN();
-
-/*
+                    String query = "call sp_consultarClientes()";
+                    con = connection.CONN();
                     try (PreparedStatement stmt = con.prepareStatement(query)) {
-                        stmt.setLong(1, identificacion);
-                        boolean hasResults = stmt.execute();
-                        //ResultSet rs = stmt.executeQuery();
+                        //boolean hasResults = stmt.execute();
+                        ResultSet rs = stmt.executeQuery();
 
-                        if (hasResults) {
-                            // Si existe algún resultado
+                        while(rs.next()){
+                            idclientes.add(rs.getInt("Identificacion"));
+                        }
+
+                        Boolean existe = false;
+                        for (Integer idcliente : idclientes){
+                            if (idcliente == identificacion){
+                                existe = true;
+                                break;
+                            }
+                        }
+
+                        if (!existe){
                             runOnUiThread(() ->
-                                    Toast.makeText(this, "Identificación errónea", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "El cliente no existe", Toast.LENGTH_SHORT).show()
                             );
                             return;
                         }
-                    }
 
- */
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
 
                     DbSesion dbSesion = new DbSesion(this);
                     dbSesion.mantenerSesionIniciada(VendeTon.CLIENTE_MAYORISTA, identificacion);

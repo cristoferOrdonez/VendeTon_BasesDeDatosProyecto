@@ -22,7 +22,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -85,6 +89,8 @@ public class ActivityCrearProducto extends AppCompatActivity {
     }
 
     public void insertarProducto(){
+        Map<Integer, String> tiposdeproducto = new HashMap<>();
+        final int[] tip_id = new int[1];
 
         connectionClass = new ConnectionClass();
         connect();
@@ -95,7 +101,39 @@ public class ActivityCrearProducto extends AppCompatActivity {
                     try {
                         con = connectionClass.CONN();
 
-                        String query = "CALL sp_insertarMercanciaProducto(?,?,?,?,?,?,?,?,?,?,?);";
+
+                        String query = "CALL sp_consultarTipoDeProductoGeneral();";
+
+                        try (PreparedStatement stmt = con.prepareStatement(query)) {
+                            //boolean hasResults = stmt.execute();
+                            ResultSet rs = stmt.executeQuery();
+
+                            while(rs.next()){
+                                tiposdeproducto.put(rs.getInt("tip_id"),rs.getString("tip_nombre"));
+                            }
+
+                            Boolean existe = false;
+                            for (Map.Entry <Integer, String> entry : tiposdeproducto.entrySet()){
+                                if (entry.getValue().equals(spinnerTiposProducto.getText().toString())){
+                                    existe = true;
+                                    tip_id[0] = entry.getKey();
+                                    break;
+                                }
+                            }
+
+                            if (!existe){
+                                runOnUiThread(() ->
+                                        Toast.makeText(this, "El tipo de producto no existe", Toast.LENGTH_SHORT).show()
+                                );
+                                return;
+                            }
+
+
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        query = "CALL sp_insertarMercanciaProducto(?,?,?,?,?,?,?,?,?,?,?);";
                         CallableStatement stmt = con.prepareCall(query);
 
                         short ancho, largo, alto;
@@ -151,7 +189,7 @@ public class ActivityCrearProducto extends AppCompatActivity {
                         stmt.setFloat(7, precioMinorista);
                         stmt.setByte(8, cantidadMaxima);
                         stmt.setFloat(9, comision);
-                        stmt.setString(10, spinnerTiposProducto.getText().toString());
+                        stmt.setInt(10, tip_id[0]);
                         stmt.setString(11, editTextDescripcion.getText().toString());
 
 
@@ -183,10 +221,7 @@ public class ActivityCrearProducto extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    runOnUiThread(() -> {
 
-
-                    });
                 }
         );
 
