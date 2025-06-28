@@ -6,17 +6,17 @@
 
 ## ✨ Características Destacadas
 
-* **Gestión Documental Completa:** Creación, edición, visualización y seguimiento detallado de documentos de venta.
+* **Gestión Documental Completa:** creación, edición, visualización y seguimiento detallado de documentos de venta.
 * **Administración de Productos Avanzada:**
     * Registro exhaustivo de productos, incluyendo control de cantidades.
     * Definición de dimensiones y origen del producto.
     * Soporte para precios diferenciados (mayorista y minorista) para una flexibilidad comercial óptima.
-* **Control de Clientes Mayoristas:** Gestión centralizada de información de contacto y un historial de compras detallado para cada cliente.
-* **Interfaz de Usuario Intuitiva (UI/UX):** Desarrollada con un diseño moderno y amigable, utilizando componentes Material Design y RecyclerView para una experiencia de usuario fluida.
-* **Persistencia de Datos Robusta:** Integración eficiente con bases de datos MySQL, utilizando procedimientos almacenados para garantizar la integridad y el rendimiento de los datos.
-* **Seguridad y Control de Acceso:** Implementación de un sistema básico de roles (usuario público, cliente mayorista, administrador) para una gestión de permisos efectiva.
-* **Arquitectura Modular y Escalable:** Separación clara entre la capa de presentación (UI), lógica de negocio (dominio) y persistencia de datos, facilitando el mantenimiento y la futura expansión.
-* **Código de Calidad Profesional:** Adherencia a buenas prácticas de programación, claridad en el código y comentarios exhaustivos, lo que lo convierte en un excelente activo para cualquier portafolio.
+* **Control de Clientes Mayoristas:** gestión centralizada de información de contacto y un historial de compras detallado para cada cliente.
+* **Interfaz de Usuario Intuitiva (UI/UX):** desarrollada con un diseño moderno y amigable, utilizando componentes Material Design y RecyclerView para una experiencia de usuario fluida.
+* **Persistencia de Datos Robusta:** integración eficiente con bases de datos MySQL, utilizando procedimientos almacenados para garantizar la integridad y el rendimiento de los datos.
+* **Seguridad y Control de Acceso:** implementación de un sistema básico de roles (usuario público, cliente mayorista, administrador) para una gestión de permisos efectiva.
+* **Arquitectura Modular y Escalable:** separación clara entre la capa de presentación (UI), lógica de negocio (dominio) y persistencia de datos, facilitando el mantenimiento y la futura expansión.
+* **Código de Calidad Profesional:** adherencia a buenas prácticas de programación, claridad en el código y comentarios exhaustivos, lo que lo convierte en un excelente activo para cualquier portafolio.
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -40,10 +40,10 @@
 
 Asegúrate de tener instalados los siguientes componentes:
 
-* **Java Development Kit (JDK):** Versión 8 o superior.
-* **Android Studio:** Entorno de desarrollo integrado para Android.
-* **Servidor MySQL:** Con una instancia de base de datos configurada y los procedimientos almacenados necesarios importados.
-* **Conectividad de Base de Datos:** Parámetros de conexión configurados en `gradle.properties` o en las clases de conexión de la aplicación.
+* **Java Development Kit (JDK):** versión 8 o superior.
+* **Android Studio:** entorno de desarrollo integrado para Android.
+* **Servidor MySQL:** con una instancia de base de datos configurada y los procedimientos almacenados necesarios importados.
+* **Conectividad de Base de Datos:** parámetros de conexión configurados en `gradle.properties` o en las clases de conexión de la aplicación.
 
 ### Pasos para Compilar y Ejecutar
 
@@ -53,16 +53,16 @@ Asegúrate de tener instalados los siguientes componentes:
     ```
 
 2.  **Abrir en Android Studio:**
-    Importa el proyecto `VendeTon_BasesDeDatosProyecto` en Android Studio.
+    importa el proyecto `VendeTon-Gestor-Ventas-Mayoristas` en Android Studio.
 
 3.  **Configurar Conexión a la Base de Datos:**
-    Edita los parámetros de conexión (usuario, contraseña, host, puerto) en el archivo `gradle.properties` o directamente en las clases de conexión de la aplicación (`app/src/main/java/com/example/vendeton/`).
+    edita los parámetros de conexión (usuario, contraseña, host, puerto) en el archivo `gradle.properties` o directamente en las clases de conexión de la aplicación (`app/src/main/java/com/example/vendeton/`).
 
 4.  **Sincronizar y Compilar:**
-    Utiliza la opción "Sync Project with Gradle Files" en Android Studio para resolver las dependencias y compilar el proyecto.
+    utiliza la opción "Sync Project with Gradle Files" en Android Studio para resolver las dependencias y compilar el proyecto.
 
 5.  **Ejecutar la Aplicación:**
-    Despliega la aplicación en un emulador de Android o en un dispositivo físico conectado.
+    despliega la aplicación en un emulador de Android o en un dispositivo físico conectado.
 
 ### Notas Importantes
 
