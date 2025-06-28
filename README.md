@@ -29,10 +29,10 @@
 * **Patrón de Arquitectura:** Modelo-Vista-Controlador (MVC)
 
 ## 📸 Capturas de Pantalla
-![KJK](https://github.com/user-attachments/assets/c64a03a9-e4df-4aa4-bb2b-3673aaf30d82)
-![Imagen de WhatsApp 2025-03-03 a las 23 25 40_35d0ac5a](https://github.com/user-attachments/assets/14eab122-2364-4944-9e9f-8ad0f540bc21)
 
-
+<img src="https://github.com/user-attachments/assets/34d7c3ee-6a95-4ee6-a0b1-1eab2f338b4a" width="20.8%">
+<img src="https://github.com/user-attachments/assets/c64a03a9-e4df-4aa4-bb2b-3673aaf30d82" width="30%">
+<img src="https://github.com/user-attachments/assets/14eab122-2364-4944-9e9f-8ad0f540bc21" width="30%">
 
 ## ⚙️ Instalación y Ejecución
 
