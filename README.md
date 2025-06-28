@@ -49,7 +49,7 @@ Asegúrate de tener instalados los siguientes componentes:
 
 1.  **Clonar el Repositorio:**
     ```sh
-    git clone https://github.com/cristoferOrdonez/VendeTon_BasesDeDatosProyecto.git
+    git clone https://github.com/cristoferOrdonez/VendeTon-Gestor-Ventas-Mayoristas.git
     ```
 
 2.  **Abrir en Android Studio:**
