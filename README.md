@@ -29,9 +29,10 @@
 * **Patrón de Arquitectura:** Modelo-Vista-Controlador (MVC)
 
 ## 📸 Capturas de Pantalla
+![KJK](https://github.com/user-attachments/assets/c64a03a9-e4df-4aa4-bb2b-3673aaf30d82)
+![Imagen de WhatsApp 2025-03-03 a las 23 25 40_35d0ac5a](https://github.com/user-attachments/assets/14eab122-2364-4944-9e9f-8ad0f540bc21)
 
-* (Próximamente: ¡Inserta aquí tus mejores capturas de pantalla de la aplicación en acción!)
-* (Considera añadir GIFs o videos cortos para una demostración más dinámica.)
+
 
 ## ⚙️ Instalación y Ejecución
 
@@ -48,7 +49,7 @@ Asegúrate de tener instalados los siguientes componentes:
 
 1.  **Clonar el Repositorio:**
     ```sh
-    git clone [https://github.com/cristoferOrdonez/VendeTon_BasesDeDatosProyecto.git](https://github.com/cristoferOrdonez/VendeTon_BasesDeDatosProyecto.git)
+    git clone https://github.com/cristoferOrdonez/VendeTon_BasesDeDatosProyecto.git
     ```
 
 2.  **Abrir en Android Studio:**
@@ -70,7 +71,7 @@ Asegúrate de tener instalados los siguientes componentes:
 * Para incorporar nuevas características, se recomienda seguir la estructura modular existente, creando nuevas actividades y entidades según sea necesario.
 
 ## 📂 Estructura del Proyecto
-.
+ ```
 ├── app/
 │   ├── src/
 │   │   └── main/
@@ -82,21 +83,18 @@ Asegúrate de tener instalados los siguientes componentes:
 ├── gradlew                                  # Script de shell para Gradle Wrapper (Linux/macOS)
 ├── gradlew.bat                              # Script de batch para Gradle Wrapper (Windows)
 └── .gitignore                               # Archivos y directorios a ignorar por Git
-
+ ```
 ## 👥 Créditos y Autores
 
 Desarrollado por:
-* **Cristofer Ordóñez**
-* Y colaboradores (¡Menciona a cualquier otro colaborador aquí!)
-
-¡Las contribuciones son bienvenidas! Si tienes sugerencias, mejoras o encuentras algún problema, no dudes en abrir un *issue* o enviar un *pull request*.
+| Nombre           | GitHub   | Correo                  |
+| ---------------- | -------- |-------------------------|
+| Deivid Farid Ardila Herrera | faridardila | deardilah@unal.edu.co |
+| Cristofer Damián Camilo Ordoñez Osa | cristoferOrdonez| crordonezo@unal.edu.co |
+| Kevin Alexis Bermudez Caicedo |  | kbermudezc@unal.edu.co |
 
 ## ⚖️ Licencia
 
 Este proyecto se distribuye bajo una licencia de **uso académico y demostrativo**. Para cualquier fin comercial, por favor contacta directamente al autor para discutir las condiciones de uso.
 
----
 
-**¿Interesado en una demostración en video, presentaciones técnicas o documentación adicional? ¡No dudes en contactarme!**
-
----
