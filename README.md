@@ -89,8 +89,8 @@ Asegúrate de tener instalados los siguientes componentes:
 Desarrollado por:
 | Nombre           | GitHub   | Correo                  |
 | ---------------- | -------- |-------------------------|
-| Deivid Farid Ardila Herrera | faridardila | deardilah@unal.edu.co |
-| Cristofer Damián Camilo Ordoñez Osa | cristoferOrdonez| crordonezo@unal.edu.co |
+| Deivid Farid Ardila Herrera | faridardila | [@faridardila](https://github.com/faridardila) |
+| Cristofer Damián Camilo Ordoñez Osa |  [@cristoferOrdonez](https://github.com/cristoferOrdonez) | crordonezo@unal.edu.co |
 | Kevin Alexis Bermudez Caicedo |  | kbermudezc@unal.edu.co |
 
 ## ⚖️ Licencia
